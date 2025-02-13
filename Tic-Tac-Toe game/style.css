@@ -1,0 +1,153 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.game-area {
+    height: 100%;
+    background-color: rgb(28, 28, 28);
+    /* display: grid;
+    place-items: center; << another way to center a div.! >> */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.music_Btn {
+    position: absolute;
+    top: 7%;
+    left: 5%;
+    color: #fff;
+}
+
+.music_on {
+    text-shadow: 0 0 5px rgb(81, 152, 214), 0 0 10px rgb(81, 152, 214), 0 0 20px rgb(81, 152, 214), 0 0 40px rgb(81, 152, 214);
+}
+
+.music_icon_show {
+    position: absolute;
+    z-index: -1;
+}
+
+.music_icon {
+    color: aliceblue;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.5s all linear;
+}
+
+.music_icon:hover {
+    color: #a9e5f0;
+}
+
+.game-title {
+    text-align: center;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bolder;
+    margin: 1rem;
+}
+
+.txt-glow {
+    text-shadow: 0 0 5px rgb(81, 152, 214), 0 0 10px rgb(81, 152, 214), 0 0 20px rgb(81, 152, 214), 0 0 40px rgb(81, 152, 214);
+    font-weight: bold;
+}
+
+.txt-glow-x {
+    text-shadow: 0 0 5px rgb(225, 43, 34), 0 0 10px rgb(225, 43, 34), 0 0 20px rgb(225, 43, 34), 0 0 40px rgb(225, 43, 34), 0 0 80px rgb(225, 43, 34);
+    font-weight: bold;
+}
+
+.txt-glow-vs {
+    text-shadow: 0 0 5px rgb(238, 52, 244), 0 0 10px rgb(238, 52, 244), 0 0 20px rgb(238, 52, 244), 0 0 40px rgb(238, 52, 244);
+    font-weight: bold;
+}
+
+.O-VS-X {
+    display: flex;
+    margin: 2rem;
+}
+
+.nxt-title {
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+.plr {
+    color: #fff;
+    margin: auto;
+}
+
+.boxes {
+    height: 18.7rem;
+    width: 18.7rem;
+    background-color: #fff;
+    display: grid;
+    grid-template-rows: repeat(3, 6rem);
+    grid-template-columns: repeat(3, 6rem);
+    row-gap: 2%;
+    column-gap: 2%;
+    margin: 1rem;
+}
+
+.box {
+    color: #fff;
+    background-color: rgb(28, 28, 28);
+    border: none;
+    font-size: 4.5rem;
+    cursor: pointer;
+}
+
+.players {
+    display: flex;
+    margin: 1rem;
+}
+
+.player-X {
+    display: flex;
+}
+
+.txt {
+    color: #fff;
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.marg-top {
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-btn {
+    cursor: pointer;
+    border-radius: 0.4rem;
+    color: #fff;
+    background-color: rgb(55, 55, 55);
+    border: 2px solid #fff;
+    padding: 0.4rem;
+    font-size: 1rem;
+    font-weight: 800;
+    transition: 0.2s all linear;
+}
+
+.reset-btn:hover {
+    background-color: rgb(25, 25, 25);
+    text-shadow: 0 0 5px rgb(81, 152, 214), 0 0 10px rgb(81, 152, 214);
+}
