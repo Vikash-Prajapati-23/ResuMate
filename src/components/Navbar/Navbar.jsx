@@ -1,10 +1,9 @@
 import React from "react";
-// import Logo from "../../assets/Logo.png";
 import BrandLogo from "../../assets/BrandName.png";
 
 const Navbar = () => {
   return (
-    <nav className="flex bg-red-700 text-white font-bold items-center justify-around py-3 ">
+    <nav className="flex bg-transparent text-blue-700 text-xl font-bold items-center justify-around py-3 ">
       <div className="">
         <img src={BrandLogo} style={{ height: "30px" }} alt="Logo" />
       </div>
