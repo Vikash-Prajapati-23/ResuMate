@@ -1,30 +1,42 @@
 import React from "react";
 import BrandLogo from "../../assets/BrandName.png";
 
-const Navbar = () => {
+const Navbar = ({ toggleTheme, theme }) => {
   return (
-    <nav className="flex bg-transparent text-blue-700 text-xl font-bold items-center justify-around py-3 ">
-      <div className="">
+    <nav style={{color: theme === false? "#078ded" : "#ee38ee" }} className="flex bg-slate-100 text-xl font-bold items-center justify-around py-3">
+      <div>
         <img src={BrandLogo} style={{ height: "30px" }} alt="Logo" />
       </div>
 
       <div className="flex items-center gap-8">
-        <div className="nav-item cursor-pointer">Home</div>
-
-        <div className="nav-item cursor-pointer gap8">Resume Examples</div>
-
-        <div className="nav-item cursor-pointer">Resume Templates</div>
+        <a href="#" className="nav-item ">
+          Home
+        </a>
+        <a href="#" className="nav-item ">
+          Resume Examples
+        </a>
+        <a href="#" className="nav-item ">
+          Resume Templates
+        </a>
       </div>
 
       <div className="flex gap-8">
-        <button className="nav-item cursor-pointer">
-          <span class="material-symbols-outlined flex align-center">light_mode</span>
+        <button className="nav-item dark hidden" onClick={toggleTheme}>
+          <span className="material-symbols-outlined flex align-center">
+            dark_mode
+          </span>
         </button>
-        <button className="nav-item cursor-pointer hidden">
-          <span class="material-symbols-outlined flex align-center">dark_mode</span>
+        <button className="nav-item light" onClick={toggleTheme}>
+          <span className="material-symbols-outlined flex align-center">
+            light_mode
+          </span>
         </button>
-        <button className="nav-item cursor-pointer">Sign Up</button>
-        <button className="nav-item cursor-pointer">Login</button>
+        <a href="#">
+          <button className="nav-item">Sign Up</button>
+        </a>
+        <a href="#">
+          <button className="nav-item">Login</button>
+        </a>
       </div>
     </nav>
   );
