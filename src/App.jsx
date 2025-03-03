@@ -1,6 +1,7 @@
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Main from "./components/Main/Main";
+import Carousel from "./components/Carousel/Carousel";
 import { useState } from "react";
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
   return (
     <>
       <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <Main theme={theme} toggleTheme={toggleTheme} />
+      {/* <Main theme={theme} toggleTheme={toggleTheme} />  */}
+      <Carousel theme={theme} toggleTheme={toggleTheme} />
     </>
   );
 }

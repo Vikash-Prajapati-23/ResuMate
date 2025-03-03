@@ -1,9 +1,9 @@
 import React from "react";
 import BrandLogo from "../../assets/BrandName.png";
 
-const Navbar = ({ toggleTheme, theme }) => {
+const Navbar = ({ toggleTheme }) => {
   return (
-    <nav style={{color: theme === false? "#078ded" : "#ee38ee" }} className="flex bg-slate-100 text-xl font-bold items-center justify-around py-3">
+    <nav className="flex bg-transparent text-blue-700 text-xl font-bold items-center justify-around py-3">
       <div>
         <img src={BrandLogo} style={{ height: "30px" }} alt="Logo" />
       </div>
