@@ -5,7 +5,6 @@ import main_carousel3 from "../../assets/main_carousel3.png";
 import main_carousel4 from "../../assets/main_carousel4.png";
 import main_carousel5 from "../../assets/main_carousel5.jpeg";
 import main_carousel6 from "../../assets/main_carousel6.jpeg";
-import main_carousel7 from "../../assets/main_carousel7.jpeg";
 import main_carousel9 from "../../assets/main_carousel9.webp";
 
 const carouselImages = [
@@ -15,7 +14,7 @@ const carouselImages = [
   main_carousel4,
   main_carousel5,
   main_carousel6,
-  main_carousel7,
+  main_carousel4,
   main_carousel9,
 ];
 
@@ -58,7 +57,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-100 to-purple-100 relative overflow-hidden w-full flex flex-col items-center h-screen">
+    <div className="bg-gradient-to-b from-blue-100 to-purple-100 relative overflow-hidden w-full flex flex-col items-center h-screen">
       <h1 className="text-5xl font-bold text-center p-3 bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
         How it works
       </h1>
