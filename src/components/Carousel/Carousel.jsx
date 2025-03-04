@@ -59,7 +59,7 @@ const Carousel = () => {
   return (
     <div className="bg-gradient-to-b from-blue-100 to-purple-100 relative overflow-hidden w-full flex flex-col items-center h-screen">
       <h1 className="text-5xl font-bold text-center p-3 bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
-        How it works
+        Choose your Template
       </h1>
 
       <div
@@ -105,8 +105,8 @@ const Carousel = () => {
             <button
               key={index}
               onClick={() => setSlide(index)}
-              className={`w-4 h-4 rounded-full mx-1 bg-blue-400 hover:bg-blue-400 ${
-                slide === index ? "p-3 bg-blue-700" : "bg-opacity-50"
+              className={`w-3 h-3 border-2 border-blue-600 rounded-full mx-1 bg-blue-400 hover:bg-blue-400 ${
+                slide === index ? "p-3 bg-blue-400 border-4 border-blue-600" : "bg-opacity-50"
               }`}
             ></button>
           ))}

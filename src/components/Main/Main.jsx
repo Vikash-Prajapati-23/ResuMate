@@ -41,7 +41,7 @@ const Main = ({ theme }) => {
 
       <div className="bg-gradient-to-b from-pink-100 to-blue-100 py-20 flex justify-evenly items-center">
         <div className="">
-          <h1 className="text-5xl font-bold text-center ">How it works</h1>
+          <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">How it works</h1>
           <div className="flex justify-evenly mt-8">
             <div className="flex flex-col items-center w-1/4">
               <img
