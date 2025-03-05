@@ -9,9 +9,11 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   return (
-    <nav className={`flex text-blue-700 text-xl font-bold items-center justify-around py-3 ${
-      theme ? "bg-gray-900 text-white" : "bg-white text-black"
-    }`}>
+    <nav
+      className={`flex text-blue-700 text-xl font-bold items-center justify-around py-3 ${
+        theme ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
       <div>
         <img src={BrandLogo} style={{ height: "30px" }} alt="Logo" />
       </div>

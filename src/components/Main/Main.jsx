@@ -13,7 +13,7 @@ const Main = () => {
 
   return (
     <>
-      <div onChange={() => dispatch(toggleTheme())} className="h-[93vh] bg-pink-100">
+      <div onChange={() => dispatch(toggleTheme())} className={`h-[93vh] ${theme ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
         <div className="flex justify-evenly items-center translate-y-[45%]">
           <div className="flex flex-col items-start w-1/2">
             <h1 className="text-8xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
