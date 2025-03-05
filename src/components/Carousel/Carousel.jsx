@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../../features/theme/themeSlice";
+import main_bg7 from "../../assets/main_bg7.jpg";
 import main_carousel1 from "../../assets/main_carousel1.jpg";
 import main_carousel2 from "../../assets/main_carousel2.jpg";
 import main_carousel3 from "../../assets/main_carousel3.png";
@@ -23,6 +26,8 @@ const Carousel = () => {
   const [visibleImages, setVisibleImages] = useState(1);
   const carouselRef = useRef(null);
   const autoSlideInterval = useRef(null);
+  const theme = useSelector((state) => state.theme.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const updateVisibleImages = () => {
@@ -57,7 +62,16 @@ const Carousel = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-blue-100 to-purple-100 relative overflow-hidden w-full flex flex-col items-center h-screen">
+    <div style={
+            theme
+              ? {
+                  backgroundImage: `url(${main_bg7})`,
+                  backgroundSize: "cover",
+                }
+              : { backgroundColor: "white" }
+          }
+     className="bg-gradient-to-b py-8 from-blue-100 to-purple-100">
+    <div className=" relative overflow-hidden w-full flex flex-col items-center h-screen">
       <h1 className="text-5xl font-bold text-center p-3 bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
         Choose your Template
       </h1>
@@ -112,6 +126,7 @@ const Carousel = () => {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 };

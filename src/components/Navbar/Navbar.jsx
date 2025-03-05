@@ -10,12 +10,20 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`flex text-blue-700 text-xl font-bold items-center justify-around py-3 ${
-        theme ? "bg-gray-900 text-white" : "bg-white text-black"
+      className={`sticky top-0 flex text-xl font-bold shadow-xl z-40 items-center justify-around py-3 ${
+        theme ? "bg-gray-900 text-indigo-600" : "bg-white text-blue-600"
       }`}
     >
       <div>
-        <img src={BrandLogo} style={{ height: "30px" }} alt="Logo" />
+        <img
+          src={BrandLogo}
+          style={{
+            height: "30px",
+            filter: theme ? "invert(1)" : "invert(0)", // Invert colors in dark mode
+            transition: "filter 0.3s ease-in-out",
+          }}
+          alt="Logo"
+        />
       </div>
 
       <div className="flex items-center gap-8">

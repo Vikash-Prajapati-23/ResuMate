@@ -3,17 +3,28 @@ import BrandLogo from "../../assets/BrandName.png";
 import main2_1 from "../../assets/main2_1.png";
 import main2_2 from "../../assets/main2_2.png";
 import main2_3 from "../../assets/main2_3.png";
+import main_bg6 from "../../assets/main_bg6.jpg";
+import main_bg2 from "../../assets/main_bg2.AVIF";
 import "./Main.css";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleTheme } from "../../features/theme/themeSlice";
+import { useSelector } from "react-redux";
 
 const Main = () => {
   const theme = useSelector((state) => state.theme.value);
-  const dispatch = useDispatch();
 
   return (
     <>
-      <div onChange={() => dispatch(toggleTheme())} className={`h-[93vh] ${theme ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
+      <div
+        style={
+          theme
+            ? {
+                backgroundImage: `url(${main_bg6})`,
+                backgroundSize: "contain",
+                color: "white",
+              }
+            : { backgroundColor: "#fce7f3" }
+        }
+        className={`h-[93vh] pink-100`}
+      >
         <div className="flex justify-evenly items-center translate-y-[45%]">
           <div className="flex flex-col items-start w-1/2">
             <h1 className="text-8xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
@@ -35,8 +46,8 @@ const Main = () => {
               src={BrandLogo}
               style={{
                 height: "120px",
-                // filter: theme === true ? "invert(1)" : "invert(0)", // Invert colors in dark mode
-                // transition: "filter 0.3s ease-in-out",
+                filter: theme ? "invert(1)" : "invert(0)", // Invert colors in dark mode
+                transition: "filter 0.3s ease-in-out",
               }}
               alt="Logo"
             />
@@ -44,12 +55,24 @@ const Main = () => {
         </div>
       </div>
 
-      <div className="bg-gradient-to-b from-pink-100 to-blue-100 py-20 flex justify-evenly items-center">
+      <div
+        style={
+          theme
+            ? {
+                backgroundImage: `url(${main_bg2})`,
+                backgroundSize: "contain",
+              }
+            : { backgroundColor: "" }
+        }
+        className={`${
+          theme ? "text-white" : "bg-gradient-to-b from-pink-100 to-blue-100"
+        } 'flex justify-evenly items-center'`}
+      >
         <div className="">
-          <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold py-8 text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
             How it works
           </h1>
-          <div className="flex justify-evenly mt-8">
+          <div className="flex justify-evenly mt-8 pb-20">
             <div className="flex flex-col items-center w-1/4">
               <img
                 className=""
