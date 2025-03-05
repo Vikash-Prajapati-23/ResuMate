@@ -4,11 +4,16 @@ import main2_1 from "../../assets/main2_1.png";
 import main2_2 from "../../assets/main2_2.png";
 import main2_3 from "../../assets/main2_3.png";
 import "./Main.css";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../../features/theme/themeSlice";
 
-const Main = ({ theme }) => {
+const Main = () => {
+  const theme = useSelector((state) => state.theme.value);
+  const dispatch = useDispatch();
+
   return (
     <>
-      <div className="h-[93vh] bg-pink-100">
+      <div onChange={() => dispatch(toggleTheme())} className="h-[93vh] bg-pink-100">
         <div className="flex justify-evenly items-center translate-y-[45%]">
           <div className="flex flex-col items-start w-1/2">
             <h1 className="text-8xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
@@ -41,7 +46,9 @@ const Main = ({ theme }) => {
 
       <div className="bg-gradient-to-b from-pink-100 to-blue-100 py-20 flex justify-evenly items-center">
         <div className="">
-          <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">How it works</h1>
+          <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+            How it works
+          </h1>
           <div className="flex justify-evenly mt-8">
             <div className="flex flex-col items-center w-1/4">
               <img
