@@ -36,11 +36,11 @@ function addResume() {
           <DialogHeader>
             <DialogTitle>Create new Resume</DialogTitle>
             <DialogDescription className="py-2">
-              <p>Add a tittle for your resume. You can edit this later.</p>
+              Add a tittle for your resume. You can edit this later.
               <Input
                 className="mt-2"
                 placeholder="Ex. Full Stack Developer..."
-                onChange={(e) => setResumeTittle(e.target.value)}
+                onChange={(e) => setResumeTittle(e.target.value)} // To save the user input
               />
             </DialogDescription>
 
