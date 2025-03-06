@@ -1,4 +1,4 @@
-import { PlusSquare } from "lucide-react";
+import { Loader2, PlusSquare } from "lucide-react";
 import React, { useState } from "react";
 import {
   Dialog,
@@ -6,21 +6,30 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import uuid4 from "uuid4";
+import { useNavigate } from "react-router-dom";
 
-function addResume() {
+function AddResume() {
   const [openDialog, setOpenDialog] = useState(false);
-  const [resumeTittle, setResumeTittle] = useState();
+  const [resumeTitle, setResumeTitle] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const onCreate = () => {
-    const uuid = uuid4();
-    console.log({ resumeTittle, uuid });
-    setOpenDialog(false);
+    setLoading(true);  // Show loader
+  
+    setTimeout(() => {
+      setLoading(false);  // Stop loader
+      setOpenDialog(false);  // Close dialog after loading
+      const uuid = uuid4();
+      console.log({ resumeTitle, uuid });
+      navigate(`/dashboard/resume/${uuid}/edit`);
+    }, 2000);
   };
+  
 
   return (
     <div className="">
@@ -36,19 +45,20 @@ function addResume() {
           <DialogHeader>
             <DialogTitle>Create new Resume</DialogTitle>
             <DialogDescription className="py-2">
-              Add a tittle for your resume. You can edit this later.
+              Add a title for your resume. You can edit this later.
               <Input
                 className="mt-2"
                 placeholder="Ex. Full Stack Developer..."
-                onChange={(e) => setResumeTittle(e.target.value)} // To save the user input
+                onChange={(e) => setResumeTitle(e.target.value)} // To save the user input
               />
             </DialogDescription>
-
             <div className="flex justify-end gap-2">
               <Button onClick={() => setOpenDialog(false)} variant="ghost">
-                Cancle
+                Cancel
               </Button>
-              <Button disabled={!resumeTittle} onClick={() => onCreate()}>Create</Button>
+              <Button disabled={!resumeTitle || loading} onClick={onCreate}>
+                {loading ? <Loader2 className="animate-spin" /> : "Create"}
+              </Button>
             </div>
           </DialogHeader>
         </DialogContent>
@@ -57,4 +67,4 @@ function addResume() {
   );
 }
 
-export default addResume;
+export default AddResume;
