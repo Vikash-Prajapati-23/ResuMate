@@ -10,6 +10,7 @@ function EditResume() {
   const [resumeInfo, setresumeInfo] = useState();
 
   useEffect(() => {
+    console.log(resumeInfo);
     setresumeInfo(dummy)
   }, []);
 
