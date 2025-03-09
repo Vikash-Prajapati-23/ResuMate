@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
-import ResumeInfoContext from "../../../../context/ResumeInfoContext";
+import React from "react";
 import { Github, Mail, MapPinHouse, Phone } from "lucide-react";
 
-const PresonalDetailPreview = () => {
-  const { resumeInfo } = useContext(ResumeInfoContext);
+const PresonalDetailPreview = ({resumeInfo}) => {
 
   return (
     <div>

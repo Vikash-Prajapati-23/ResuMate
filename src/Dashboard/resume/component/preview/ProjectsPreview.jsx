@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
-import ResumeInfoContext from "../../../../context/ResumeInfoContext";
+import React from "react";
 
-function ProjectsPreview() {
-  const { resumeInfo } = useContext(ResumeInfoContext);
+function ProjectsPreview({resumeInfo}) {
 
   return (
     <div>

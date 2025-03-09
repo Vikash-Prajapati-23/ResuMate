@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FormSection from "../../component/FormSection";
 import PreviewSection from "../../component/PreviewSection";
-import ResumeInfoContext from "@/Context/ResumeInfoContext";
+import {ResumeInfoContext} from "@/Context/ResumeInfoContext";
 import dummy from "@/Data/dummy";
 
 function EditResume() {
@@ -10,7 +10,6 @@ function EditResume() {
   const [resumeInfo, setresumeInfo] = useState();
 
   useEffect(() => {
-    console.log(resumeInfo);
     setresumeInfo(dummy)
   }, []);
 
