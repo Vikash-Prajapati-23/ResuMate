@@ -1,11 +1,14 @@
 import { Input } from "@/components/ui/input";
-import React, { useContext } from "react";
+import { LoaderCircle } from 'lucide-react';
+import React, { useContext, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { BrainCircuitIcon } from 'lucide-react';
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 
 function PersonalInfo({ enableNext, setEnableNext }) {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+  const [loading, setLoading] = useState(false);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +25,11 @@ function PersonalInfo({ enableNext, setEnableNext }) {
 
   const handleSave = (e) => {
     e.preventDefault();
-    setEnableNext(true);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setEnableNext(true);
+    }, 2000);
   };
 
   return (
@@ -62,9 +69,16 @@ function PersonalInfo({ enableNext, setEnableNext }) {
           </div>
         </div>
 
-        <div className="mt-3 space-y-2 ">
-          <h2 className="ms-2">Add Summery</h2>
-          <p className="text-sm ms-2">Add a aummary for your job role.</p>
+        <div className="mt-4 space-y-2 ">
+          <div className="flex justify-between">
+            <div>
+            <h2 className="ms-2">Add Summery</h2>
+            <p className="text-sm ms-2">Add a aummary for your job role.</p>
+            </div>
+            <div>
+              <Button variant="outline" type="submit" className="bg-purple-500" > <BrainCircuitIcon/> Generate with AI </Button>
+            </div>
+          </div>
           <Textarea
             placeholder="Type your message here..."
             required
@@ -74,8 +88,8 @@ function PersonalInfo({ enableNext, setEnableNext }) {
         </div>
 
         <div className="flex justify-end mt-3">
-          <Button type="submit" className="bg-purple-500">
-            Save
+          <Button disabled={loading} type="submit" className="bg-purple-500">
+            {loading? <LoaderCircle className="animate-spin" /> : "Save" }
           </Button>
         </div>
       </form>

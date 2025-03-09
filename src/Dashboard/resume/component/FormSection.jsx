@@ -39,7 +39,7 @@ function FormSection() {
 
       {activeIndex == 1 ? (
         <PersonalInfo enableNext={(value) => setEnableNext(value)} setEnableNext={setEnableNext} />
-      ) : <SkillSet />}
+      ) : activeIndex == 2 ? <SkillSet /> : null}
       
 
       <Experience />
