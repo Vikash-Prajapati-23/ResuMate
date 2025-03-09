@@ -8,7 +8,7 @@ import CertificationsPreview from "./preview/CertificationsPreview";
 import {ResumeInfoContext} from "@/context/ResumeInfoContext";
 
 function PreviewSection() {
-  const {resumeInfo, setresumeInfo} = useContext(ResumeInfoContext)
+  const {resumeInfo, setResumeInfo} = useContext(ResumeInfoContext)
 
   return (
     <div className='bg-white p-5 shadow-lg border-t-[25px]  border-blue-800'>

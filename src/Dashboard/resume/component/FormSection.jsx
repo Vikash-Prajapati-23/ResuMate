@@ -6,10 +6,11 @@ import Experience from "./forms/Experience";
 import Projects from "./forms/Projects";
 
 function FormSection() {
-  const [activeIndex, setActiveIndex] = useState(2);
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [enableNext, setEnableNext] = useState(false);
 
   return (
-    <div className=" bg-white p-4">
+    <div className=" p-4">
       <div className="flex justify-between">
         <h2 className="flex gap-2 bg-purple-500 text-white cursor-pointer p-3 font-bold rounded-md w-[110px]">
           <LayoutGridIcon className="" /> Theme
@@ -18,25 +19,31 @@ function FormSection() {
         <div className="flex gap-2 ">
           {activeIndex > 1 && (
             <button
-              className="bg-purple-500 text-white p-3 font-bold rounded-md"
+              className="bg-purple-500 flex gap-1 text-white p-3 font-bold rounded-md"
               onClick={() => setActiveIndex(activeIndex - 1)}
             >
               <MoveLeft />
+              Back
             </button>
           )}
           <button
-            className="bg-purple-500 text-white p-3 font-bold rounded-md"
+            className="bg-purple-500 flex gap-1 text-white p-3 font-bold rounded-md"
+            disabled={!enableNext}
             onClick={() => setActiveIndex(activeIndex + 1)}
           >
+            Next
             <MoveRight />
           </button>
         </div>
       </div>
 
-      <PersonalInfo />
-      <SkillSet />
+      {activeIndex == 1 ? (
+        <PersonalInfo enableNext={(value) => setEnableNext(value)} setEnableNext={setEnableNext} />
+      ) : <SkillSet />}
+      
+
       <Experience />
-      <Projects />
+      <Projects /> 
     </div>
   );
 }

@@ -1,21 +1,28 @@
 import { Input } from "@/components/ui/input";
 import React, { useContext } from "react";
-import {ResumeInfoContext} from "@/context/ResumeInfoContext";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 
-function PersonalInfo() {
-  const { resumeInfo, setresumeInfo } = useContext(ResumeInfoContext);
+function PersonalInfo({ enableNext, setEnableNext }) {
+  const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+
   const handleFormChange = (e) => {
-    const {name, value} = e.target;
-    setresumeInfo({
-        ...resumeInfo,
-        [name]:value,
-    })
-    console.log(resumeInfo)
+    const { name, value } = e.target;
+    enableNext(false);
+    setResumeInfo((prevInfo) => ({
+      ...prevInfo,
+      personal_info: {
+        ...prevInfo.personal_info,
+        [name]: value,
+      },
+      summary: name === "summary" ? value : prevInfo.summary,
+    }));
   };
 
   const handleSave = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
+    setEnableNext(true);
   };
 
   return (
@@ -55,8 +62,21 @@ function PersonalInfo() {
           </div>
         </div>
 
+        <div className="mt-3 space-y-2 ">
+          <h2 className="ms-2">Add Summery</h2>
+          <p className="text-sm ms-2">Add a aummary for your job role.</p>
+          <Textarea
+            placeholder="Type your message here..."
+            required
+            name="summary"
+            onChange={handleFormChange}
+          />
+        </div>
+
         <div className="flex justify-end mt-3">
-          <Button type="submit" className="bg-purple-500"> Save </Button>
+          <Button type="submit" className="bg-purple-500">
+            Save
+          </Button>
         </div>
       </form>
     </div>
