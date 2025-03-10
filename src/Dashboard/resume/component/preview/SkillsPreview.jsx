@@ -12,7 +12,7 @@ function SkillsPreview({ resumeInfo }) {
                 className="h-2"
                 style={{
                   backgroundColor: resumeInfo?.personal_info.theme_color,
-                  width: `${parseInt(skills.percentage)}%`,
+                  width: skills?.rating*20+'%',
                 }}
               ></div>
             </div>

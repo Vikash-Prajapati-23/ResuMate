@@ -1,22 +1,48 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import { LayoutGridIcon, MoveLeft, MoveRight } from "lucide-react";
 import PersonalInfo from "./forms/PersonalInfo";
 import SkillSet from "./forms/SkillSet";
 import Experience from "./forms/Experience";
 import Projects from "./forms/Projects";
+import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 
 function FormSection() {
   const [activeIndex, setActiveIndex] = useState(1);
-  const [enableNext, setEnableNext] = useState(false);
+  // const [enableNext, setEnableNext] = useState(false);
+  const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+  const [loading, setLoading] = useState(false);
+
+  // const handleFormChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setEnableNext(false);
+  //   setResumeInfo((prevInfo) => ({
+  //     ...prevInfo,
+  //     personal_info: {
+  //       ...prevInfo.personal_info,
+  //       [name]: value,
+  //     },
+  //     summary: name === "summary" ? value : prevInfo.summary,
+  //     skills: name === "skills" ? value : prevInfo.skills,
+  //   }));
+  // };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      // setEnableNext(true);
+    }, 2000);
+  };
 
   return (
-    <div className=" p-4">
+    <div className="p-4">
       <div className="flex justify-between">
         <h2 className="flex gap-2 bg-purple-500 text-white cursor-pointer p-3 font-bold rounded-md w-[110px]">
           <LayoutGridIcon className="" /> Theme
         </h2>
 
-        <div className="flex gap-2 ">
+        <div className="flex gap-2">
           {activeIndex > 1 && (
             <button
               className="bg-purple-500 flex gap-1 text-white p-3 font-bold rounded-md"
@@ -28,7 +54,7 @@ function FormSection() {
           )}
           <button
             className="bg-purple-500 flex gap-1 text-white p-3 font-bold rounded-md"
-            disabled={!enableNext}
+            // disabled={!enableNext}
             onClick={() => setActiveIndex(activeIndex + 1)}
           >
             Next
@@ -37,13 +63,35 @@ function FormSection() {
         </div>
       </div>
 
-      {activeIndex == 1 ? (
-        <PersonalInfo enableNext={(value) => setEnableNext(value)} setEnableNext={setEnableNext} />
-      ) : activeIndex == 2 ? <SkillSet /> : null}
-      
-
-      <Experience />
-      <Projects /> 
+      {activeIndex === 1 && (
+        <PersonalInfo
+          setResumeInfo={setResumeInfo}
+          handleSave={handleSave}
+          loading={loading}
+        />
+      )}
+      {activeIndex === 2 && (
+        <SkillSet
+          setResumeInfo={setResumeInfo}
+          resumeInfo={resumeInfo}
+          handleSave={handleSave}
+          loading={loading}
+        />
+      )}
+      {activeIndex === 3 && (
+        <Experience
+          setResumeInfo={setResumeInfo}
+          handleSave={handleSave}
+          loading={loading}
+        />
+      )}
+      {activeIndex === 4 && (
+        <Projects
+          setResumeInfo={setResumeInfo}
+          handleSave={handleSave}
+          loading={loading}
+        />
+      )}
     </div>
   );
 }
