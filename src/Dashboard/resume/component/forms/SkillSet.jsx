@@ -61,6 +61,7 @@ function SkillSet({ handleSave, loading, resumeInfo, setResumeInfo }) {
                 <Input
                   required
                   value={item.name}
+                  type="text"
                   className="w-[250px] text-xs"
                   onChange={(e) =>
                     handleFormChange(index, "name", e.target.value)
@@ -71,6 +72,7 @@ function SkillSet({ handleSave, loading, resumeInfo, setResumeInfo }) {
                 <Rating
                   style={{ maxWidth: 170 }}
                   value={item.rating}
+                  type="number"
                   className="flex items-end"
                   onChange={(value) => handleFormChange(index, "rating", value)}
                 />

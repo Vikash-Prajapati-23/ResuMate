@@ -32,29 +32,29 @@ function PersonalInfo({ setResumeInfo, handleSave, loading }) {
         <div className="grid grid-cols-2 gap-3 mt-3">
           <div>
             <label className="ms-2 text-sm">First name</label>
-            <Input name="first_name" required onChange={handleFormChange} />
+            <Input name="first_name" type="text" required onChange={handleFormChange} />
           </div>
           <div>
             <label className="ms-2 text-sm">Last name</label>
-            <Input name="last_name" required onChange={handleFormChange} />
+            <Input name="last_name" type="text" required onChange={handleFormChange} />
           </div>
 
           <div className="col-span-2">
             <label className="ms-2 text-sm">Job title</label>
-            <Input name="job_title" required onChange={handleFormChange} />
+            <Input name="job_title" type="text" required onChange={handleFormChange} />
           </div>
           <div className="col-span-2">
             <label className="ms-2 text-sm">Address</label>
-            <Input name="address" required onChange={handleFormChange} />
+            <Input name="address" type="text" required onChange={handleFormChange} />
           </div>
 
           <div>
             <label className="ms-2 text-sm">Phone</label>
-            <Input name="phone" required onChange={handleFormChange} />
+            <Input name="phone" type="number" required onChange={handleFormChange} />
           </div>
           <div>
             <label className="ms-2 text-sm">Email</label>
-            <Input name="email" required onChange={handleFormChange} />
+            <Input name="email" type="email" required onChange={handleFormChange} />
           </div>
         </div>
 

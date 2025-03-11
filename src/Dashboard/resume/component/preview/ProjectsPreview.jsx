@@ -16,23 +16,23 @@ function ProjectsPreview({resumeInfo}) {
         className="border-[1.5px] mb-1 "
       />
       <div className="m-2">
-        {resumeInfo?.projects.map((projects, index) => (
+        {resumeInfo?.projects.map((project, index) => (
           <div key={index}>
             <div className=" my-1">
               <div>
-                <p className="font-bold"> {projects?.name} </p>
-                <p className="text-sm">{projects?.description}</p>
+                <p className="font-bold"> {project?.name} </p>
+                <p className="text-sm">{project?.description}</p>
               </div>
               <div className="flex mt-1 text-xs">
                 <span className="font-bold" >Technologies used -</span>
-                {projects?.technologies?.map((tech, index) => (
+                {project?.technologies?.map((tech, index) => (
                   <span key={index} className="text-xs mx-1">
-                    {tech},
+                    {tech} {index < project.technologies.length - 1 && ","}
                   </span>
                 ))}
               </div>
             </div>
-            <p className="mb-6 mt-3 text-xs"> Github link :- {projects?.link} </p>
+            <p className="mb-6 mt-3 text-xs"> Github link :- {project?.link} </p>
           </div>
         ))}
       </div>

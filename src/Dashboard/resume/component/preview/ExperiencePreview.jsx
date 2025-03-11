@@ -10,12 +10,12 @@ function ExperiencePreview({resumeInfo}) {
             <div>
               <p className="font-bold"> {experience?.job_title} </p>
               <p className="">
-                {experience?.company} { experience?. company && experience?.location && <span>,</span>} {experience?.location}
+                {experience?.company} { experience?. company && experience?.location && ','} {experience?.location}
               </p>
             </div>
             <div>
               <span className="flex mt-5 text-xs">
-                {experience?.start_date} - {experience?.end_date}
+                {experience?.start_date} { experience?.start_date && experience?.end_date && "-" } {experience?.end_date}
               </span>
             </div>
           </div>

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import TextEditor from "../TextEditor";
 
-function Experience({ resumeInfo, setResumeInfo, handleSave, loading }) {
+function Experience({ setResumeInfo, handleSave, loading }) {
   const [experience, setExperience] = useState([
     {
       job_title: "",
@@ -19,6 +19,16 @@ function Experience({ resumeInfo, setResumeInfo, handleSave, loading }) {
   const handleFormChange = (index, name, value) => {
     const newExperience = experience.slice();
     newExperience[index][name] = value;
+    setExperience(newExperience);
+    setResumeInfo((prevInfo) => ({
+      ...prevInfo,
+      experience: newExperience,
+    }));
+  };
+
+  const handleTextFormChange = (event, name, index) => {
+    const newExperience = experience.slice();
+    newExperience[index][name] = event.target.value;
     setExperience(newExperience);
     setResumeInfo((prevInfo) => ({
       ...prevInfo,
@@ -41,7 +51,8 @@ function Experience({ resumeInfo, setResumeInfo, handleSave, loading }) {
   };
 
   const removeExperience = (index) => {
-    const newExperience = experience.filter((_, i) => i !== index);
+     // The "_" is parameter that is used very commonly when we don't want variable we use this. inside the filter is a callback function that takes two parameters. 1st is _ (means the current item) and 2nd is the index of that item.
+     const newExperience = experience.filter((_, i) => i !== index); 
     setExperience(newExperience);
     setResumeInfo((prevInfo) => ({
       ...prevInfo,
@@ -96,6 +107,7 @@ function Experience({ resumeInfo, setResumeInfo, handleSave, loading }) {
                 <label className="ms-2 text-xs"> Start Date </label>
                 <Input
                   value={item.start_date}
+                  type='date'
                   onChange={(e) =>
                     handleFormChange(index, "start_date", e.target.value)
                   }
@@ -106,6 +118,7 @@ function Experience({ resumeInfo, setResumeInfo, handleSave, loading }) {
                 <label className="ms-2 text-xs"> End Date </label>
                 <Input
                   value={item.end_date}
+                  type='date'
                   onChange={(e) =>
                     handleFormChange(index, "end_date", e.target.value)
                   }
@@ -114,18 +127,14 @@ function Experience({ resumeInfo, setResumeInfo, handleSave, loading }) {
               </div>
               <div className=" col-span-2">
                 <label className="ms-2 text-xs"> Your Responsibility </label>
-                <Textarea
-                  value={item.responsibilities}
-                  required
-                  onChange={(e) =>
-                    handleFormChange(index, "responsibilities", e.target.value)
-                  }
+                <TextEditor
+                  onTextEditorChange={(event) => handleTextFormChange(event, "responsibilities", index)}
                 />
               </div>
               <Button
                 type="button"
-                onClick={removeExperience}
-                className="bg-purple-500"
+                onClick={() => removeExperience(index)}
+                className="bg-red-500 w-[50%]"
               >
                 Remove Experience
               </Button>
