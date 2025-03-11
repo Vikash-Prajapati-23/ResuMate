@@ -10,7 +10,7 @@ function ExperiencePreview({resumeInfo}) {
             <div>
               <p className="font-bold"> {experience?.job_title} </p>
               <p className="">
-                {experience?.company}, {experience?.location}
+                {experience?.company} { experience?. company && experience?.location && <span>,</span>} {experience?.location}
               </p>
             </div>
             <div>

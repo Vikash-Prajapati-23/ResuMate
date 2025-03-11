@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import uuid4 from "uuid4";
-import { useNavigate } from "react-router-dom";
+import uuid4 from "uuid4"; // This package generates unique id's 
+import { useNavigate } from "react-router-dom";  // This is used to nevigate to other components as it's name suggests.
 
 function AddResume() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -18,9 +18,8 @@ function AddResume() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const onCreate = () => {
+  const onCreate = () => { 
     setLoading(true);  // Show loader
-  
     setTimeout(() => {
       setLoading(false);  // Stop loader
       setOpenDialog(false);  // Close dialog after loading
@@ -32,7 +31,7 @@ function AddResume() {
   
 
   return (
-    <div className="">
+    <div>
       <div
         className="my-4 p-14 h-[250px] cursor-pointer bg-secondary w-60 flex justify-center items-center border-2 border-dashed border-gray-300 rounded-lg hover:scale-110 transition-transform duration-300 ease-in-out shadow-md"
         onClick={() => setOpenDialog(true)}

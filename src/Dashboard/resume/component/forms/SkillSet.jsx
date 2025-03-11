@@ -13,11 +13,11 @@ function SkillSet({ handleSave, loading, resumeInfo, setResumeInfo }) {
     },
   ]);
 
-  useEffect(() => {
-    if (resumeInfo.skills) {
-      setSkills(resumeInfo.skills);
-    }
-  }, [resumeInfo]);
+  // useEffect(() => { // This is used to to show the dummy data.
+  //   if (resumeInfo.skills) {
+  //     setSkills(resumeInfo.skills);
+  //   }
+  // }, [resumeInfo]);
 
   const handleFormChange = (index, name, value) => {
     const newSkills = skills.slice();
@@ -57,11 +57,11 @@ function SkillSet({ handleSave, loading, resumeInfo, setResumeInfo }) {
               key={index}
             >
               <div>
-                <label className="ms-2">Name</label>
+                <label className="ms-2 text-xs">Name</label>
                 <Input
                   required
                   value={item.name}
-                  className="w-[250px]"
+                  className="w-[250px] text-xs"
                   onChange={(e) =>
                     handleFormChange(index, "name", e.target.value)
                   }

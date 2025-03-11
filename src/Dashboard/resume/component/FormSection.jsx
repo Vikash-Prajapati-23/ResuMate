@@ -12,20 +12,6 @@ function FormSection() {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const [loading, setLoading] = useState(false);
 
-  // const handleFormChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setEnableNext(false);
-  //   setResumeInfo((prevInfo) => ({
-  //     ...prevInfo,
-  //     personal_info: {
-  //       ...prevInfo.personal_info,
-  //       [name]: value,
-  //     },
-  //     summary: name === "summary" ? value : prevInfo.summary,
-  //     skills: name === "skills" ? value : prevInfo.skills,
-  //   }));
-  // };
-
   const handleSave = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -39,11 +25,11 @@ function FormSection() {
     <div className="p-4">
       <div className="flex justify-between">
         <h2 className="flex gap-2 bg-purple-500 text-white cursor-pointer p-3 font-bold rounded-md w-[110px]">
-          <LayoutGridIcon className="" /> Theme
+          <LayoutGridIcon /> Theme
         </h2>
 
         <div className="flex gap-2">
-          {activeIndex > 1 && (
+          {activeIndex > 1 && ( //This is short-circuit evaluation using the && operator.
             <button
               className="bg-purple-500 flex gap-1 text-white p-3 font-bold rounded-md"
               onClick={() => setActiveIndex(activeIndex - 1)}
@@ -80,6 +66,7 @@ function FormSection() {
       )}
       {activeIndex === 3 && (
         <Experience
+          resumeInfo={resumeInfo}
           setResumeInfo={setResumeInfo}
           handleSave={handleSave}
           loading={loading}
