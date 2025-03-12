@@ -38,13 +38,15 @@ export default {
       ],
     },
   ],
-  education: {
-    degree: "Bachelor of Science in Computer Science",
-    institution: "University of California, Berkeley",
-    location: "Berkeley, CA",
-    start_year: 2014,
-    end_year: 2018,
-  },
+  education: [
+    {
+      degree: "Bachelor of Science in Computer Science",
+      institution: "University of California, Berkeley",
+      location: "Berkeley, CA",
+      start_year: 2014,
+      end_year: 2018,
+    },
+  ],
   skills: [
     {
       id: 1,

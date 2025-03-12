@@ -84,6 +84,7 @@ function FormSection() {
       )}
       {activeIndex === 5 && (
         <Education
+          resumeInfo={resumeInfo}
           setResumeInfo={setResumeInfo}
           handleSave={handleSave}
           loading={loading}

@@ -15,7 +15,7 @@ function Certificates({ resumeInfo, setResumeInfo, handleSave, loading }) {
     if (resumeInfo && resumeInfo.certifications) {
       setCertificate(resumeInfo.certifications);
     }
-  }, [resumeInfo]);
+  }, []);
 
   const handleFormChange = (index, name, value) => {
     const newCertificates = certificate.slice();
@@ -28,18 +28,13 @@ function Certificates({ resumeInfo, setResumeInfo, handleSave, loading }) {
   };
 
   const addCertificates = () => {
-    const newCertificates = [
+    setCertificate([
       ...certificate,
       {
         name: "",
         year: 0,
       },
-    ];
-    setCertificate(newCertificates);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      certifications: newCertificates,
-    }));
+    ]);
   };
 
   const removeCertificates = (index) => {
@@ -95,7 +90,7 @@ function Certificates({ resumeInfo, setResumeInfo, handleSave, loading }) {
               <Button
                 type="button"
                 onClick={() => removeCertificates(index)}
-                className="bg-purple-500 w-[50%]"
+                className="bg-red-500 w-[50%]"
               >
                 Remove Certificate
               </Button>

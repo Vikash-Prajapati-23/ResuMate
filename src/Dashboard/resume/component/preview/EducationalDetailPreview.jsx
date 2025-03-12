@@ -1,7 +1,6 @@
 import React from "react";
 
-function EducationalDetailPreview({resumeInfo}) {
-
+function EducationalDetailPreview({ resumeInfo }) {
   return (
     <div className="">
       <h2
@@ -16,21 +15,20 @@ function EducationalDetailPreview({resumeInfo}) {
         className="border-[1.5px] mb-1 "
       />
 
-      <div className="my-2 flex justify-between m-2">
-        <div>
-          <h2 className="font-bold text-normal">
-            {resumeInfo?.education.institution}
-          </h2>
-          <p className="text-xs" > {resumeInfo?.education.degree} </p>
+      {resumeInfo?.education.map((edu, index) => (
+        <div className="my-2 flex justify-between m-2" key={index}>
+          <div>
+            <h2 className="font-bold text-normal">{edu.institution}</h2>
+            <p className="text-xs">{edu.degree}</p>
+          </div>
+          <div>
+            <p className="text-xs">{edu.location}</p>
+            <p className="text-xs">
+              {edu.start_year} - {edu.end_year}
+            </p>
+          </div>
         </div>
-        <div>
-          <p className="text-xs" > {resumeInfo?.education.location} </p>
-          <p className="text-xs" >
-            {resumeInfo?.education.start_year} -
-            {resumeInfo?.education.end_year}
-          </p>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }
