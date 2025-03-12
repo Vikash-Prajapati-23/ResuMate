@@ -5,6 +5,7 @@ import SkillSet from "./forms/SkillSet";
 import Experience from "./forms/Experience";
 import Projects from "./forms/Projects";
 import Certificates from "./forms/Certificates";
+import Education from "./forms/Education";
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 
 function FormSection() {
@@ -52,6 +53,7 @@ function FormSection() {
 
       {activeIndex === 1 && (
         <PersonalInfo
+          resumeInfo={resumeInfo}
           setResumeInfo={setResumeInfo}
           handleSave={handleSave}
           loading={loading}
@@ -81,6 +83,13 @@ function FormSection() {
         />
       )}
       {activeIndex === 5 && (
+        <Education
+          setResumeInfo={setResumeInfo}
+          handleSave={handleSave}
+          loading={loading}
+        />
+      )}
+      {activeIndex === 6 && (
         <Certificates
           setResumeInfo={setResumeInfo}
           handleSave={handleSave}

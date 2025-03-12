@@ -43,6 +43,7 @@ function Projects({ resumeInfo, setResumeInfo, handleSave, loading }) {
       project: newProject,
     }));
   }
+  
   const addProject = () => {
     setProject([
       ...project,
@@ -95,7 +96,7 @@ function Projects({ resumeInfo, setResumeInfo, handleSave, loading }) {
                 <Input
                   value={item.technologies.join(", ")}
                   type="text"
-                  placeHolder="Ex. React, Js, Node.js"
+                  placeholder="Ex. React, Js, Node.js"
                   required
                   onChange={(e) =>
                     handleFormChange(index, "technologies", e.target.value)

@@ -128,7 +128,7 @@ function Experience({ setResumeInfo, handleSave, loading }) {
               <div className=" col-span-2">
                 <label className="ms-2 text-xs"> Your Responsibility </label>
                 <TextEditor
-                  onTextEditorChange={(event) => handleTextFormChange(event, "responsibilities", index)}
+                  onTextEditorChange={(value) => handleTextFormChange(value, "responsibilities", index)}
                 />
               </div>
               <Button
