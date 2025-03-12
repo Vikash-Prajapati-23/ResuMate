@@ -8,7 +8,7 @@ function CertificationsPreview({resumeInfo}) {
         style={{ color: resumeInfo?.personal_info.theme_color }}
         className="text-center mt-6 text-xl font-bold mb-1 m-2"
       >
-        Educational Qualification
+        Certificates
       </h2>
 
       <hr

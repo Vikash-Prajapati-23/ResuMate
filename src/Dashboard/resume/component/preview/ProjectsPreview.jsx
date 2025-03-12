@@ -21,7 +21,8 @@ function ProjectsPreview({resumeInfo}) {
             <div className=" my-1">
               <div>
                 <p className="font-bold"> {project?.name} </p>
-                <p className="text-sm">{project?.description}</p>
+                {/* <p className="text-sm">{project?.description}</p> */}
+                <div dangerouslySetInnerHTML={{__html:project?.description}} />
               </div>
               <div className="flex mt-1 text-xs">
                 <span className="font-bold" >Technologies used -</span>

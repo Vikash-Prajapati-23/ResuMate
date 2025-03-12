@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -70,7 +70,7 @@ function Experience({ setResumeInfo, handleSave, loading }) {
       </div>
 
       <form className="mt-4" onSubmit={handleSave}>
-        <div>
+        <div className="mt-4 border-2 p-3 rounded-md">
           {experience.map((item, index) => (
             <div key={index} className="grid grid-cols-2 gap-3">
               <div className="">

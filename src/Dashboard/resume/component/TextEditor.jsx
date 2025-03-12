@@ -25,13 +25,13 @@ function TextEditor({ onTextEditorChange }) {
     <EditorProvider>
       <Editor value={value} onChange={(e) => {setValue(e.target.value); onTextEditorChange(e) }}>
         <Toolbar>
-          <BtnUndo />
-          <BtnRedo />
-          <Separator />
           <BtnBold />
           <BtnItalic />
           <BtnUnderline />
           <BtnStrikeThrough />
+          <Separator />
+          <BtnUndo />
+          <BtnRedo />
           <Separator />
           <BtnNumberedList />
           <BtnBulletList />

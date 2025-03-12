@@ -91,6 +91,7 @@ function FormSection() {
       )}
       {activeIndex === 6 && (
         <Certificates
+          resumeInfo={resumeInfo}
           setResumeInfo={setResumeInfo}
           handleSave={handleSave}
           loading={loading}

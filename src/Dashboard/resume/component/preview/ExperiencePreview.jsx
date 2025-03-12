@@ -19,7 +19,8 @@ function ExperiencePreview({resumeInfo}) {
               </span>
             </div>
           </div>
-          <p className="mb-6 mt-3 text-xs"> {experience?.responsibilities} </p>
+          {/* <p className="mb-6 mt-3 text-xs"> {experience?.responsibilities} </p> */}
+          <div dangerouslySetInnerHTML={{__html:experience?.responsibilities}} />
         </div>
       ))}
     </div>

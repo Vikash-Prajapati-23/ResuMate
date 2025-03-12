@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import TextEditor from "../TextEditor";
 
 function Projects({ resumeInfo, setResumeInfo, handleSave, loading }) {
+
   const [project, setProject] = useState([
     {
       name: "",
