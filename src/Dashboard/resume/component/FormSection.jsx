@@ -57,6 +57,7 @@ function FormSection() {
           setResumeInfo={setResumeInfo}
           handleSave={handleSave}
           loading={loading}
+          setLoading={setLoading}
         />
       )}
       {activeIndex === 2 && (

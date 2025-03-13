@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import BrandLogo from "../../assets/BrandName.png";
 import main2_1 from "../../assets/main2_1.png";
 import main2_2 from "../../assets/main2_2.png";

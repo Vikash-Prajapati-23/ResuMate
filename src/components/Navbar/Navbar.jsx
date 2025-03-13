@@ -1,8 +1,10 @@
 import React from "react";
 import "./Navbar.css";
+// import index from "../../Dashboard/index.js"
 import BrandLogo from "../../assets/BrandName.png";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../../features/theme/themeSlice";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const theme = useSelector((state) => state.theme.value);
@@ -27,24 +29,24 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-8">
-        <a
-          href="#"
+        <Link
+          to="/"
           className="border-b-2 border-transparent hover:border-blue-500 nav-item"
         >
           Home
-        </a>
-        <a
-          href="#"
+        </Link>
+        <Link
+          to="/"
           className="nav-item border-b-2 border-transparent hover:border-blue-500 nav-item"
         >
           Resume Examples
-        </a>
-        <a
-          href="#"
+        </Link>
+        <Link
+          to="/"
           className="nav-item border-b-2 border-transparent hover:border-blue-500 nav-item"
         >
           Resume Templates
-        </a>
+        </Link>
       </div>
 
       <div className="flex gap-8">
@@ -64,16 +66,19 @@ const Navbar = () => {
             light_mode
           </span>
         </button>
-        <a href="#">
+        <Link to="/">
           <button className="nav-item border-b-2 border-transparent hover:border-blue-500 nav-item">
             Sign Up
           </button>
-        </a>
-        <a href="#">
+        </Link>
+        <Link to="/">
           <button className="nav-item border-b-2 border-transparent hover:border-blue-500 nav-item">
             Login
           </button>
-        </a>
+        </Link>
+        <Link to="/Dashboard">
+          Dashboard
+        </Link>
       </div>
     </nav>
   );
