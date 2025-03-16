@@ -13,11 +13,11 @@ function SkillSet({ handleSave, loading, resumeInfo, setResumeInfo }) {
     },
   ]);
 
-  // useEffect(() => { // This is used to to show the dummy data.
-  //   if (resumeInfo.skills) {
-  //     setSkills(resumeInfo.skills);
-  //   }
-  // }, [resumeInfo]);
+  useEffect(() => { // This is used to to show the dummy data.
+    if (resumeInfo.skills) {
+      setSkills(resumeInfo.skills);
+    }
+  }, []);
 
   const handleFormChange = (index, name, value) => {
     const newSkills = skills.slice();

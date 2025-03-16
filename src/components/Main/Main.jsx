@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useRef} from "react";
+import Carousel from "../Carousel/Carousel";
 import BrandLogo from "../../assets/BrandName.png";
 import main2_1 from "../../assets/main2_1.png";
 import main2_2 from "../../assets/main2_2.png";
@@ -10,6 +11,12 @@ import { useSelector } from "react-redux";
 
 const Main = () => {
   const theme = useSelector((state) => state.theme.value);
+
+  // const btnRef = useRef(0)
+
+  // function changeColor () {
+  //   btnRef.current.style.backgroundColor = "red"
+  // }  // This was just for learning purposes
 
   return (
     <>
@@ -54,6 +61,12 @@ const Main = () => {
           </div>
         </div>
       </div>
+
+      {/* // This was just for learning purposes */}
+      {/* <div className="h-96 grid items-center font-extrabold " >
+        <button ref={btnRef} className="p-2 m-auto rounded-md" > Click Me </button>
+        <button onClick={changeColor} className="bg-zinc-700 text-white p-2 m-auto rounded-md" > Click Me </button>
+      </div> */}
 
       <div
         style={
@@ -112,6 +125,9 @@ const Main = () => {
           </div>
         </div>
       </div>
+
+      <Carousel />
+
     </>
   );
 };

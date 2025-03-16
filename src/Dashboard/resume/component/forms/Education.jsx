@@ -14,11 +14,11 @@ function Education({ resumeInfo, setResumeInfo, handleSave, loading }) {
     },
   ]);
 
-  // useEffect(() => {
-  //   if (resumeInfo && resumeInfo.education) {
-  //     setEducation(resumeInfo.education);
-  //   }
-  // }, [resumeInfo]);
+  useEffect(() => {
+    if (resumeInfo && resumeInfo.education) {
+      setEducation(resumeInfo.education);
+    }
+  }, []);
 
   const handleFormChange = (index, name, value) => {
     const newEducation = education.slice();

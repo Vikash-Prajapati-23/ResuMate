@@ -76,7 +76,7 @@ const Navbar = () => {
             Login
           </button>
         </Link>
-        <Link to="/Dashboard">
+        <Link to="/Dashboard" className="border-b-2 border-transparent hover:border-blue-500 nav-item">
           Dashboard
         </Link>
       </div>
