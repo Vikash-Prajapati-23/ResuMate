@@ -5,14 +5,14 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-purple-100 to-indigo-100 ">
       <div className="mx-[5%]">
-        <div className="foot-section grid sm:grid-cols-1 md:grid-cols-4 pt-8 justify-items-center">
-          <div className="foot-content1 space-y-5 text-center md:text-left sm:text-left">
+        <div className="foot-section grid sm:grid-cols-1 md:grid-cols-5 pt-8 justify-items-center">
+          <div className="foot-content1 space-y-5 text-center col-span-2 md:text-left sm:text-left">
             <img
               src={BrandLogo}
               className="w-[150px] sm:w-[200px] mx-auto md:mx-0"
               alt="Logo"
             />
-            <div className="w-[90%] sm:w-[80%] md:w-[70%] mx-auto md:mx-0">
+            <div className="w-[90%] sm:w-[80%] md:w-[90%] mx-auto md:mx-0">
               <p className="text-pretty py-4">
                 ResuMate is a platform that helps you create a professional
                 resume. We assure our brand can increase your chances of getting
@@ -20,7 +20,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="flex justify-center md:justify-start gap-4">
+            <div className="flex justify-center md:justify-start col-span-3 gap-4">
               <a href="#">
                 <i className="fa-brands fa-facebook text-4xl bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
               </a>
