@@ -7,6 +7,7 @@ import Projects from "./forms/Projects";
 import Certificates from "./forms/Certificates";
 import Education from "./forms/Education";
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
+import { toast } from "sonner"
 
 function FormSection() {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -17,6 +18,7 @@ function FormSection() {
   const handleSave = (e) => {
     e.preventDefault();
     setLoading(true);
+    toast("✅ Details Updated Successfully! 🥳🎉")
     setTimeout(() => {
       setLoading(false);
       // setEnableNext(true);

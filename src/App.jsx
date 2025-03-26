@@ -5,6 +5,7 @@ import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 import Dashboard from "./Dashboard";
 import EditResume from "./Dashboard/resume/[resumeID]/edit";
+import { Toaster } from "@/components/ui/sonner"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           element={<EditResume />}
         />
       </Routes>
+      <Toaster />
       <Footer />
     </>
   );

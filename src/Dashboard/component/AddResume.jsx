@@ -19,10 +19,10 @@ function AddResume() {
   const navigate = useNavigate();
 
   const onCreate = () => { 
-    setLoading(true);  // Show loader
+    setLoading(true);  
     setTimeout(() => {
-      setLoading(false);  // Stop loader
-      setOpenDialog(false);  // Close dialog after loading
+      setLoading(false);  
+      setOpenDialog(false);  
       const uuid = uuid4();
       console.log({ resumeTitle, uuid });
       navigate(`/dashboard/resume/${uuid}/edit`);
