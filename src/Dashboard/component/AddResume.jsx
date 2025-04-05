@@ -1,5 +1,5 @@
-import { Loader2, PlusSquare } from "lucide-react";
 import React, { useState } from "react";
+import { Loader2, PlusSquare } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -46,7 +46,7 @@ function AddResume() {
             <DialogDescription className="py-2">
               Add a title for your resume. You can edit this later.
               <Input
-                className="mt-2"
+                className="mt-3"
                 placeholder="Ex. Full Stack Developer..."
                 onChange={(e) => setResumeTitle(e.target.value)} // To save the user input
               />
