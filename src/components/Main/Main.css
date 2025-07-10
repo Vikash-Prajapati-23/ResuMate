@@ -1,0 +1,52 @@
+.main-content {
+    position: absolute;
+    top: 35%;
+    left: 5%;
+    color: #fff;
+}
+
+.main_bg {
+    height: 100vh;
+    width: 100vw;
+    object-fit: fit;
+}
+
+.main_1 {
+  width: 50%;
+}
+
+.main_1-head {
+    font-size: 4rem;
+}
+
+.main_2 {
+  width: 30%;
+}
+
+@media screen and (max-width: 1030px) {
+  .main_1 {
+    width: 40%;
+  }
+
+.main_1-head {
+    font-size: 3rem;
+}
+
+  .main_2 {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .main_1 {
+    width: 40%;
+  }
+
+.main_1-head {
+    font-size: 4rem;
+}
+
+  .main_2 {
+    display: none;;
+  }
+}

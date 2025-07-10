@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../../features/theme/themeSlice";
-import main_bg7 from "../../assets/main_bg7.jpg";
+// import main_bg7 from "../../assets/main_bg7.jpg";
 import main_carousel1 from "../../assets/main_carousel1.jpg";
 import main_carousel2 from "../../assets/main_carousel2.jpg";
 import main_carousel3 from "../../assets/main_carousel3.png";
@@ -62,15 +62,15 @@ const Carousel = () => {
 
   return (
     <div
-      style={
-        theme
-          ? {
-              backgroundImage: `url(${main_bg7})`,
-              backgroundSize: "cover",
-            }
-          : { backgroundColor: "white" }
-      }
-      className="bg-gradient-to-b py-8 from-blue-100 to-purple-100"
+      // style={
+      //   theme
+      //     ? {
+      //         backgroundImage: `url(${main_bg7})`,
+      //         backgroundSize: "cover",
+      //       }
+      //     : { backgroundColor: "white" }
+      // }
+      className={`${!theme ? "bg-[#fce7f3]" : "bg-[#2e1a24] text-white"}`}
     >
       <div className=" relative overflow-hidden w-full flex flex-col items-center h-screen">
         <h1 className="text-5xl font-bold text-center p-3 bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">

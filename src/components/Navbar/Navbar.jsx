@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 shadow-xl z-40  py-3 lg:px-20 md:px-10 lg:text-xl md:text-sm ${
+      className={`sticky top-0 shadow-xl z-40  py-0 lg:px-20 md:px-10 lg:text-xl md:text-sm ${
         theme ? "bg-gray-900 text-indigo-600" : "bg-white text-blue-600"
       }`}
     >
@@ -75,10 +75,10 @@ const Navbar = () => {
               />
             </Link>
             <Link
-              to="/"
+              to="/Dashboard"
               className="nav-item border-b-2 border-transparent hover:border-blue-500 nav-item"
             >
-              Resume Examples
+              Get Started
             </Link>
             <Link
               to="/"
@@ -122,12 +122,22 @@ const Navbar = () => {
                 </Link>
               </div>
             ) : (
-              <Link
-                to="/Dashboard"
-                className="border-b-2 border-transparent hover:border-blue-500 nav-item"
-              >
-                Dashboard
-              </Link>
+              <div className="flex gap-8">
+                <Link
+                  onClick={() => setIsLoggedIn(false)}
+                  to="/"
+                  className="border-b-2 border-transparent nav-item"
+                >
+                  Logout
+                </Link>
+
+                <Link
+                  to="/Dashboard"
+                  className="border-b-2 border-transparent hover:border-blue-500 nav-item"
+                >
+                  Dashboard
+                </Link>
+              </div>
             )}
           </div>
         </div>
