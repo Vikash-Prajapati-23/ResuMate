@@ -5,44 +5,44 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-purple-100 to-indigo-100 ">
       <div className="mx-[5%]">
-        <div className="foot-section grid sm:grid-cols-1 md:grid-cols-5 pt-8 justify-items-center">
-          <div className="foot-content1 space-y-5 text-center col-span-2 md:text-left sm:text-left">
+        <div className="grid sm:grid-cols-1 md:grid-cols-5 pt-8 justify-items-center">
+          <div className="md:space-y-5 col-span-2 md:text-left">
             <img
               src={BrandLogo}
-              className="w-[150px] sm:w-[200px] mx-auto md:mx-0"
+              className="w-[150px] sm:w-[200px] md:mx-0 ms-4"
               alt="Logo"
             />
             <div className="w-[90%] sm:w-[80%] md:w-[90%] mx-auto md:mx-0">
-              <p className="text-pretty py-4">
+              <p className="text-pretty lg:text-base md:text-sm py-4">
                 ResuMate is a platform that helps you create a professional
                 resume. We assure our brand can increase your chances of getting
                 your dream job by 50%.
               </p>
             </div>
 
-            <div className="flex justify-center md:justify-start col-span-3 gap-4">
+            <div className="flex justify-start md:text-4xl text-3xl md:mx-0 ms-4 md:mb-0 mb-10 col-span-3 gap-4">
               <a href="#">
-                <i className="fa-brands fa-facebook text-4xl bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
+                <i className="fa-brands fa-facebook bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
               </a>
               <a href="#">
-                <i className="fa-brands fa-square-instagram text-4xl bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
+                <i className="fa-brands fa-square-instagram bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
               </a>
               <a href="#">
-                <i className="fa-brands fa-square-x-twitter text-4xl bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
+                <i className="fa-brands fa-square-x-twitter bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
               </a>
               <a href="#">
-                <i className="fa-brands fa-tiktok text-4xl bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
+                <i className="fa-brands fa-tiktok bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
               </a>
               <a href="#">
-                <i className="fa-brands fa-youtube text-4xl bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
+                <i className="fa-brands fa-youtube bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent hover:scale-125 transition-transform duration-300"></i>
               </a>
             </div>
           </div>
 
           {/* Footer Links */}
-          <div className="foot-content2 text-center md:text-left sm:text-left">
-            <h1 className="font-bold text-xl pb-4">About ResuMate</h1>
-            <ul className="space-y-2">
+          <div className="text-left">
+            <h1 className="font-bold lg:text-xl md:text-base md:pb-4 pb-3">About Us</h1>
+            <ul className="space-y-2 lg:text-xl md:text-sm text-xs">
               <li>
                 <a href="#" className="hover:text-blue-600">
                   About Us
@@ -66,22 +66,22 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="foot-content3 text-center md:text-left sm:text-left">
-            <h1 className="font-bold text-xl pb-4">Resume Templates</h1>
-            <ul className="space-y-2">
+          <div className="text-left">
+            <h1 className="font-bold lg:text-xl md:text-base md:pb-4 pb-3">Templates</h1>
+            <ul className="space-y-2 lg:text-lg md:text-sm text-xs">
               <li>
                 <a href="#" className="hover:text-blue-600">
-                  Front End Developer
+                  Front-end Dev
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-blue-600">
-                  Back End Developer
+                  Back-end Dev
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-blue-600">
-                  Full Stack Developer
+                  Full-Stack Dev
                 </a>
               </li>
               <li>
@@ -92,9 +92,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="foot-content4 text-center md:text-left sm:text-left">
-            <h1 className="font-bold text-xl pb-4">Build your Resume</h1>
-            <ul className="space-y-2">
+          <div className="text-left md:mt-0 mt-6 md:ms-0 ms-4">
+            <h1 className="font-bold lg:text-xl md:text-lg md:pb-4 pb-3">Build Resumes</h1>
+            <ul className="space-y-2 lg:text-lg md:text-sm text-xs">
               <li>
                 <a href="#" className="hover:text-blue-600">
                   AI Resume Builder
@@ -112,7 +112,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="hover:text-blue-600">
-                  Cover Letter Examples
+                  Cover Letters
                 </a>
               </li>
             </ul>

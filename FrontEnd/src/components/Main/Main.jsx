@@ -19,7 +19,7 @@ const Main = () => {
 
         <div className="main-content h-screen md:translate-y-[-5%] translate-y-[-5%]  bg-gradient-to-b from-white to-blue-50">
           <div className="flex flex-col items-start main_1 ">
-            <span className="font-bold lg:text-6xl md:text-4xl main-head">
+            <span className="font-bold lg:text-6xl md:text-4xl main-head bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
               Welcome to Resume Builder
             </span>
             <p className="font-bold mt-4 lg:text-xl md:text-sm text-xs text-justify ">
@@ -45,9 +45,9 @@ const Main = () => {
         </div>
       </div>
 
-      {/* <MidSection /> */}
+      <MidSection />
 
-      {/* <Carousel /> */}
+      <Carousel />
     </div>
   );
 };
