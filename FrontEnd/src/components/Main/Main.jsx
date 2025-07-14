@@ -6,6 +6,7 @@ import main_img_3 from "../../assets/main_carousel9.webp";
 import "./Main.css";
 import Carousel from "../Carousel/Carousel";
 import MidSection from "../MidSection/MidSection";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   const theme = useSelector((state) => state.theme.value);
@@ -29,7 +30,7 @@ const Main = () => {
               resume today!
             </p>
             <button className="bg-blue-500 hover:bg-blue-700 md:hover:scale-125 ease-in-out duration-300 text-white md:text-base text-xs font-bold py-2 px-4 rounded mt-4">
-              Get Started
+              <Link to="/Dashboard">Get Started</Link>
             </button>
           </div>
 

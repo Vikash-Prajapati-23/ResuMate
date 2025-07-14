@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-function SkillsPreview({ resumeInfo }) {
+function SkillsPreview() {
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
+  
   return (
     <>
       <div className="grid grid-cols-2 gap-3 mt-3 mb-6 m-2">

@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useId } from "react";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setResumeInfo } from "@/features/resumeInfo/resumeInfo";
 
-function SkillSet({ handleSave, loading, resumeInfo, setResumeInfo }) {
+function SkillSet({ handleSave, loading }) {
+  const dispatch = useDispatch();
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
+
   const [skills, setSkills] = useState([
     {
       name: "",
@@ -13,7 +18,8 @@ function SkillSet({ handleSave, loading, resumeInfo, setResumeInfo }) {
     },
   ]);
 
-  useEffect(() => { // This is used to to show the dummy data.
+  useEffect(() => {
+    // This is used to to show the dummy data.
     if (resumeInfo.skills) {
       setSkills(resumeInfo.skills);
     }
@@ -23,10 +29,12 @@ function SkillSet({ handleSave, loading, resumeInfo, setResumeInfo }) {
     const newSkills = skills.slice();
     newSkills[index][name] = value;
     setSkills(newSkills);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      skills: newSkills,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        skills: newSkills,
+      }))
+    );
   };
 
   const addSkill = () => {
@@ -36,10 +44,12 @@ function SkillSet({ handleSave, loading, resumeInfo, setResumeInfo }) {
   const removeSkill = (index) => {
     const newSkills = skills.filter((_, i) => i !== index);
     setSkills(newSkills);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      skills: newSkills,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        skills: newSkills,
+      }))
+    );
   };
 
   return (

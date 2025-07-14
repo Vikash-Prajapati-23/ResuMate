@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useDispatch, useSelector } from "react-redux";
+import { setResumeInfo } from "@/features/resumeInfo/resumeInfo";
 
-function Education({ resumeInfo, setResumeInfo, handleSave, loading }) {
+function Education({ handleSave, loading }) {
+  const dispatch = useDispatch();
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
+
   const [education, setEducation] = useState([
     {
       degree: "",
@@ -22,12 +27,14 @@ function Education({ resumeInfo, setResumeInfo, handleSave, loading }) {
 
   const handleFormChange = (index, name, value) => {
     const newEducation = education.slice();
-    newEducation [index] [name] = value;
+    newEducation[index][name] = value;
     setEducation(newEducation);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      education: newEducation,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        education: newEducation,
+      }))
+    );
   };
 
   const addEducation = () => {
@@ -44,12 +51,14 @@ function Education({ resumeInfo, setResumeInfo, handleSave, loading }) {
   };
 
   const removeEducation = (index) => {
-    const newEducation = education.filter((_ , i) => i !== index);
+    const newEducation = education.filter((_, i) => i !== index);
     setEducation(newEducation);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      education: newEducation,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        education: newEducation,
+      }))
+    );
   };
 
   return (
@@ -72,7 +81,9 @@ function Education({ resumeInfo, setResumeInfo, handleSave, loading }) {
                   value={item.degree}
                   type="text"
                   required
-                  onChange={(e) => handleFormChange(index, "degree", e.target.value)}
+                  onChange={(e) =>
+                    handleFormChange(index, "degree", e.target.value)
+                  }
                 />
               </div>
               <div>
@@ -81,7 +92,9 @@ function Education({ resumeInfo, setResumeInfo, handleSave, loading }) {
                   value={item.institution}
                   type="text"
                   required
-                  onChange={(e) => handleFormChange(index, "institution", e.target.value)}
+                  onChange={(e) =>
+                    handleFormChange(index, "institution", e.target.value)
+                  }
                 />
               </div>
 
@@ -91,7 +104,9 @@ function Education({ resumeInfo, setResumeInfo, handleSave, loading }) {
                   value={item.location}
                   type="text"
                   required
-                  onChange={(e) => handleFormChange(index, "location", e.target.value)}
+                  onChange={(e) =>
+                    handleFormChange(index, "location", e.target.value)
+                  }
                 />
               </div>
               <div className="col-span-1">
@@ -102,7 +117,9 @@ function Education({ resumeInfo, setResumeInfo, handleSave, loading }) {
                   min="1900"
                   max={new Date().getFullYear()} // Prevents future years
                   required
-                  onChange={(e) => handleFormChange(index, "start_year", e.target.value)}
+                  onChange={(e) =>
+                    handleFormChange(index, "start_year", e.target.value)
+                  }
                 />
               </div>
               <div className="col-span-1">
@@ -113,7 +130,9 @@ function Education({ resumeInfo, setResumeInfo, handleSave, loading }) {
                   min="1900"
                   max={new Date().getFullYear()} // Prevents future years
                   required
-                  onChange={(e) => handleFormChange(index, "end_year", e.target.value)}
+                  onChange={(e) =>
+                    handleFormChange(index, "end_year", e.target.value)
+                  }
                 />
               </div>
               <Button

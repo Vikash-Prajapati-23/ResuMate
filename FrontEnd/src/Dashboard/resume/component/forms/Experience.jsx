@@ -3,8 +3,13 @@ import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import TextEditor from "../TextEditor";
+import { useDispatch, useSelector } from "react-redux";
+import { setResumeInfo } from "@/features/resumeInfo/resumeInfo";
 
-function Experience({ setResumeInfo, handleSave, loading }) {
+function Experience({  handleSave, loading }) {
+  const dispatch = useDispatch();
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
+
   const [experience, setExperience] = useState([
     {
       job_title: "",
@@ -20,20 +25,24 @@ function Experience({ setResumeInfo, handleSave, loading }) {
     const newExperience = experience.slice();
     newExperience[index][name] = value;
     setExperience(newExperience);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      experience: newExperience,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        experience: newExperience,
+      }))
+    );
   };
 
   const handleTextFormChange = (event, name, index) => {
     const newExperience = experience.slice();
     newExperience[index][name] = event.target.value;
     setExperience(newExperience);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      experience: newExperience,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        experience: newExperience,
+      }))
+    );
   };
 
   const addExperience = () => {
@@ -51,13 +60,15 @@ function Experience({ setResumeInfo, handleSave, loading }) {
   };
 
   const removeExperience = (index) => {
-     // The "_" is parameter that is used very commonly when we don't want variable we use this. inside the filter is a callback function that takes two parameters. 1st is _ (means the current item) and 2nd is the index of that item.
-     const newExperience = experience.filter((_, i) => i !== index); 
+    // The "_" is parameter that is used very commonly when we don't want variable we use this. inside the filter is a callback function that takes two parameters. 1st is _ (means the current item) and 2nd is the index of that item.
+    const newExperience = experience.filter((_, i) => i !== index);
     setExperience(newExperience);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      experience: newExperience,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        experience: newExperience,
+      }))
+    );
   };
 
   return (
@@ -107,7 +118,7 @@ function Experience({ setResumeInfo, handleSave, loading }) {
                 <label className="ms-2 text-xs"> Start Date </label>
                 <Input
                   value={item.start_date}
-                  type='date'
+                  type="date"
                   onChange={(e) =>
                     handleFormChange(index, "start_date", e.target.value)
                   }
@@ -118,7 +129,7 @@ function Experience({ setResumeInfo, handleSave, loading }) {
                 <label className="ms-2 text-xs"> End Date </label>
                 <Input
                   value={item.end_date}
-                  type='date'
+                  type="date"
                   onChange={(e) =>
                     handleFormChange(index, "end_date", e.target.value)
                   }
@@ -128,7 +139,9 @@ function Experience({ setResumeInfo, handleSave, loading }) {
               <div className=" col-span-2">
                 <label className="ms-2 text-xs"> Your Responsibility </label>
                 <TextEditor
-                  onTextEditorChange={(value) => handleTextFormChange(value, "responsibilities", index)}
+                  onTextEditorChange={(value) =>
+                    handleTextFormChange(value, "responsibilities", index)
+                  }
                 />
               </div>
               <Button

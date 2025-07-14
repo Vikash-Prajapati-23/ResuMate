@@ -1,6 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-function ProjectsPreview({resumeInfo}) {
+function ProjectsPreview() {
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
 
   return (
     <div>

@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import {ResumeInfoContext} from "@/context/ResumeInfoContext";
+import React from "react";
 import { Github, Mail, MapPinHouse, Phone } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const PresonalDetailPreview = () => {
-  const { resumeInfo } = useContext(ResumeInfoContext);
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
 
   return (
     <div>

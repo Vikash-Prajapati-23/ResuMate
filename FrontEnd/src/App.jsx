@@ -6,6 +6,7 @@ import Footer from "./components/Footer/Footer";
 import Dashboard from "./Dashboard";
 import EditResume from "./Dashboard/resume/[resumeID]/edit";
 import { Toaster } from "@/components/ui/sonner"
+import ViewResume from "./ViewResume/[resumeViewID]/View";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
         <Route
           path="/dashboard/resume/:resumeID/edit"
           element={<EditResume />}
+        />
+        <Route 
+        path="/ViewResume/:resumeViewID/view"
+        element={<ViewResume />}
         />
       </Routes>
       <Toaster />

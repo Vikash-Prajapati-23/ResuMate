@@ -2,8 +2,13 @@ import { Input } from "@/components/ui/input";
 import { LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setResumeInfo } from "@/features/resumeInfo/resumeInfo";
 
-function Certificates({ resumeInfo, setResumeInfo, handleSave, loading }) {
+function Certificates({ handleSave, loading }) {
+  const dispatch = useDispatch();
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
+
   const [certificate, setCertificate] = useState([
     {
       name: "",
@@ -21,10 +26,12 @@ function Certificates({ resumeInfo, setResumeInfo, handleSave, loading }) {
     const newCertificates = certificate.slice();
     newCertificates[index][name] = value;
     setCertificate(newCertificates);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      certifications: newCertificates,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        certifications: newCertificates,
+      }))
+    );
   };
 
   const addCertificates = () => {
@@ -40,10 +47,12 @@ function Certificates({ resumeInfo, setResumeInfo, handleSave, loading }) {
   const removeCertificates = (index) => {
     const newCertificates = certificate.filter((_, i) => i !== index);
     setCertificate(newCertificates);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      certifications: newCertificates,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        certifications: newCertificates,
+      }))
+    );
   };
 
   return (

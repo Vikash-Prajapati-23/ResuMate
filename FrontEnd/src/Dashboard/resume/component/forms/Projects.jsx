@@ -3,8 +3,12 @@ import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import TextEditor from "../TextEditor";
+import { useDispatch, useSelector } from "react-redux";
+import { setResumeInfo } from "@/features/resumeInfo/resumeInfo";
 
-function Projects({ resumeInfo, setResumeInfo, handleSave, loading }) {
+function Projects({ handleSave, loading }) {
+  const dispatch = useDispatch();
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
 
   const [project, setProject] = useState([
     {
@@ -29,22 +33,26 @@ function Projects({ resumeInfo, setResumeInfo, handleSave, loading }) {
       newProject[index][name] = value;
     }
     setProject(newProject);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      project: newProject,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        project: newProject,
+      }))
+    );
   };
 
   const handleTextFormChange = (event, name, index) => {
     const newProject = project.slice();
     newProject[index][name] = event.target.value;
     setProject(newProject);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      project: newProject,
-    }));
-  }
-  
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        project: newProject,
+      }))
+    );
+  };
+
   const addProject = () => {
     setProject([
       ...project,
@@ -60,10 +68,12 @@ function Projects({ resumeInfo, setResumeInfo, handleSave, loading }) {
   const removeProject = (index) => {
     const newProject = project.filter((_, i) => i !== index);
     setProject(newProject);
-    setResumeInfo((prevInfo) => ({
-      ...prevInfo,
-      project: newProject,
-    }));
+    dispatch(
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        project: newProject,
+      }))
+    );
   };
 
   return (
@@ -108,7 +118,9 @@ function Projects({ resumeInfo, setResumeInfo, handleSave, loading }) {
               <div className="col-span-2">
                 <label className="ms-2 text-sm">Description</label>
                 <TextEditor
-                  onTextEditorChange={(event) => handleTextFormChange(event, "description", index)}
+                  onTextEditorChange={(event) =>
+                    handleTextFormChange(event, "description", index)
+                  }
                 />
               </div>
 

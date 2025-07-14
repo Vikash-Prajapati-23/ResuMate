@@ -22,7 +22,7 @@ const Navbar = () => {
     window.addEventListener("resize", handleResize);
     // Clean ups to avoid memory leaks or unwanted state updates.
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, []); 
 
   const handleToggel = () => {
     setIsOpen((open) => (open = !open));

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { LayoutGridIcon, MoveLeft, MoveRight } from "lucide-react";
 import PersonalInfo from "./forms/PersonalInfo";
 import SkillSet from "./forms/SkillSet";
@@ -6,14 +6,13 @@ import Experience from "./forms/Experience";
 import Projects from "./forms/Projects";
 import Certificates from "./forms/Certificates";
 import Education from "./forms/Education";
-import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import { toast } from "sonner"
+import { Navigate, useParams } from "react-router-dom";
 
 function FormSection() {
   const [activeIndex, setActiveIndex] = useState(1);
-  // const [enableNext, setEnableNext] = useState(false);
-  const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const [loading, setLoading] = useState(false);
+  const { resumeViewID } = useParams();
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -21,7 +20,6 @@ function FormSection() {
     toast("✅ Details Updated Successfully! 🥳🎉")
     setTimeout(() => {
       setLoading(false);
-      // setEnableNext(true);
     }, 2000);
   };
 
@@ -44,7 +42,6 @@ function FormSection() {
           )}
           <button
             className="bg-purple-500 flex gap-1 text-white p-3 font-bold rounded-md"
-            // disabled={!enableNext}
             onClick={() => setActiveIndex(activeIndex + 1)}
           >
             Next
@@ -55,8 +52,6 @@ function FormSection() {
 
       {activeIndex === 1 && (
         <PersonalInfo
-          resumeInfo={resumeInfo}
-          setResumeInfo={setResumeInfo}
           handleSave={handleSave}
           loading={loading}
           setLoading={setLoading}
@@ -64,42 +59,36 @@ function FormSection() {
       )}
       {activeIndex === 2 && (
         <SkillSet
-          setResumeInfo={setResumeInfo}
-          resumeInfo={resumeInfo}
           handleSave={handleSave}
           loading={loading}
         />
       )}
       {activeIndex === 3 && (
         <Experience
-          setResumeInfo={setResumeInfo}
           handleSave={handleSave}
           loading={loading}
         />
       )}
       {activeIndex === 4 && (
         <Projects
-          resumeInfo={resumeInfo}
-          setResumeInfo={setResumeInfo}
           handleSave={handleSave}
           loading={loading}
         />
       )}
       {activeIndex === 5 && (
         <Education
-          resumeInfo={resumeInfo}
-          setResumeInfo={setResumeInfo}
           handleSave={handleSave}
           loading={loading}
         />
       )}
       {activeIndex === 6 && (
         <Certificates
-          resumeInfo={resumeInfo}
-          setResumeInfo={setResumeInfo}
           handleSave={handleSave}
           loading={loading}
         />
+      )}
+      {activeIndex === 7 && (
+        <Navigate to={`/ViewResume/${resumeViewID}/view`} replace  />
       )}
     </div>
   );
