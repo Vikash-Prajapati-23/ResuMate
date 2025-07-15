@@ -5,13 +5,15 @@ import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 import Dashboard from "./Dashboard";
 import EditResume from "./Dashboard/resume/[resumeID]/edit";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 import ViewResume from "./ViewResume/[resumeViewID]/View";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <div className="no-print">
+        <Navbar />
+      </div>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -19,13 +21,13 @@ function App() {
           path="/dashboard/resume/:resumeID/edit"
           element={<EditResume />}
         />
-        <Route 
-        path="/ViewResume/:resumeViewID/view"
-        element={<ViewResume />}
-        />
+        <Route path="/ViewResume/:resumeViewID/view" element={<ViewResume />} />
       </Routes>
       <Toaster />
-      <Footer />
+
+      <div className="no-print">
+        <Footer />
+      </div>
     </>
   );
 }

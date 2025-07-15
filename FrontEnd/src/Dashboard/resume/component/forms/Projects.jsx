@@ -80,7 +80,7 @@ function Projects({ handleSave, loading }) {
     <div className="bg-white shadow-md rounded-lg p-4 border-t-4 border-purple-500 my-5">
       <div className="ms-2">
         <h2 className="font-bold">Projects</h2>
-        <p className="text-sm">Fill your projects if any.</p>
+        <p className="">Fill your projects if any.</p>
       </div>
 
       <form onSubmit={handleSave}>
@@ -91,7 +91,7 @@ function Projects({ handleSave, loading }) {
               key={index}
             >
               <div>
-                <label className="ms-2 text-sm">Project name</label>
+                <label className="ms-2 ">Project name</label>
                 <Input
                   value={item.name}
                   type="text"
@@ -103,7 +103,7 @@ function Projects({ handleSave, loading }) {
               </div>
 
               <div>
-                <label className="ms-2 text-sm">Technologies</label>
+                <label className="ms-2 ">Technologies</label>
                 <Input
                   value={item.technologies.join(", ")}
                   type="text"
@@ -116,7 +116,7 @@ function Projects({ handleSave, loading }) {
               </div>
 
               <div className="col-span-2">
-                <label className="ms-2 text-sm">Description</label>
+                <label className="ms-2 ">Description</label>
                 <TextEditor
                   onTextEditorChange={(event) =>
                     handleTextFormChange(event, "description", index)
@@ -125,7 +125,7 @@ function Projects({ handleSave, loading }) {
               </div>
 
               <div className="col-span-2">
-                <label className="ms-2 text-sm">Github link</label>
+                <label className="ms-2">Github link</label>
                 <Input
                   value={item.link}
                   type="link"

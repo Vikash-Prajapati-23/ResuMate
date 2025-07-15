@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import main_img_1 from "../../assets/main_carousel1.jpg";
 import main_img_2 from "../../assets/main_carousel5.jpeg";

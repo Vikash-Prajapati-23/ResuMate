@@ -222,7 +222,6 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
-
     dispatch(
       setResumeInfo({
         ...resumeInfo,

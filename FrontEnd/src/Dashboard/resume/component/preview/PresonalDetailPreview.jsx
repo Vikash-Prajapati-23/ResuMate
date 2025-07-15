@@ -22,7 +22,7 @@ const PresonalDetailPreview = () => {
         </p>
       </div>
 
-      <div className="flex justify-between text-xs m-2">
+      <div className="flex justify-between text-xs">
         <div className="space-y-1 my-2">
           <p className="text-start flex gap-2">
             <MapPinHouse className="w-4 h-4" /> {resumeInfo?.personal_info.address}
@@ -60,12 +60,12 @@ const PresonalDetailPreview = () => {
         className="border-[1.5px] mb-1 "
       />
 
-      <p className="text-justify text-xs m-2">{resumeInfo?.summary}</p>
+      <p className="text-justify text-xs">{resumeInfo?.summary}</p>
 
       
       <h2
         style={{ color: resumeInfo?.personal_info.theme_color }}
-        className=" mt-4 text-xl font-bold mb-1 m-2"
+        className=" mt-4 text-xl font-bold mb-1"
       >
         Skills
       </h2>

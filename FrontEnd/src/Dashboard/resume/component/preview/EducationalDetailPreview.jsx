@@ -8,7 +8,7 @@ function EducationalDetailPreview() {
     <div className="">
       <h2
         style={{ color: resumeInfo?.personal_info.theme_color }}
-        className="text-center mt-6 text-xl font-bold mb-1 m-2"
+        className="text-center mt-6 text-xl font-bold mb-1"
       >
         Educational Qualification
       </h2>
@@ -19,7 +19,7 @@ function EducationalDetailPreview() {
       />
 
       {resumeInfo?.education.map((edu, index) => (
-        <div className="my-2 flex justify-between m-2" key={index}>
+        <div className="my-2 flex justify-between" key={index}>
           <div>
             <h2 className="font-bold text-normal">{edu.institution}</h2>
             <p className="text-xs">{edu.degree}</p>

@@ -5,13 +5,13 @@ function ExperiencePreview() {
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
 
   return (
-    <div className="m-2">
+    <div className="">
       {resumeInfo?.experience.map((experience, index) => (
         <div key={index}>
           <div className="flex justify-between my-1">
             <div>
-              <p className="font-bold"> {experience?.job_title} </p>
-              <p className="">
+              <p className="font-bold text-sm"> {experience?.job_title} </p>
+              <p className="font-semibold text-xs">
                 {experience?.company} { experience?. company && experience?.location && ','} {experience?.location}
               </p>
             </div>
@@ -22,7 +22,7 @@ function ExperiencePreview() {
             </div>
           </div>
           {/* <p className="mb-6 mt-3 text-xs"> {experience?.responsibilities} </p> */}
-          <div dangerouslySetInnerHTML={{__html:experience?.responsibilities}} />
+          <div className=" text-xs" dangerouslySetInnerHTML={{__html:experience?.responsibilities}} />
         </div>
       ))}
     </div>
