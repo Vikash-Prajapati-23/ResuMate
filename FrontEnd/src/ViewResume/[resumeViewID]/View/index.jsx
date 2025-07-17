@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
 import PreviewSection from "@/Dashboard/resume/component/PreviewSection";
-import { RWebShare } from "react-web-share";
 import { useParams } from "react-router-dom";
 
 const ViewResume = () => {
@@ -21,6 +20,21 @@ const ViewResume = () => {
     }, 100);
   };
 
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "My Website",
+          text: "Check this out!",
+          url: window.location.href,
+        })
+        .then(() => console.log("Shared successfully"))
+        .catch(console.error);
+    } else {
+      alert("Web Share API not supported.");
+    }
+  };
+
   if (!resumeInfo) {
     return <div className="text-center p-5 text-gray-500">Loading...</div>;
   }
@@ -29,23 +43,9 @@ const ViewResume = () => {
     <>
       {/* Buttons that will not be printed */}
       <div className="no-print flex justify-between my-5 lg:mx-96 md:mx-20">
-        <RWebShare
-          data={{
-            text: "Hey, I just got a platform where you can create and download resumes just in minuts. You just need to fill your details and your resume is ready. No more editing Formating! Here's the link for my resume that i'he created for me. Do check this out.",
-            url:
-              import.meta.env.VITE_BASE_URL +
-              "/ViewResume/" +
-              resumeViewID +
-              "/view",
-            title:
-              resumeInfo?.first_name + " " + resumeInfo?.last_name + "resume",
-          }}
-          onClick={() => console.log("shared successfully!")}
-        >
-          <Button className="bg-purple-500 text-white" type="button">
-            Share
-          </Button>
-        </RWebShare>
+        <Button onClick={handleShare} className="bg-purple-500 text-white" type="button">
+          Share
+        </Button>
 
         <Button
           onClick={handleDownload}
