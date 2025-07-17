@@ -3,6 +3,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
+import authRoute from "./routes/authRoutes.js";
+
 
 dotenv.config();
 
@@ -12,6 +14,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+
+
+// Routes... 
+app.use("/api/auth", authRoute);
 
 const PORT = process.env.PORT || 3001;
 

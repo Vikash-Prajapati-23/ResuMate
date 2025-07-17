@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
 import PreviewSection from "@/Dashboard/resume/component/PreviewSection";
@@ -24,8 +24,8 @@ const ViewResume = () => {
     if (navigator.share) {
       navigator
         .share({
-          title: "My Website",
-          text: "Check this out!",
+          title: "My Resume.",
+          text: "Check this out! I've created it on Resumate. Its an amazing platform to create resume's in minuts with the help of AI.",
           url: window.location.href,
         })
         .then(() => console.log("Shared successfully"))
