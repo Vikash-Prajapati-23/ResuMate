@@ -4,7 +4,7 @@ import { LoaderCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import TextEditor from "../TextEditor";
 import { useDispatch, useSelector } from "react-redux";
-import { setResumeInfo } from "@/features/resumeInfo/resumeInfo";
+import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
 
 function Projects({ handleSave, loading }) {
   const dispatch = useDispatch();

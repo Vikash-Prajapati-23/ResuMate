@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
-import { setResumeInfo } from "@/features/resumeInfo/resumeInfo";
+import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
 
 function Education({ handleSave, loading }) {
   const dispatch = useDispatch();

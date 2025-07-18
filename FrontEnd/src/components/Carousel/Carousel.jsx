@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleTheme } from "../../features/theme/themeSlice";
+import { toggleTheme } from "@/store/slices/theme/themeSlice";
 import main_carousel1 from "../../assets/main_carousel1.jpg";
 import main_carousel2 from "../../assets/main_carousel2.jpg";
 import main_carousel3 from "../../assets/main_carousel3.png";

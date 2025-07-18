@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import FormSection from "../../component/FormSection";
 import PreviewSection from "../../component/PreviewSection";
-import {ResumeInfoContext} from "@/context/ResumeInfoContext.jsx";
 import dummy from "@/Data/dummy";
 import { useDispatch } from "react-redux";
-import { setResumeInfo } from "@/features/resumeInfo/resumeInfo";
+import { setResumeInfo } from "../../../../store/slices/resumeInfo/resumeInfo.js";
 
 function EditResume() {
-  // const [resumeInfo, setResumeInfo] = useState();
 
   const dispatch = useDispatch();
 
@@ -20,12 +18,10 @@ function EditResume() {
   // }, [resumeInfo]);
 
   return (
-    // <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
       <div className="m-5 grid grid-cols-1 md:grid-cols-2 gap-3 p-5 bg-secondary">
         <FormSection />
         <PreviewSection />
       </div>
-    // </ResumeInfoContext.Provider>
   );
 }
 

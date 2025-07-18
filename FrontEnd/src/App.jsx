@@ -14,7 +14,7 @@ function App() {
     <>
       <div className="no-print">
         <Navbar />
-        <SignUp />
+        {/* <SignUp /> */}
       </div>
       <Routes>
         <Route path="/" element={<Main />} />

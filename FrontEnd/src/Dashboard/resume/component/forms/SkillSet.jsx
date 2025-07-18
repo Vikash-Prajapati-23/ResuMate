@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setResumeInfo } from "@/features/resumeInfo/resumeInfo";
+import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
 
 function SkillSet({ handleSave, loading }) {
   const dispatch = useDispatch();

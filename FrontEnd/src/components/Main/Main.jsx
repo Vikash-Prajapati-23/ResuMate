@@ -8,6 +8,7 @@ import Carousel from "../Carousel/Carousel";
 import MidSection from "../MidSection/MidSection";
 import { Link } from "react-router-dom";
 
+
 const Main = () => {
   const theme = useSelector((state) => state.theme.value);
 

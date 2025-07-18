@@ -27,6 +27,11 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.get("/", (req, res) => {
+  res.send("✅ Backend Root Route Working!");
+});
+
+
 // Routes...
 app.use("/api/auth", authRoute);
 
@@ -41,7 +46,7 @@ app.get("/api/auth/test", (req, res) => {
 //   console.log(`Server is running at port ${PORT}`);
 // });
 
-app.listen(3001, "0.0.0.0", () => {
-  console.log("Server is running at port 3001;");
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is running at port ${PORT}`);
 });
 
