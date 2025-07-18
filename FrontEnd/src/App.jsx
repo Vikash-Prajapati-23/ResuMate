@@ -7,12 +7,14 @@ import Dashboard from "./Dashboard";
 import EditResume from "./Dashboard/resume/[resumeID]/edit";
 import { Toaster } from "@/components/ui/sonner";
 import ViewResume from "./ViewResume/[resumeViewID]/View";
+import SignUp from "./components/SignUp/SignUp";
 
 function App() {
   return (
     <>
       <div className="no-print">
         <Navbar />
+        <SignUp />
       </div>
       <Routes>
         <Route path="/" element={<Main />} />

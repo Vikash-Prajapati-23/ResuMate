@@ -28,5 +28,8 @@ export async function handleSignUp(req, res) {
       message: "Something went wrong while creating a new user.",
       error,
     });
+    return res
+      .status(500)
+      .json({ message: "Server error. Please try again later." });
   }
 }
