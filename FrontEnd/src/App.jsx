@@ -8,13 +8,16 @@ import EditResume from "./Dashboard/resume/[resumeID]/edit";
 import { Toaster } from "@/components/ui/sonner";
 import ViewResume from "./ViewResume/[resumeViewID]/View";
 import SignUp from "./components/SignUp/SignUp";
+import { useState } from "react";
 
 function App() {
+  const [isSignUp, setIsSignUp] = useState(false);
+
   return (
     <>
       <div className="no-print">
-        <Navbar />
-        {/* <SignUp /> */}
+        <Navbar setIsSignUp={setIsSignUp} />
+        {isSignUp && <SignUp setIsSignUp={setIsSignUp} />}
       </div>
       <Routes>
         <Route path="/" element={<Main />} />

@@ -1,18 +1,27 @@
 import React, { useState } from "react";
+import LogIn from "../LogIn/Login";
 import { Button } from "../ui/button";
 import { Github } from "lucide-react";
 import google_logo from "../../assets/google-logo.png";
 import { Input } from "../ui/input";
+import { setLogIn } from "@/store/slices/loogedIn/loogedIn";
+import { useDispatch } from "react-redux";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
-const SignUp = () => {
+const SignUp = ({ setIsSignUp }) => {
+  const [isLogingIn, setIsLogingin] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const dispatch = useDispatch();
   const [formData, setformData] = useState({
     userName: "",
     email: "",
     password: "",
   });
+
+  const toggelLogInSignUp = () => {
+    setIsLogingin((login) => (login = !login));
+  };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -30,7 +39,9 @@ const SignUp = () => {
       const data = await response.json();
       if (response.ok) {
         alert(data.message);
-        setIsVisible(false)
+        dispatch(setLogIn());
+        setIsVisible(false);
+        setIsSignUp(false);
       }
     } catch (error) {
       alert("Something went wrong while signing up.!");
@@ -45,86 +56,118 @@ const SignUp = () => {
       [name]: value,
     }));
   };
-
+  //
   return (
-    <div className={` ${isVisible ? "block" : "hidden"} `}>
-      <p className="text-xl font-semibold text-center">Create your account.</p>
-      <p className="text-gray-500 text-sm mb-5 text-center">
-        Please fill in the details to get started.
-      </p>
-
-      <form onSubmit={handleSignUp}>
-        <div className="flex flex-col mb-3">
-          <label className="text-sm" htmlFor="">
-            Name
-          </label>
-          <Input
-            className="rounded p-1 shadow-md border-2 border-gray-300 text-sm "
-            type="text"
-            name="userName"
-            value={formData.userName.trimStart()}
-            required
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col mb-3">
-          <label className="text-sm" htmlFor="">
-            Email
-          </label>
-          <Input
-            className="rounded p-1 shadow-md border-2 border-gray-300 text-sm "
-            type="text"
-            name="email"
-            value={formData.email}
-            required
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex flex-col mb-3">
-          <label className="text-sm" htmlFor="">
-            Password
-          </label>
-          <Input
-            className="rounded p-1 shadow-md border-2 border-gray-300 text-sm "
-            type="password"
-            name="password"
-            value={formData.password}
-            required
-            onChange={handleChange}
-          />
-        </div>
-        <Button
-          type="submit"
-          // onClick={}
-          className="text-center text-white w-full bg-blue-500 "
+    <div
+      className={`fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50`}
+    >
+      {!isLogingIn ? (
+        <div
+          className={`relative bg-white md:py-5 py-2 md:px-10 px-5 rounded-lg ${
+            isVisible ? "block" : "hidden"
+          } `}
         >
-          Sign up
-        </Button>
-
-        <div className="flex justify-between items-center my-4">
-          <div className="h-[1px] w-[100px] bg-blue-500 "></div>
-          <div className="text-xs">Or</div>
-          <div className="h-[1px] w-[100px] bg-blue-500  "></div>
-        </div>
-
-        <div className="flex justify-between gap-5 mb-2">
-          <Button
-            type="button"
-            // onClick={}
-            className="bg-gray-200 px-16 shadow-md "
-            variant="ghost"
+          <button
+            onClick={() => {
+              setIsVisible(false), setIsSignUp(false);
+            }}
+            className="absolute top-[4%] right-[5%] text-sm text-gray-500 "
           >
-            <img src={google_logo} alt="Google" className="w-4 h-4 " />
-          </Button>
-          <Button
-            type="button"
-            className="bg-gray-200 px-16 shadow-md "
-            variant="ghost"
-          >
-            <Github className="w-5 h-5 text-black" />
-          </Button>
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+          <p className="md:text-xl text-base font-semibold text-center">
+            Create your account.
+          </p>
+          <p className="text-gray-500 md:text-sm text-xs mb-5 text-center">
+            Please fill in the details to get started.
+          </p>
+
+          <form onSubmit={handleSignUp}>
+            <div className="flex flex-col mb-3">
+              <label className="text-sm" htmlFor="">
+                Name
+              </label>
+              <Input
+                className="text-sm "
+                type="text"
+                name="userName"
+                value={formData.userName.trimStart()}
+                required
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col mb-3">
+              <label className="text-sm" htmlFor="">
+                Email
+              </label>
+              <Input
+                className="text-sm"
+                type="text"
+                name="email"
+                value={formData.email}
+                required
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col mb-3">
+              <label className="text-sm" htmlFor="">
+                Password
+              </label>
+              <Input
+                className="text-sm"
+                type="password"
+                name="password"
+                value={formData.password}
+                required
+                onChange={handleChange}
+              />
+            </div>
+            <Button
+              type="submit"
+              // onClick={}
+              className="text-center text-white w-full bg-blue-500 "
+            >
+              Sign up
+            </Button>
+
+            <div className="flex justify-between items-center gap-1 md:my-4 my-2">
+              <div className="h-[1px] md:w-[140px] w-[110px] bg-blue-500 "></div>
+              <div className="text-xs">Or</div>
+              <div className="h-[1px] md:w-[140px] w-[110px] bg-blue-500  "></div>
+            </div>
+
+            <div className="flex justify-between md:gap-5 mb-2">
+              <Button
+                type="button"
+                // onClick={}
+                className="bg-gray-200 md:px-16 px-12 shadow-md "
+                variant="ghost"
+              >
+                <img
+                  src={google_logo}
+                  alt="Google"
+                  className="md:w-5 w-3 md:h-5 h-3 "
+                />
+              </Button>
+              <Button
+                type="button"
+                className="bg-gray-200 md:px-16 px-12 shadow-md "
+                variant="ghost"
+              >
+                <Github className="md:w-5 w-2 md:h-5 h-2 text-black" />
+              </Button>
+            </div>
+          </form>
+
+          <div onClick={toggelLogInSignUp} className="flex justify-end cursor-pointer">
+            <span className="text-blue-500 hover:underline hover:text-blue-600 transition text-xs">
+              have an account? Log In
+            </span>
+          </div>
         </div>
-      </form>
+      ) : (
+        <LogIn setIsSignUp={setIsSignUp} toggelLogInSignUp={toggelLogInSignUp} />
+      )}
     </div>
   );
 };

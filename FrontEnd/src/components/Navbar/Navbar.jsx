@@ -7,12 +7,12 @@ import { setLogIn, setLogOut } from "@/store/slices/loogedIn/loogedIn";
 import { Link } from "react-router-dom";
 import SignUp from "../SignUp/SignUp";
 
-const Navbar = () => {
+const Navbar = ({ setIsSignUp }) => {
   const isLoggedIn = useSelector((state) => state.loggedIn.value);
   const theme = useSelector((state) => state.theme.value);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
+  // const [isSignUp, setIsSignUp] = useState(false);
   // This checks if the screen size is less that = 500px.
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 500);
 
@@ -116,22 +116,7 @@ const Navbar = () => {
                 >
                   Sign Up
                 </button>
-                {/* </Link> */}
-                <div
-                  className={`fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50 ${
-                    isSignUp ? "block" : "hidden"
-                  } `}
-                >
-                  <div className="relative bg-white  py-5 px-10 rounded-lg">
-                    <button
-                      onClick={() => setIsSignUp(false)}
-                      className="absolute top-[4%] right-[5%] text-sm text-gray-500 "
-                    >
-                      <i className="fa-solid fa-xmark"></i>
-                    </button>
-                    <SignUp />
-                  </div>
-                </div>
+                {/* {isSignUp && <SignUp setIsSignUp={setIsSignUp} />} */}
               </div>
             ) : (
               <div className="flex gap-8">
@@ -191,20 +176,14 @@ const Navbar = () => {
               </span>
             </button>
             {!isLoggedIn ? (
-              <div className="flex gap-1 flex-col justify-end ">
-                <Link to="/">
-                  <button className="nav-item border-b-2 border-transparent nav-item">
-                    Sign Up
-                  </button>
-                </Link>
-                <Link to="/">
-                  <button
-                    onClick={() => dispatch(setLogIn())}
-                    className="nav-item border-b-2 border-transparent nav-item"
-                  >
-                    Login
-                  </button>
-                </Link>
+              <div className="flex gap-8">
+                <button
+                  onClick={() => setIsSignUp(true)}
+                  className="nav-item border-b-2 border-transparent hover:border-blue-500 nav-item"
+                >
+                  Sign Up
+                </button>
+                {/* {isSignUp && <SignUp setIsSignUp={setIsSignUp} />} */}
               </div>
             ) : (
               <div className="flex gap-1 flex-col justify-end ">
