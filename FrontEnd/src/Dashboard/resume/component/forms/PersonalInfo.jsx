@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { AIChatSession } from "./../../../../../service/GoogleApiModel";
 import { useDispatch, useSelector } from "react-redux";
-import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo"; 
+import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
 
 const prompt =
   "Generate a compelling and professional summary for a resume based on the job title: {job_title}. The response should be in JSON format with the following structure: 'experience_level' (containing 'fresher' and 'mid_level_experienced') and 'summary' (containing a concise, impactful, and achievement-driven statement). The summary should highlight key strengths, industry relevance, and career potential. Keep it within 2-3 lines, making it engaging and results-oriented.";
@@ -66,7 +66,9 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
     <div className="bg-white shadow-md rounded-lg p-4 border-t-4 border-purple-500 my-5">
       <div className="ms-2">
         <h2 className="font-bold">Personal Details</h2>
-        <p className="text-sm">Get started with filling up some personal details.</p>
+        <p className="text-sm">
+          Get started with filling up some personal details.
+        </p>
       </div>
 
       <form onSubmit={handleSave}>

@@ -6,10 +6,13 @@ import google_logo from "../../assets/google-logo.png";
 import { Input } from "../ui/input";
 import { setLogIn } from "@/store/slices/loogedIn/loogedIn";
 import { useDispatch } from "react-redux";
+import { LoaderCircle } from "lucide-react";
+import { toast } from "sonner";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const SignUp = ({ setIsSignUp }) => {
+  const [loading, setLoading] = useState(false);
   const [isLogingIn, setIsLogingin] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const dispatch = useDispatch();
@@ -31,20 +34,24 @@ const SignUp = ({ setIsSignUp }) => {
         // "http://localhost:3001/api/auth/signup",
         {
           method: "POST",
-          //   credentials: "include",
+          credentials: "include",
           body: JSON.stringify(formData),
           headers: { "Content-Type": "application/json" },
         }
       );
       const data = await response.json();
       if (response.ok) {
-        alert(data.message);
         dispatch(setLogIn());
         setIsVisible(false);
         setIsSignUp(false);
+        setLoading(true);
+        toast.success(`${data.message} 🥳🎉`);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       }
     } catch (error) {
-      alert("Something went wrong while signing up.!");
+      toast.error("Something went wrong while signing up.!");
       console.log(error);
     }
   };
@@ -56,7 +63,7 @@ const SignUp = ({ setIsSignUp }) => {
       [name]: value,
     }));
   };
-  //
+  
   return (
     <div
       className={`fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50`}
@@ -125,9 +132,10 @@ const SignUp = ({ setIsSignUp }) => {
             <Button
               type="submit"
               // onClick={}
+              disabled={loading}
               className="text-center text-white w-full bg-blue-500 "
             >
-              Sign up
+              {loading ? <LoaderCircle className="animate-spin" /> : "Sign up"}
             </Button>
 
             <div className="flex justify-between items-center gap-1 md:my-4 my-2">
@@ -159,14 +167,23 @@ const SignUp = ({ setIsSignUp }) => {
             </div>
           </form>
 
-          <div onClick={toggelLogInSignUp} className="flex justify-end cursor-pointer">
+          <div
+            onClick={toggelLogInSignUp}
+            className="flex justify-end cursor-pointer"
+          >
             <span className="text-blue-500 hover:underline hover:text-blue-600 transition text-xs">
               have an account? Log In
             </span>
           </div>
         </div>
       ) : (
-        <LogIn setIsSignUp={setIsSignUp} toggelLogInSignUp={toggelLogInSignUp} />
+        <LogIn
+          loading={loading}
+          setLoading={setLoading}
+          setIsSignUp={setIsSignUp}
+          toggelLogInSignUp={toggelLogInSignUp}
+          handleChange={handleChange}
+        />
       )}
     </div>
   );

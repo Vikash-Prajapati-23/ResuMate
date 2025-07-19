@@ -20,7 +20,7 @@ app.use(
       "http://localhost:5173",
       "https://resumate-ai-resume-builder.vercel.app",
     ],
-    //   credentials: true,
+      credentials: true,
   })
 );
 
