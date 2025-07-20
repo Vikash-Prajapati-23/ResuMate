@@ -5,7 +5,7 @@ dotenv.config();
 
 const secret = process.env.JWT_SECRET_KEY;
 
-export function setUser(user) {
+export function generateToken(user) {
   // This was for cookie setup.
   // await session.create({
   //     sessionId,
@@ -24,7 +24,7 @@ export function setUser(user) {
   ); // Inside the token the above data is stored in the encoded version.
 }
 
-export function getUser(token) {
+export function verifyToken(token) {
   // This was for cookie setup.
   // const userSession = await session.find({ sessionId }).populate("userId");
   // return userSession ? userSession.userId : null;

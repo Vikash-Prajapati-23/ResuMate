@@ -8,13 +8,12 @@ import { useDispatch } from "react-redux";
 import { LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
-
 const LogIn = ({
   setIsSignUp,
   toggelLogInSignUp,
   loading,
   setLoading,
+  baseUrl,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const dispatch = useDispatch();

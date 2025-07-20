@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LogIn from "../LogIn/Login";
+import LogIn from "../LogIn/LogIn";
 import { Button } from "../ui/button";
 import { Github } from "lucide-react";
 import google_logo from "../../assets/google-logo.png";
@@ -9,9 +9,7 @@ import { useDispatch } from "react-redux";
 import { LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
-
-const SignUp = ({ setIsSignUp }) => {
+const SignUp = ({ setIsSignUp, baseUrl }) => {
   const [loading, setLoading] = useState(false);
   const [isLogingIn, setIsLogingin] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -63,7 +61,7 @@ const SignUp = ({ setIsSignUp }) => {
       [name]: value,
     }));
   };
-  
+
   return (
     <div
       className={`fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50`}
@@ -178,6 +176,7 @@ const SignUp = ({ setIsSignUp }) => {
         </div>
       ) : (
         <LogIn
+          baseUrl={baseUrl}
           loading={loading}
           setLoading={setLoading}
           setIsSignUp={setIsSignUp}
