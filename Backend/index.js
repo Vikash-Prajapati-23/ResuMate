@@ -14,15 +14,30 @@ connectToMongoUrl(process.env.MONGO_DB_CONNECTION_STRING);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// app.use(
+//   cors({
+//     origin: ["http://localhost:5173", process.env.FRONTEND_URL],
+//     credentials: true,
+//   })
+// );
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://ai-resume-builder-bice-one.vercel.app"
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://resumate-ai-resume-builder.vercel.app",
-    ],
-      credentials: true,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
+
 
 app.use(express.json());
 app.use(cookieParser());
@@ -31,16 +46,12 @@ app.get("/", (req, res) => {
   res.send("✅ Backend Root Route Working!");
 });
 
-
 // Routes...
 app.use("/api/auth", authRoute);
-
-
 
 app.get("/api/auth/test", (req, res) => {
   res.send("Auth route working!");
 });
-
 
 // app.listen(PORT, () => {
 //   console.log(`Server is running at port ${PORT}`);
@@ -49,4 +60,3 @@ app.get("/api/auth/test", (req, res) => {
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running at port ${PORT}`);
 });
-
