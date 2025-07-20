@@ -5,7 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "@/store/slices/theme/themeSlice";
 import { setLogIn, setLogOut } from "@/store/slices/loogedIn/loogedIn";
 import { Link } from "react-router-dom";
-import SignUp from "../SignUp/SignUp";
+import { toast } from "sonner";
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const Navbar = ({ setIsSignUp }) => {
   const isLoggedIn = useSelector((state) => state.loggedIn.value);
@@ -26,6 +28,21 @@ const Navbar = ({ setIsSignUp }) => {
     // Clean ups to avoid memory leaks or unwanted state updates.
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleLogout = async () => {
+    const response = await fetch(`${baseUrl}/api/auth/logout`, {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await response.json();
+    if (response.ok) {
+      dispatch(setLogOut());
+      toast.success(data.message);
+    } else {
+      dispatch(setLogIn());
+      console.error("Error while loging out.")
+    }
+  };
 
   const handleToggel = () => {
     setIsOpen((open) => (open = !open));
@@ -121,7 +138,7 @@ const Navbar = ({ setIsSignUp }) => {
             ) : (
               <div className="flex gap-8">
                 <Link
-                  onClick={() => dispatch(setLogOut())}
+                  onClick={handleLogout}
                   to="/"
                   className="border-b-2 border-transparent nav-item"
                 >
@@ -188,7 +205,7 @@ const Navbar = ({ setIsSignUp }) => {
             ) : (
               <div className="flex gap-1 flex-col justify-end ">
                 <Link
-                  onClick={() => dispatch(setLogOut())}
+                  onClick={handleLogout}
                   to="/"
                   className="border-b-2 border-transparent nav-item"
                 >

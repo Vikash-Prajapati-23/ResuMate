@@ -19,24 +19,27 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-  fetch(`${baseUrl}/api/auth/me`, {
-    credentials: "include", // include cookie (JWT token)
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.user) {
-        dispatch(setLogIn());  // mark user as logged in
-      } else {
-        dispatch(setLogOut()); // mark user as logged out
-      }
+    fetch(`${baseUrl}/api/auth/me`, {
+      credentials: "include", // include cookie (JWT token)
+      method: "GET",
     })
-    .catch((err) => {
-      console.error("Auth check failed:", err);
-      dispatch(setLogOut());
-    });
-}, [dispatch]);
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.user) {
+          dispatch(setLogIn()); // mark user as logged in
+        } else {
+          dispatch(setLogOut()); // mark user as logged out
+        }
+      })
+      .catch((err) => {
+        console.error("Auth check failed:", err);
+        dispatch(setLogOut());
+      });
+  }, [dispatch]);
 
+  // useEffect(() => {
+  //   fetch()
+  // })
 
   return (
     <>

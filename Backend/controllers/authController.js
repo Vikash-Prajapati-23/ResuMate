@@ -22,8 +22,7 @@ export async function handleSignUp(req, res) {
       password: hashedPassword,
     });
 
-    
-    // In this project I'll use JWT, so I'm commenting this out. 
+    // In this project I'll use JWT, so I'm commenting this out.
     // const sessionId = uuidv4();
     // generateToken(sessionId, newUser);
 
@@ -47,9 +46,13 @@ export async function handleSignUp(req, res) {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.status(201).json({
+    res.status(200).json({
       message: "Signup successful",
-      user: { userName: newUser.userName, email: newUser.email, id: newUser._id },
+      user: {
+        userName: newUser.userName,
+        email: newUser.email,
+        id: newUser._id,
+      },
     });
   } catch (error) {
     console.error("Signup error:", error);
@@ -65,18 +68,18 @@ export async function handleLogin(req, res) {
     const user = await auth.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(400).json({ message: "User not found" });
     }
 
     const match = await bcrypt.compare(password, user.password);
 
     if (!match) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Invalid credentials" });
     }
 
     const token = generateToken(user);
 
-    // Setting the jwt as cookie. 
+    // Setting the jwt as cookie.
     res.cookie("authToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -102,11 +105,11 @@ export async function verifyLogin(req, res) {
     return res.status(401).json({ message: "Not authenticated" });
   }
 
-  // Verify the token with the secret key, if the data matches then its a valid user unless invalid. 
+  // Verify the token with the secret key, if the data matches then its a valid user unless invalid.
   const userData = verifyToken(token);
 
   if (!userData) {
-    return res.status(403).json({ message: "Invalid or expired token" });
+    return res.status(400).json({ message: "Invalid or expired token" });
   }
 
   try {
@@ -114,12 +117,32 @@ export async function verifyLogin(req, res) {
     const user = await auth.findById(userData.userId).select("-password");
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(400).json({ message: "User not found" });
     }
 
     return res.status(200).json({ user });
   } catch (error) {
     console.error("Verify error:", error);
     return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+export function verifyLogout(req, res) {
+  const token = req.cookies.authToken;
+
+  if(!token) {
+    console.log("Token not found.!");
+  }
+
+  if (token) {
+    res.clearCookie("authToken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "Lax",
+    });
+
+    return res.status(200).json({ message: "Logout successfully.!" });
+  } else {
+    return res.status(400).json({ message: "Internal srver error." });
   }
 }
