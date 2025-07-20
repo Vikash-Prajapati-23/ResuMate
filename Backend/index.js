@@ -46,8 +46,12 @@ app.get("/", (req, res) => {
   res.send("✅ Backend Root Route Working!");
 });
 
+
+
 // Routes...
 app.use("/api/auth", authRoute);
+
+
 
 app.get("/api/auth/test", (req, res) => {
   res.send("Auth route working!");

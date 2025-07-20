@@ -1,26 +1,28 @@
 import { auth } from "../models/authModel.js";
 import bcrypt from "bcrypt";
-// import { v4 as uuidv4 } from "uuid"; // This is for generating unique Id's.
 import { generateToken, verifyToken } from "../services/jwtTokens.js";
 
 const saltRounds = 10;
 
+// Sign up
 export async function handleSignUp(req, res) {
   const { userName, email, password } = req.body;
 
   try {
     const exists = await auth.findOne({ email });
     if (exists) {
-      return res.status(400).json({ message: "Email already exists.!" });
+      return res.status(400).json({ message: "User already exists" });
     }
 
-    const hashPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     const newUser = await auth.create({
       userName,
       email,
-      password: hashPassword,
+      password: hashedPassword,
     });
 
+    
     // In this project I'll use JWT, so I'm commenting this out. 
     // const sessionId = uuidv4();
     // generateToken(sessionId, newUser);
@@ -36,72 +38,88 @@ export async function handleSignUp(req, res) {
 
     const token = generateToken(newUser);
 
-    res.cookie("userToken", token, {
+    // Here the "authToken" is the name of the cookie and the token is the value of the cookie.
+    // We setup the cookies just like that.
+    res.cookie("authToken", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: process.env.NODE_ENV === "production", // Use HTTPS in production
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    return res.status(200).json({
-      message: "Account created & Logged in successfully.!",
-      user: {
-        userId: newUser._id,
-        userName: newUser.userName,
-        email: newUser.email,
-      },
+    res.status(201).json({
+      message: "Signup successful",
+      user: { userName: newUser.userName, email: newUser.email, id: newUser._id },
     });
   } catch (error) {
-    console.error({
-      message: "Something went wrong while creating a new user.",
-      error,
-    });
-    return res
-      .status(500)
-      .json({ message: "Server error. Please try again later." });
+    console.error("Signup error:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
+// Login
 export async function handleLogin(req, res) {
   const { email, password } = req.body;
 
   try {
     const user = await auth.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid email or password." });
 
-    const isPasswordMatched = await bcrypt.compare(password, user.password);
-    if (!isPasswordMatched) return res.status(400).json({ message: "Invalid email or password." });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    const jwtToken = verifyToken(user);
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = generateToken(user);
 
     // Setting the jwt as cookie. 
-    res.cookie("jwtToken", jwtToken, {
+    res.cookie("authToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000, 
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    return res.status(200).json({
-      message: "Login successfull",
-      user: {
-        userId: user.userId,
-        userName: user.userName,
-        email: user.email,
-      },
+    res.status(200).json({
+      message: "Login successful",
+      user: { userName: user.userName, email: user.email, id: user._id },
     });
   } catch (error) {
-    console.log("Internal server error.", error);
-    return res.status(500).json({  message: "Something went wrong while loging in."});
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
-export function verifyLogin(req, res) {
-  const token = req.cookies.token;
+// Verify login
+export async function verifyLogin(req, res) {
+  const token = req.cookies.authToken;
 
-  const verify = verifyToken(token);
+  if (!token) {
+    return res.status(401).json({ message: "Not authenticated" });
+  }
 
-  return res.status(200).json({
-    user: verify,
-  });
+  // Verify the token with the secret key, if the data matches then its a valid user unless invalid. 
+  const userData = verifyToken(token);
+
+  if (!userData) {
+    return res.status(403).json({ message: "Invalid or expired token" });
+  }
+
+  try {
+    // .select("-password")	Tells Mongoose to exclude the password field from the result. The - sign means "do not include".
+    const user = await auth.findById(userData.userId).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.error("Verify error:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 }
