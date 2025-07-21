@@ -16,9 +16,11 @@ const PORT = process.env.PORT || 3001;
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://ai-resume-builder-bice-one.vercel.app"
+  "https://ai-resume-builder-bice-one.vercel.app",
+  "https://resumate-ai-resume-builder.vercel.app"
 ];
 
+// This should be defined before any routes.
 app.use(
   cors({
     origin: function (origin, callback) {
