@@ -6,13 +6,26 @@ import { Textarea } from "@/components/ui/textarea";
 import { AIChatSession } from "./../../../../../service/GoogleApiModel";
 import { useDispatch, useSelector } from "react-redux";
 import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
+import { toast } from "sonner";
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const prompt =
   "Generate a compelling and professional summary for a resume based on the job title: {job_title}. The response should be in JSON format with the following structure: 'experience_level' (containing 'fresher' and 'mid_level_experienced') and 'summary' (containing a concise, impactful, and achievement-driven statement). The summary should highlight key strengths, industry relevance, and career potential. Keep it within 2-3 lines, making it engaging and results-oriented.";
 
-function PersonalInfo({ handleSave, loading, setLoading }) {
+function PersonalInfo({ loading, setLoading }) {
   const [aiGeneratedSummary, setAiGeneratedSummary] = useState([]);
   const dispatch = useDispatch();
+  // const [rotateBrain, setRotateBrain] = useState(false);
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    job_title: "",
+    address: "",
+    phone: "",
+    email: "",
+    summary: "",
+  });
 
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
 
@@ -24,21 +37,35 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
-    dispatch(
-      setResumeInfo({
-        ...resumeInfo,
-        personal_info: {
-          ...resumeInfo?.personal_info,
-          [name]: value,
-        },
-        summary: name === "summary" ? value : resumeInfo?.summary,
-      })
-    );
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${baseUrl}/api/create-resume/personal-info`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        toast.success(data.message);
+        setFormData(data.personalData);
+      }
+    } catch (error) {
+      toast.error("Something went wrong.!");
+      console.error("Internal server error.", error);
+    }
   };
 
   const generateSummaryByAI = async () => {
     setLoading(true);
-    const jobTitle = resumeInfo?.personal_info?.job_title || "undefined";
+    const jobTitle = formData.job_title || "undefined";
     const PROMPT = prompt.replace("{job_title}", jobTitle);
     console.log(PROMPT);
 
@@ -50,12 +77,12 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
 
       setAiGeneratedSummary(parsedResponse);
 
-      dispatch(
-        setResumeInfo({
-          ...resumeInfo,
+      // dispatch(
+        setFormData({
+          ...formData,
           summary: parsedResponse.map((item) => item.summary).join("\n"),
         })
-      );
+      // );
     } catch (error) {
       console.error("Error generating AI summary:", error);
     }
@@ -80,7 +107,7 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
               type="text"
               required
               onChange={handleFormChange}
-              value={resumeInfo?.personal_info?.first_name || ""}
+              value={formData.first_name || ""}
             />
           </div>
           <div>
@@ -90,7 +117,7 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
               type="text"
               required
               onChange={handleFormChange}
-              value={resumeInfo?.personal_info?.last_name || ""}
+              value={formData.last_name || ""}
             />
           </div>
 
@@ -101,7 +128,7 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
               type="text"
               required
               onChange={handleFormChange}
-              value={resumeInfo?.personal_info?.job_title || ""}
+              value={formData.job_title || ""}
             />
           </div>
 
@@ -112,7 +139,7 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
               type="text"
               required
               onChange={handleFormChange}
-              value={resumeInfo?.personal_info?.address || ""}
+              value={formData.address || ""}
             />
           </div>
 
@@ -123,7 +150,7 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
               type="number"
               required
               onChange={handleFormChange}
-              value={resumeInfo?.personal_info?.phone || ""}
+              value={formData.phone || ""}
             />
           </div>
           <div>
@@ -133,7 +160,7 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
               type="email"
               required
               onChange={handleFormChange}
-              value={resumeInfo?.personal_info?.email || ""}
+              value={formData.email || ""}
             />
           </div>
         </div>
@@ -153,7 +180,7 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
                 className="bg-purple-500"
               >
                 {loading ? (
-                  <BrainCircuitIcon className="animate-spin" />
+                  <BrainCircuitIcon className="" />
                 ) : (
                   "Generate with AI"
                 )}
@@ -161,11 +188,12 @@ function PersonalInfo({ handleSave, loading, setLoading }) {
             </div>
           </div>
           <Textarea
-            placeholder="Type your message here..."
+            placeholder="Write your own summary or generate with AI"
+            type="text"
             required
             name="summary"
             onChange={handleFormChange}
-            value={resumeInfo?.summary || ""}
+            value={formData.summary || ""}
           />
         </div>
 

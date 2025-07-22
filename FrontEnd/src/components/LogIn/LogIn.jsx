@@ -27,7 +27,6 @@ const LogIn = ({
     try {
       const response = await fetch(
         `${baseUrl}/api/auth/login`,
-        // "http://localhost:3001/api/auth/signup",
         {
           method: "POST",
           credentials: "include",

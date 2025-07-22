@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { connectToMongoUrl } from "./connectToMongoDB/connectToMongoDBUrl.js";
 
 import authRoute from "./routes/authRoutes.js";
+import createResume from "./routes/personalIInfoRoutes.js";
 
 dotenv.config();
 
@@ -44,7 +45,7 @@ app.get("/", (req, res) => {
 
 // Routes...
 app.use("/api/auth", authRoute);
-
+app.use("/api/create-resume", createResume);
 
 
 app.get("/api/auth/test", (req, res) => {

@@ -29,7 +29,6 @@ const SignUp = ({ setIsSignUp, baseUrl }) => {
     try {
       const response = await fetch(
         `${baseUrl}/api/auth/signup`,
-        // "http://localhost:3001/api/auth/signup",
         {
           method: "POST",
           credentials: "include",

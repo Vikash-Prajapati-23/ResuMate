@@ -48,7 +48,7 @@ function App() {
         {isSignUp && <SignUp baseUrl={baseUrl} setIsSignUp={setIsSignUp} />}
       </div>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main setIsSignUp={setIsSignUp} />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route
           path="/dashboard/resume/:resumeID/edit"

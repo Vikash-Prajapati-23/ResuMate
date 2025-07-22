@@ -4,7 +4,7 @@ import BrandLogo from "../../assets/BrandName.png";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "@/store/slices/theme/themeSlice";
 import { setLogIn, setLogOut } from "@/store/slices/loogedIn/loogedIn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -14,9 +14,10 @@ const Navbar = ({ setIsSignUp }) => {
   const theme = useSelector((state) => state.theme.value);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  // const [isSignUp, setIsSignUp] = useState(false);
   // This checks if the screen size is less that = 500px.
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 500);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // This function updates the isMobile state every time the window is resized, by re-checking window.innerWidth <= 500..
@@ -27,6 +28,14 @@ const Navbar = ({ setIsSignUp }) => {
     window.addEventListener("resize", handleResize);
     // Clean ups to avoid memory leaks or unwanted state updates.
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLogout = async () => {
@@ -40,7 +49,7 @@ const Navbar = ({ setIsSignUp }) => {
       toast.success(data.message);
     } else {
       dispatch(setLogIn());
-      console.error("Error while loging out.")
+      console.error("Error while loging out.");
     }
   };
 
@@ -48,10 +57,24 @@ const Navbar = ({ setIsSignUp }) => {
     setIsOpen((open) => (open = !open));
   };
 
+  const handleGetStarted = () => {
+    if (!isLoggedIn) {
+      setIsSignUp(true);
+    } else {
+      navigate("/Dashboard");
+    }
+  };
+
+  const handleMessage = () => {
+    toast("This feature will be available soon.!");
+  }
+
   return (
     <nav
-      className={`sticky top-0 shadow-xl z-40  py-0 lg:px-20 md:px-10 lg:text-xl md:text-sm ${
-        theme ? "bg-gray-900 text-indigo-600" : "bg-white text-blue-600"
+      className={`fixed top-0 z-50 w-full py-0 lg:px-20 md:px-10 lg:text-xl md:text-sm ${
+        isScrolled
+          ? "bg-blue-100 shadow-md transition duration-300 ease-in "
+          : "bg-white"
       }`}
     >
       {isMobile ? (
@@ -94,14 +117,14 @@ const Navbar = ({ setIsSignUp }) => {
                 alt="Logo"
               />
             </Link>
-            <Link
-              to="/Dashboard"
-              className="nav-item border-b-2 border-transparent hover:border-blue-500 nav-item"
+            <button
+              onClick={handleGetStarted}
             >
-              Get Started
-            </Link>
+              Get started
+            </button>
             <Link
               to="/"
+              onClick={handleMessage}
               className="nav-item border-b-2 border-transparent hover:border-blue-500 nav-item"
             >
               Resume Templates
@@ -172,6 +195,7 @@ const Navbar = ({ setIsSignUp }) => {
             </Link>
             <Link
               to="/"
+              onClick={handleMessage}
               className="nav-item border-b-2 border-transparent nav-item"
             >
               Resume Templates
