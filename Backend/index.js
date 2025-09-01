@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import { connectToMongoUrl } from "./connectToMongoDB/connectToMongoDBUrl.js";
 
 import authRoute from "./routes/authRoutes.js";
-import createResume from "./routes/personalIInfoRoutes.js";
+import resumeRoutes from "./routes/saveResumesRoutes.js";
 
 dotenv.config();
 
@@ -21,7 +21,6 @@ const allowedOrigins = [
   "https://resumate-ai-resume-builder.vercel.app"
 ];
 
-// This should be defined before any routes.
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -45,16 +44,12 @@ app.get("/", (req, res) => {
 
 // Routes...
 app.use("/api/auth", authRoute);
-app.use("/api/create-resume", createResume);
+app.use("/api/create-resume", resumeRoutes);
 
 
 app.get("/api/auth/test", (req, res) => {
   res.send("Auth route working!");
 });
-
-// app.listen(PORT, () => {
-//   console.log(`Server is running at port ${PORT}`);
-// });
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running at port ${PORT}`);

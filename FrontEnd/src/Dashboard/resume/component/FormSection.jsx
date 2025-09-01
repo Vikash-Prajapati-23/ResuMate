@@ -24,7 +24,7 @@ function FormSection() {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 ">
       <div className="flex justify-between">
         <h2 className="flex gap-2 bg-purple-500 text-white cursor-pointer p-3 font-bold rounded-md w-[110px]">
           <LayoutGridIcon /> Theme

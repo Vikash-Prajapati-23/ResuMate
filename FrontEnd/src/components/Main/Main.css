@@ -16,12 +16,13 @@
 .main-imgs {
   height: 350px;
   object-fit: contain;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .middle {
   position: absolute;
   top: -8%;
-  left: 25%;
+  left: 20%;
   height: 400px;
   object-fit: contain;
 }
@@ -47,7 +48,7 @@
   .middle {
     position: absolute;
     top: -8%;
-    left: 25%;
+    left: 20%;
     height: 300px;
     object-fit: contain;
   }
@@ -74,7 +75,7 @@
   .middle {
     position: absolute;
     top: -15%;
-    left: 25%;
+    left: 20%;
     height: 250px;
     object-fit: contain;
   }

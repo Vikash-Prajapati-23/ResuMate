@@ -3,8 +3,11 @@ import AddResume from './component/AddResume'
 import SavedResume from './component/SavedResume'
 
 function dashboard() {
+
+  
+
   return (
-    <div className='h-screen p-10'>
+    <div className='h-screen p-10 mt-16'>
       <h2>Create your Resume</h2>
       <p>Make your resume ATS free with the help of AI</p>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 ">

@@ -9,13 +9,13 @@ const PresonalDetailPreview = () => {
     <div>
       <div className="flex justify-center gap-2">
         <p
-          style={{ color: resumeInfo?.personal_info.theme_color }}
+          style={{ color: "blue" }}
           className="text-center font-bold text-2xl"
         >
           {resumeInfo?.personal_info.first_name}
         </p>
         <p
-          style={{ color: resumeInfo?.personal_info.theme_color }}
+          style={{ color: "blue" || "blue" }}
           className="text-center font-bold text-2xl"
         >
           {resumeInfo?.personal_info.last_name}
@@ -28,35 +28,35 @@ const PresonalDetailPreview = () => {
             <MapPinHouse className="w-4 h-4" /> {resumeInfo?.personal_info.address}
           </p>
           <p className="text-start flex gap-2">
-            <Phone  size={16} /> {resumeInfo?.personal_info.phone}
+            <Phone size={16} /> {resumeInfo?.personal_info.phone}
           </p>
-          {/* <p className="text-start flex">
-            <MapPinHouse className="" /> {resumeInfo?.personal_info.linkedin}
-          </p> */}
         </div>
 
         <div className="space-y-1 ">
           <p className="text-start flex gap-2">
             <Mail className="w-4 h-4" /> {resumeInfo?.personal_info.email}
           </p>
+          {/* <p className="text-start flex gap-2">
+            <Github className="w-4 h-4" /> {resumeInfo?.personal_info.github}
+          </p> */}
           <p className="text-start flex gap-2">
-            <Github className="w-4 h-4" /> {resumeInfo?.personal_info.portfolio}
+            <MapPinHouse size={16} className="" /> {resumeInfo?.personal_info.linkedin}
           </p>
           {/* <p className="text-start flex">
-            <MapPinHouse className="" /> {resumeInfo?.personal_info.github}
+            <MapPinHouse size={16} className="" /> {resumeInfo?.personal_info.github}
           </p> */}
         </div>
       </div>
 
       <h2
         className="text-center font-bold text-l mb-1"
-        style={{ color: resumeInfo?.personal_info.theme_color }}
+        style={{ color: "blue" }}
       >
         Summary
       </h2>
 
       <hr
-        style={{ borderColor: resumeInfo?.personal_info.theme_color }}
+        style={{ borderColor: "blue" }}
         className="border-[1.5px] mb-1 "
       />
 
@@ -64,14 +64,14 @@ const PresonalDetailPreview = () => {
 
       
       <h2
-        style={{ color: resumeInfo?.personal_info.theme_color }}
+        style={{ color: "blue" }}
         className=" mt-4 text-xl font-bold mb-1"
       >
         Skills
       </h2>
 
       <hr
-        style={{ borderColor: resumeInfo?.personal_info.theme_color }}
+        // style={{ borderColor: "blue" }}
         className="border-[1.5px] mb-1 "
       />
     </div>

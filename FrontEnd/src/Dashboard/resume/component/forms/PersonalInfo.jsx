@@ -7,6 +7,7 @@ import { AIChatSession } from "./../../../../../service/GoogleApiModel";
 import { useDispatch, useSelector } from "react-redux";
 import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
 import { toast } from "sonner";
+import { useParams } from "react-router-dom";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -26,14 +27,15 @@ function PersonalInfo({ loading, setLoading }) {
     email: "",
     summary: "",
   });
+  const resumeId = useParams();
 
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
 
   useEffect(() => {
-    if (resumeInfo && resumeInfo.summary) {
-      setAiGeneratedSummary([{ summary: resumeInfo.summary }]);
+    if (formData && formData.summary) {
+      setAiGeneratedSummary([{ summary: formData.summary }]);
     }
-  }, [resumeInfo]);
+  }, [formData]);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -46,8 +48,8 @@ function PersonalInfo({ loading, setLoading }) {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${baseUrl}/api/create-resume/personal-info`, {
-        method: "POST",
+      const response = await fetch(`${baseUrl}/api/create-resume/${resumeId}`, {
+        method: "PATCH",
         credentials: "include",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(formData),

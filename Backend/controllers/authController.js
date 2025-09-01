@@ -34,7 +34,6 @@ export async function handleSignUp(req, res) {
     //   sameSite: "Lax",
     //   maxAge: 7 * 24 * 60 * 60 * 1000,
     // });
-
     const token = generateToken(newUser);
 
     // Here the "authToken" is the name of the cookie and the token is the value of the cookie.

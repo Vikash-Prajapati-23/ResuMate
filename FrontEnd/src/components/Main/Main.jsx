@@ -47,14 +47,14 @@ const Main = ({ setIsSignUp }) => {
             </button>
           </div>
 
-          <div className="main_2 relative md:flex ">
-            <img className="main-imgs" src={main_img_3} alt="" />
+          <div className="main_2 relative md:flex shadow-2xl">
+            <img className="main-imgs border" src={main_img_3} alt="" />
             <img
-              className="main-imgs middle shadow-2xl "
+              className="main-imgs middle border"
               src={main_img_1}
               alt=""
             />
-            <img className="main-imgs" src={main_img_2} alt="" />
+            <img className="main-imgs border" src={main_img_2} alt="" />
           </div>
         </div>
       </div>

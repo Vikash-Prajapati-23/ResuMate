@@ -9,26 +9,44 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import uuid4 from "uuid4"; // This package generates unique id's 
-import { useNavigate } from "react-router-dom";  // This is used to nevigate to other components as it's name suggests.
+import uuid4 from "uuid4"; // This package generates unique id's
+import { useNavigate } from "react-router-dom"; // This is used to nevigate to other components as it's name suggests.
+import { useDispatch } from "react-redux";
+import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function AddResume() {
   const [openDialog, setOpenDialog] = useState(false);
   const [resumeTitle, setResumeTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onCreate = () => { 
-    setLoading(true);  
-    setTimeout(() => {
-      setLoading(false);  
-      setOpenDialog(false);  
-      const uuid = uuid4();
-      console.log({ resumeTitle, uuid });
+  const onCreate = async () => {
+    setLoading(true);
+    const uuid = uuid4();
+    console.log(resumeTitle, uuid);
+    const response = await fetch(
+      `${baseUrl}/api/create-resume/${uuid}`,
+      {
+        method: "PATCH",
+        credentials: "include",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          resumeTitle,
+          resumeId: uuid,
+        }),
+      }
+    );
+    const data = await response.json();
+    if (response.ok) {
+      setLoading(false);
+      setOpenDialog(false);
+      dispatch(setResumeInfo(data));
       navigate(`/dashboard/resume/${uuid}/edit`);
-    }, 2000);
+    }
   };
-  
 
   return (
     <div>

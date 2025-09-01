@@ -51,7 +51,7 @@ function App() {
         <Route path="/" element={<Main setIsSignUp={setIsSignUp} />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route
-          path="/dashboard/resume/:resumeID/edit"
+          path="/dashboard/resume/:resumeId/edit"
           element={<EditResume />}
         />
         <Route path="/ViewResume/:resumeViewID/view" element={<ViewResume />} />

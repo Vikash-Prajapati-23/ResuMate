@@ -7,14 +7,14 @@ function ProjectsPreview() {
   return (
     <div>
       <h2
-        style={{ color: resumeInfo?.personal_info.theme_color }}
+        // style={{ color: "blue" }}
         className="text-center mt-6 text-xl font-bold mb-1"
       >
         Projects
       </h2>
 
       <hr
-        style={{ borderColor: resumeInfo?.personal_info.theme_color }}
+        // style={{ borderColor: "blue" }}
         className="border-[1.5px] mb-1 "
       />
       <div className="">

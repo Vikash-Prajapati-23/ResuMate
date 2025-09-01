@@ -92,7 +92,7 @@ const Carousel = () => {
                 key={index}
                 src={image}
                 alt={`carousel-${index}`}
-                className="lg:h-[500px] h-[300px] md:h-[450px] object-contain rounded-xl shadow-xl p-4 sm:p-6 transition-transform duration-300 hover:scale-125"
+                className="lg:h-[500px] h-[300px] md:h-[450px] object-contain rounded-xl shadow-xl p-4 sm:p-6 transition-transform duration-300 hover:scale-110 "
               />
             ))}
           </div>

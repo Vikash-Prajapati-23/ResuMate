@@ -30,6 +30,7 @@ const Navbar = ({ setIsSignUp }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // This is for shadow effect.
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -73,7 +74,7 @@ const Navbar = ({ setIsSignUp }) => {
     <nav
       className={`fixed top-0 z-50 w-full py-0 lg:px-20 md:px-10 lg:text-xl md:text-sm ${
         isScrolled
-          ? "bg-blue-100 shadow-md transition duration-300 ease-in "
+          ? "bg-blue-50 shadow-md transition duration-300 ease-in "
           : "bg-white"
       }`}
     >
@@ -132,7 +133,7 @@ const Navbar = ({ setIsSignUp }) => {
           </div>
 
           <div className="flex gap-8 font-semibold">
-            <button
+            {/* <button
               className="moon-icon hidden border-b-2 border-transparent hover:border-blue-500 nav-item"
               onClick={() => dispatch(toggleTheme())}
             >
@@ -147,7 +148,7 @@ const Navbar = ({ setIsSignUp }) => {
               <span className="material-symbols-outlined flex align-center">
                 light_mode
               </span>
-            </button>
+            </button> */}
             {!isLoggedIn ? (
               <div className="flex gap-8">
                 <button
@@ -200,7 +201,7 @@ const Navbar = ({ setIsSignUp }) => {
             >
               Resume Templates
             </Link>
-            <button
+            {/* <button
               className="moon-icon hidden border-b-2 border-transparent nav-item"
               onClick={() => dispatch(toggleTheme())}
             >
@@ -215,7 +216,7 @@ const Navbar = ({ setIsSignUp }) => {
               <span className="material-symbols-outlined flex align-center">
                 light_mode
               </span>
-            </button>
+            </button> */}
             {!isLoggedIn ? (
               <div className="flex gap-8">
                 <button

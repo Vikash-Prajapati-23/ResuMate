@@ -4,9 +4,10 @@
 
 @media print {
   * {
-    -webkit-print-color-adjust: exact !important;
-    color-adjust: exact !important;
-  }
+  -webkit-print-color-adjust: exact !important; /* for Safari */
+  print-color-adjust: exact !important;         /* standard property */
+}
+
 
   body {
     margin: 0;
