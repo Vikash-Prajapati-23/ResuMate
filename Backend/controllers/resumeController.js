@@ -23,21 +23,21 @@ export async function createResume(req, res) {
     updates["certifications"] = req.body.certifications;
 
   try {
-    const updatedresume = await resumeInfomodel.findOneAndUpdate(
+    const updatedResume = await resumeInfomodel.findOneAndUpdate(
       { resumeId },
       { $set: updates },
-      { new: true }
+      { new: true, upsert: true }
     );
 
-    if (!updatedresume) {
-      // return res.status(404).json({ message: "No data here," });
+    if (!updatedResume) {
+      return res.status(404).json({ message: "No data here," });
     }
 
-    console.log(updatedresume);
+    console.log("Resume data:",updatedResume);
 
     return res.status(200).json({
       message: "Details saved successfully.!",
-      data: updatedresume,
+      data: updatedResume,
     });
   } catch (error) {
     console.log("Internal server error.");

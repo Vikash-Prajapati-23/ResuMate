@@ -14,19 +14,19 @@ function PreviewSection() {
       <PresonalDetailPreview />
 
       {/* skills */}
-      <SkillsPreview />
+      {/* <SkillsPreview /> */}
 
       {/* experience */}
-      <ExperiencePreview />
+      {/* <ExperiencePreview /> */}
 
       {/* projects */}
-      <ProjectsPreview />
+      {/* <ProjectsPreview /> */}
 
       {/* education */}
-      <EducationalDetailPreview />
+      {/* <EducationalDetailPreview /> */}
 
       {/* certifications */}
-      <CertificationsPreview />
+      {/* <CertificationsPreview /> */}
     </div>
   );
 }

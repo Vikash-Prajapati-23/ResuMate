@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { connectToMongoUrl } from "./connectToMongoDB/connectToMongoDBUrl.js";
 
+// resumeRoutes. 
 import authRoute from "./routes/authRoutes.js";
 import resumeRoutes from "./routes/saveResumesRoutes.js";
 
@@ -41,11 +42,9 @@ app.get("/", (req, res) => {
   res.send("✅ Backend Root Route Working!");
 });
 
-
 // Routes...
 app.use("/api/auth", authRoute);
 app.use("/api/create-resume", resumeRoutes);
-
 
 app.get("/api/auth/test", (req, res) => {
   res.send("Auth route working!");

@@ -25,26 +25,22 @@ function AddResume() {
 
   const onCreate = async () => {
     setLoading(true);
-    const uuid = uuid4();
-    console.log(resumeTitle, uuid);
-    const response = await fetch(
-      `${baseUrl}/api/create-resume/${uuid}`,
-      {
-        method: "PATCH",
-        credentials: "include",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          resumeTitle,
-          resumeId: uuid,
-        }),
-      }
-    );
+    const resumeId = uuid4();
+    console.log(resumeTitle, resumeId);
+    const response = await fetch(`${baseUrl}/api/create-resume/${resumeId}`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        resumeTitle,
+      }),
+    });
     const data = await response.json();
     if (response.ok) {
       setLoading(false);
       setOpenDialog(false);
       dispatch(setResumeInfo(data));
-      navigate(`/dashboard/resume/${uuid}/edit`);
+      navigate(`/dashboard/resume/${resumeId}/edit`);
     }
   };
 

@@ -17,37 +17,14 @@ const resumeSchema = mongoose.Schema(
     },
 
     personalInfo: {
-      first_name: {
-        type: String,
-        required: true,
-      },
-      last_name: {
-        type: String,
-        required: true,
-      },
-      email: {
-        type: String,
-        required: true,
-      },
-      phone: {
-        type: String,
-        required: true,
-      },
-      address: {
-        type: String,
-        required: true,
-      },
-      linkedin: {
-        type: String,
-        required: true,
-      },
-      github: {
-        type: String,
-        required: true,
-      },
-      summary: {
-        type: String,
-      },
+      first_name: String,
+      last_name: String,
+      email: String,
+      phone: String,
+      address: String,
+      linkedin: String,
+      github: String,
+      summary: String,
     },
 
     skills: [
