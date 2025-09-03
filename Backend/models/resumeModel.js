@@ -19,6 +19,8 @@ const resumeSchema = mongoose.Schema(
     personalInfo: {
       first_name: String,
       last_name: String,
+      job_title: String,
+      job_title: String,
       email: String,
       phone: String,
       address: String,

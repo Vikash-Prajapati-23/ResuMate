@@ -2,13 +2,22 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: {
-    personalInfo: {},
-    education: [],
-    experience: [],
+    personalInfo: {
+      first_name: "",
+      last_name: "",
+      job_title: "",
+      email: "",
+      phone: "",
+      address: "",
+      linkedin: "",
+      github: "",
+      summary: "",
+    },
     skills: [],
+    experience: [],
     projects: [],
+    education: [],
     certifications: [],
-    // add more sections as you go
   },
 };
 
@@ -21,18 +30,17 @@ const resumeInfoSlice = createSlice({
       state.value = action.payload;
     },
 
-    // Update a specific section (like personalInfo, education, etc.)
+    // Update a specific section
     updateResumeInfoField: (state, action) => {
       const { field, data } = action.payload;
 
-      if (!state.value) {
-        state.value = {};
-      }
+      if (!(field in state.value)) return; // prevent invalid fields
 
-      // ✅ Handles both object and array fields
       if (Array.isArray(state.value[field])) {
-        state.value[field] = [...data]; // replace whole array
+        // Replace entire array (could add more fine-grained reducers later)
+        state.value[field] = [...data];
       } else {
+        // Merge object fields
         state.value[field] = {
           ...state.value[field],
           ...data,
@@ -40,9 +48,9 @@ const resumeInfoSlice = createSlice({
       }
     },
 
-    // Reset the whole resume
+    // Reset everything to defaults
     resetResumeInfo: (state) => {
-      state.value = initialState.value;
+      state.value = { ...initialState.value }; // fresh copy
     },
   },
 });

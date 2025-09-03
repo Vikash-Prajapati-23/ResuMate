@@ -15,7 +15,7 @@ export async function createResume(req, res) {
   if (req.body.userId) updates["userId"] = req.body.userId;
   if (req.body.resumeTitle) updates["resumeTitle"] = req.body.resumeTitle;
   if (req.body.personalInfo) updates["personalInfo"] = req.body.personalInfo;
-  if (req.body.skils) updates["skils"] = req.body.skils;
+  if (req.body.skills) updates["skills"] = req.body.skills;
   if (req.body.experience) updates["experience"] = req.body.experience;
   if (req.body.projects) updates["projects"] = req.body.projects;
   if (req.body.education) updates["education"] = req.body.education;

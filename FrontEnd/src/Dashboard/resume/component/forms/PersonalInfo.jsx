@@ -5,7 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { AIChatSession } from "./../../../../../service/GoogleApiModel";
 import { useDispatch, useSelector } from "react-redux";
-import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
+import {
+  setResumeInfo,
+  updateResumeInfoField,
+} from "@/store/slices/resumeInfo/resumeInfo";
 import { toast } from "sonner";
 import { useParams } from "react-router-dom";
 
@@ -67,7 +70,7 @@ function PersonalInfo({ loading, setLoading }) {
         dispatch(
           setResumeInfo({
             ...resumeInfo,
-            personalInfo: data.personalData,
+            personalInfo: data,
           })
         );
       }
@@ -79,24 +82,24 @@ function PersonalInfo({ loading, setLoading }) {
 
   const generateSummaryByAI = async () => {
     setLoading(true);
-    const jobTitle = formData.job_title || "undefined";
+    const jobTitle = resumeInfo?.personalInfo?.job_title || "undefined";
     const PROMPT = prompt.replace("{job_title}", jobTitle);
     console.log(PROMPT);
 
     try {
       const result = await AIChatSession.sendMessage(PROMPT);
-      const textResponse = await result.response.text();
+      const textResponse = result.response.text();
       const parsedResponse = JSON.parse(textResponse);
       console.log(parsedResponse);
 
       setAiGeneratedSummary(parsedResponse);
 
-      // dispatch(
-      setFormData({
-        ...formData,
-        summary: parsedResponse.map((item) => item.summary).join("\n"),
-      });
-      // );
+      dispatch(
+        updateResumeInfoField({
+          field: "personalInfo",
+          data: { ...resumeInfo.personalInfo, [name]: value },
+        })
+      );
     } catch (error) {
       console.error("Error generating AI summary:", error);
     }
