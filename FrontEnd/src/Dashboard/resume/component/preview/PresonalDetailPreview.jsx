@@ -12,38 +12,38 @@ const PresonalDetailPreview = () => {
           style={{ color: "blue" }}
           className="text-center font-bold text-2xl"
         >
-          {/* {resumeInfo?.personal_info.first_name} */}
+          {resumeInfo.personalInfo?.first_name}
         </p>
         <p
           style={{ color: "blue" || "blue" }}
           className="text-center font-bold text-2xl"
         >
-          {/* {resumeInfo?.personal_info.last_name} */}
+          {resumeInfo.personalInfo?.last_name}
         </p>
       </div>
 
       <div className="flex justify-between text-xs">
         <div className="space-y-1 my-2">
           <p className="text-start flex gap-2">
-            {/* <MapPinHouse className="w-4 h-4" /> {resumeInfo?.personal_info.address} */}
+            <MapPinHouse className="w-4 h-4" /> {resumeInfo.personalInfo?.address}
           </p>
           <p className="text-start flex gap-2">
-            {/* <Phone size={16} /> {resumeInfo?.personal_info.phone} */}
+            <Phone size={16} /> {resumeInfo.personalInfo?.phone}
           </p>
         </div>
 
         <div className="space-y-1 ">
           <p className="text-start flex gap-2">
-            {/* <Mail className="w-4 h-4" /> {resumeInfo?.personal_info.email} */}
+            <Mail className="w-4 h-4" /> {resumeInfo.personalInfo?.email}
           </p>
           {/* <p className="text-start flex gap-2">
-            <Github className="w-4 h-4" /> {resumeInfo?.personal_info.github}
+            <Github className="w-4 h-4" /> {resumeInfo.personalInfo?.github}
           </p> */}
           <p className="text-start flex gap-2">
-            {/* <MapPinHouse size={16} className="" /> {resumeInfo?.personal_info.linkedin} */}
+            <MapPinHouse size={16} className="" /> {resumeInfo.personalInfo?.linkedin}
           </p>
           {/* <p className="text-start flex">
-            <MapPinHouse size={16} className="" /> {resumeInfo?.personal_info.github}
+            <MapPinHouse size={16} className="" /> {resumeInfo.personalInfo?.github}
           </p> */}
         </div>
       </div>
@@ -60,7 +60,7 @@ const PresonalDetailPreview = () => {
         className="border-[1.5px] mb-1 "
       />
 
-      {/* <p className="text-justify text-xs">{resumeInfo?.summary}</p> */}
+      <p className="text-justify text-xs">{resumeInfo.personalInfo?.summary}</p>
 
       
       <h2

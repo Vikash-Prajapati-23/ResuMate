@@ -15,9 +15,9 @@ function EditResume() {
   //   dispatch(setResumeInfo(dummy))
   // }, []);
 
-  useEffect(() => {
-    console.log(params.resumeId);
-  }, []);
+  // useEffect(() => {
+  //   console.log(params.resumeId);
+  // }, []);
 
   return (
       <div className="mx-2 my-10 grid grid-cols-1 md:grid-cols-2 gap-3 p-5 bg-secondary">

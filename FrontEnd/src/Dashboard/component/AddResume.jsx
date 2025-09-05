@@ -26,7 +26,7 @@ function AddResume() {
   const onCreate = async () => {
     setLoading(true);
     const resumeId = uuid4();
-    console.log(resumeTitle, resumeId);
+    // console.log(resumeTitle, resumeId);
     const response = await fetch(`${baseUrl}/api/create-resume/${resumeId}`, {
       method: "PATCH",
       credentials: "include",

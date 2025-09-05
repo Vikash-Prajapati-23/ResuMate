@@ -37,7 +37,7 @@ function PersonalInfo({ loading, setLoading }) {
 
   useEffect(() => {
     if (resumeInfo.personalInfo?.summary) {
-      setAiGeneratedSummary([{ summary: resumeInfo.personalInfo.summary }]);
+      setAiGeneratedSummary([{ summary: resumeInfo.personalInfo?.summary }]);
     }
   }, [resumeInfo.personalInfo?.summary]);
 
@@ -50,7 +50,7 @@ function PersonalInfo({ loading, setLoading }) {
     dispatch(
       updateResumeInfoField({
         field: "personalInfo",
-        data: { ...resumeInfo.personalInfo, [name]: value },
+        data: { ...(resumeInfo.personalInfo || {}), [name]: value }, // Initially the personalInfo is undefined so using safeguard to prevent errors.
       })
     );
   };
@@ -84,22 +84,22 @@ function PersonalInfo({ loading, setLoading }) {
     setLoading(true);
     const jobTitle = resumeInfo?.personalInfo?.job_title || "undefined";
     const PROMPT = prompt.replace("{job_title}", jobTitle);
-    console.log(PROMPT);
+    // console.log(PROMPT);
 
     try {
       const result = await AIChatSession.sendMessage(PROMPT);
       const textResponse = result.response.text();
       const parsedResponse = JSON.parse(textResponse);
-      console.log(parsedResponse);
+      // console.log(parsedResponse);
 
       setAiGeneratedSummary(parsedResponse);
 
-      dispatch(
-        updateResumeInfoField({
-          field: "personalInfo",
-          data: { ...resumeInfo.personalInfo, [name]: value },
-        })
-      );
+      // dispatch(
+      //   updateResumeInfoField({
+      //     field: "personalInfo",
+      //     data: { ...resumeInfo.personalInfo, [name]: value },
+      //   })
+      // );
     } catch (error) {
       console.error("Error generating AI summary:", error);
     }
@@ -124,7 +124,7 @@ function PersonalInfo({ loading, setLoading }) {
               type="text"
               required
               onChange={handleFormChange}
-              value={resumeInfo.personalInfo.first_name || ""}
+              value={resumeInfo.personalInfo?.first_name || ""}
             />
           </div>
           <div>
@@ -134,7 +134,7 @@ function PersonalInfo({ loading, setLoading }) {
               type="text"
               required
               onChange={handleFormChange}
-              value={resumeInfo.personalInfo.last_name || ""}
+              value={resumeInfo.personalInfo?.last_name || ""}
             />
           </div>
 
@@ -145,7 +145,7 @@ function PersonalInfo({ loading, setLoading }) {
               type="text"
               required
               onChange={handleFormChange}
-              value={resumeInfo.personalInfo.job_title || ""}
+              value={resumeInfo.personalInfo?.job_title || ""}
             />
           </div>
 
@@ -156,7 +156,7 @@ function PersonalInfo({ loading, setLoading }) {
               type="text"
               required
               onChange={handleFormChange}
-              value={resumeInfo.personalInfo.address || ""}
+              value={resumeInfo.personalInfo?.address || ""}
             />
           </div>
 
@@ -167,7 +167,7 @@ function PersonalInfo({ loading, setLoading }) {
               type="number"
               required
               onChange={handleFormChange}
-              value={resumeInfo.personalInfo.phone || ""}
+              value={resumeInfo.personalInfo?.phone || ""}
             />
           </div>
           <div>
@@ -177,7 +177,7 @@ function PersonalInfo({ loading, setLoading }) {
               type="email"
               required
               onChange={handleFormChange}
-              value={resumeInfo.personalInfo.email || ""}
+              value={resumeInfo.personalInfo?.email || ""}
             />
           </div>
         </div>
@@ -210,7 +210,7 @@ function PersonalInfo({ loading, setLoading }) {
             required
             name="summary"
             onChange={handleFormChange}
-            value={resumeInfo.personalInfo.summary || ""}
+            value={resumeInfo.personalInfo?.summary || ""}
           />
         </div>
 
