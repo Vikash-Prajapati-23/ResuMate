@@ -1,5 +1,6 @@
 import React from "react";
 import { Github, Mail, MapPinHouse, Phone } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const PresonalDetailPreview = () => {
@@ -40,7 +41,7 @@ const PresonalDetailPreview = () => {
             <Github className="w-4 h-4" /> {resumeInfo.personalInfo?.github}
           </p> */}
           <p className="text-start flex gap-2">
-            <MapPinHouse size={16} className="" /> {resumeInfo.personalInfo?.linkedin}
+            <FaLinkedin size={16} className="text-blue-600" /> {resumeInfo.personalInfo?.linkedin}
           </p>
           {/* <p className="text-start flex">
             <MapPinHouse size={16} className="" /> {resumeInfo.personalInfo?.github}

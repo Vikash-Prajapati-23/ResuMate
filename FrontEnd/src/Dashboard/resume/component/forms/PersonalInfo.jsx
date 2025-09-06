@@ -32,7 +32,7 @@ function PersonalInfo({ loading, setLoading }) {
   //   phone: "",
   //   email: "",
   //   summary: "",
-  // });
+  // });    
   const resumeId = useParams();
 
   useEffect(() => {
@@ -70,7 +70,7 @@ function PersonalInfo({ loading, setLoading }) {
         dispatch(
           setResumeInfo({
             ...resumeInfo,
-            personalInfo: data,
+            personalInfo: data.data.personalInfo,
           })
         );
       }
@@ -139,17 +139,6 @@ function PersonalInfo({ loading, setLoading }) {
           </div>
 
           <div className="col-span-2">
-            <label className="ms-2 text-sm">Job title</label>
-            <Input
-              name="job_title"
-              type="text"
-              required
-              onChange={handleFormChange}
-              value={resumeInfo.personalInfo?.job_title || ""}
-            />
-          </div>
-
-          <div className="col-span-2">
             <label className="ms-2 text-sm">Address</label>
             <Input
               name="address"
@@ -160,6 +149,16 @@ function PersonalInfo({ loading, setLoading }) {
             />
           </div>
 
+          <div className="">
+            <label className="ms-2 text-sm">Job title</label>
+            <Input
+              name="job_title"
+              type="text"
+              required
+              onChange={handleFormChange}
+              value={resumeInfo.personalInfo?.job_title || ""}
+            />
+          </div>
           <div>
             <label className="ms-2 text-sm">Phone</label>
             <Input
@@ -170,6 +169,7 @@ function PersonalInfo({ loading, setLoading }) {
               value={resumeInfo.personalInfo?.phone || ""}
             />
           </div>
+
           <div>
             <label className="ms-2 text-sm">Email</label>
             <Input
@@ -178,6 +178,17 @@ function PersonalInfo({ loading, setLoading }) {
               required
               onChange={handleFormChange}
               value={resumeInfo.personalInfo?.email || ""}
+            />
+          </div>
+
+          <div>
+            <label className="ms-2 text-sm">LinkedIn</label>
+            <Input
+              name="linkedin"
+              type="text"
+              required
+              onChange={handleFormChange}
+              value={resumeInfo.personalInfo?.linkedin || ""}
             />
           </div>
         </div>

@@ -5,50 +5,98 @@ import { Input } from "@/components/ui/input";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
+import {
+  setResumeInfo,
+  updateResumeInfoField,
+} from "@/store/slices/resumeInfo/resumeInfo";
+import { toast } from "sonner";
+import { useParams } from "react-router-dom";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
-function SkillSet({ handleSave, loading }) {
+function SkillSet({ loading }) {
   const dispatch = useDispatch();
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
+  const resumeId = useParams();
 
-  const [skills, setSkills] = useState([
-    {
-      name: "",
-      rating: 0,
-    },
-  ]);
+  // const [skills, setSkills] = useState([
+  //   {
+  //     name: "",
+  //     rating: 0,
+  //   },
+  // ]);
 
-  useEffect(() => {
-    // This is used to to show the dummy data.
-    if (resumeInfo.skills) {
-      setSkills(resumeInfo.skills);
+  // useEffect(() => {
+  //   // This is used to to show the dummy data.
+  //   if (resumeInfo.skills) {
+  //     setSkills(resumeInfo.skills);
+  //   }
+  // }, []);
+
+  const handleFormChange = (index, field, value) => {
+    const newSkills = [...(resumeInfo.skills || [])];
+
+    // if no object exists at this index, create it
+    if (!newSkills[index]) {
+      newSkills[index] = { name: "", rating: 0 };
     }
-  }, []);
 
-  const handleFormChange = (index, name, value) => {
-    const newSkills = skills.slice();
-    newSkills[index][name] = value;
-    setSkills(newSkills);
+    newSkills[index] = {
+      ...newSkills[index], // Spread existing properties
+      [field]: value, // Update the specific field
+    };
+
     dispatch(
-      setResumeInfo((prevInfo) => ({
-        ...prevInfo,
-        skills: newSkills,
-      }))
+      updateResumeInfoField({
+        field: "skills",
+        data: newSkills,
+      })
     );
   };
 
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${baseUrl}/api/create-resume/${resumeId}`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ skills: resumeInfo.skills }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      toast.success(data.message);
+      dispatch(
+        setResumeInfo({
+          ...resumeInfo,
+          skills: data.data.skills,
+        })
+      );
+    }
+    } catch (error) {
+      toast.error('Failed to save the data.');
+      console.error("Internal server error.", error);
+    }
+  };
+
   const addSkill = () => {
-    setSkills([...skills, { name: "", rating: 0 }]);
+    const newSkills = [...(resumeInfo.skills || []), { name: "", rating: 0 }];
+
+    dispatch(
+      updateResumeInfoField({
+        field: "skills",
+        data: newSkills,
+      })
+    );
   };
 
   const removeSkill = (index) => {
-    const newSkills = skills.filter((_, i) => i !== index);
-    setSkills(newSkills);
+    const newSkills = resumeInfo.skills.filter((_, i) => i !== index);
+
     dispatch(
-      setResumeInfo((prevInfo) => ({
-        ...prevInfo,
-        skills: newSkills,
-      }))
+      updateResumeInfoField({
+        field: "skills",
+        data: newSkills,
+      })
     );
   };
 
@@ -61,7 +109,7 @@ function SkillSet({ handleSave, loading }) {
 
       <form className="mt-3" onSubmit={handleSave}>
         <div className="">
-          {skills.map((item, index) => (
+          {resumeInfo?.skills?.map((item, index) => (
             <div
               className="border-2 p-6 mb-3 rounded-md flex justify-between"
               key={index}
@@ -81,10 +129,12 @@ function SkillSet({ handleSave, loading }) {
               <div className="flex justify-between items-end ">
                 <Rating
                   style={{ maxWidth: 170 }}
-                  value={item.rating}
-                  type="number"
+                  value={Number(item.rating)}
+                  // type="number"
                   className="flex items-end"
-                  onChange={(value) => handleFormChange(index, "rating", value)}
+                  onChange={(value) =>
+                    handleFormChange(index, "rating", value)
+                  }
                 />
                 <Button
                   type="button"
@@ -100,13 +150,22 @@ function SkillSet({ handleSave, loading }) {
 
         <div className="flex justify-between mt-3">
           <div className="flex">
-            <Button type="button" onClick={addSkill} className="bg-purple-500">
+            <Button
+              type="button"
+              onClick={() => addSkill()}
+              className="bg-purple-500"
+            >
               Add skills
             </Button>
           </div>
 
           <div>
-            <Button disabled={loading} type="submit" className="bg-purple-500">
+            <Button
+              disabled={loading}
+              onClick={handleSave}
+              type="submit"
+              className="bg-purple-500"
+            >
               {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
             </Button>
           </div>

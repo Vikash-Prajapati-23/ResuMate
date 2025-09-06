@@ -32,7 +32,7 @@ const resumeSchema = mongoose.Schema(
     skills: [
       {
         name: { type: String, required: true },
-        percentage: { type: String, required: true },
+        rating: { type: String, required: true },
       },
     ],
 
