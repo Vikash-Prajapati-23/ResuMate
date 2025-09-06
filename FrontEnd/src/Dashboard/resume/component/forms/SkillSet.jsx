@@ -57,23 +57,23 @@ function SkillSet({ loading }) {
     e.preventDefault();
     try {
       const response = await fetch(`${baseUrl}/api/create-resume/${resumeId}`, {
-      method: "PATCH",
-      credentials: "include",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ skills: resumeInfo.skills }),
-    });
-    const data = await response.json();
-    if (response.ok) {
-      toast.success(data.message);
-      dispatch(
-        setResumeInfo({
-          ...resumeInfo,
-          skills: data.data.skills,
-        })
-      );
-    }
+        method: "PATCH",
+        credentials: "include",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ skills: resumeInfo.skills }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        toast.success(data.message);
+        dispatch(
+          setResumeInfo({
+            ...resumeInfo,
+            skills: data.data.skills,
+          })
+        );
+      }
     } catch (error) {
-      toast.error('Failed to save the data.');
+      toast.error("Failed to save the data.");
       console.error("Internal server error.", error);
     }
   };
@@ -132,9 +132,7 @@ function SkillSet({ loading }) {
                   value={Number(item.rating)}
                   // type="number"
                   className="flex items-end"
-                  onChange={(value) =>
-                    handleFormChange(index, "rating", value)
-                  }
+                  onChange={(value) => handleFormChange(index, "rating", value)}
                 />
                 <Button
                   type="button"
