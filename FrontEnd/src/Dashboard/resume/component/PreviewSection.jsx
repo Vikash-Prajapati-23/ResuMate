@@ -23,10 +23,10 @@ function PreviewSection() {
       <ProjectsPreview />
 
       {/* education */}
-      {/* <EducationalDetailPreview /> */}
+      <EducationalDetailPreview />
 
       {/* certifications */}
-      {/* <CertificationsPreview /> */}
+      <CertificationsPreview />
     </div>
   );
 }

@@ -82,12 +82,6 @@ function PersonalInfo({ loading, setLoading }) {
 
       setAiGeneratedSummary(parsedResponse);
 
-      // dispatch(
-      //   updateResumeInfoField({
-      //     field: "personalInfo",
-      //     data: { ...resumeInfo.personalInfo, [name]: value },
-      //   })
-      // );
     } catch (error) {
       console.error("Error generating AI summary:", error);
     }

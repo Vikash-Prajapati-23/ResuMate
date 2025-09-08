@@ -41,7 +41,7 @@ function SkillSet({ loading }) {
     }
 
     newSkills[index] = {
-      ...newSkills[index], // Spread existing properties
+      ...newSkills[index],
       [field]: value, // Update the specific field
     };
 

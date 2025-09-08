@@ -3,61 +3,93 @@ import { Input } from "@/components/ui/input";
 import { LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
-import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
+import {
+  setResumeInfo,
+  updateResumeInfoField,
+} from "@/store/slices/resumeInfo/resumeInfo";
+import { useParams } from "react-router-dom";
+import { toast } from "sonner"; // Added missing import
 
-function Education({ handleSave, loading }) {
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+function Education({ loading }) {
   const dispatch = useDispatch();
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
+  const { resumeId } = useParams();
 
-  const [education, setEducation] = useState([
-    {
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${baseUrl}/api/create-resume/${resumeId}`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ education: resumeInfo.education }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        toast.success(data.message);
+        dispatch(
+          setResumeInfo({
+            ...resumeInfo,
+            education: data.data.education,
+          })
+        );
+      }
+    } catch (error) {
+      toast.error("Something went wrong, please try again later.");
+      console.error("Internal error.", error);
+    }
+  };
+
+  // FIXED: Properly create deep copies of objects
+  const handleFormChange = (index, name, value) => {
+    const newEducation = [...(resumeInfo.education || [])];
+
+    // Create a new object instead of mutating the existing one
+    newEducation[index] = {
+      ...newEducation[index], // Spread the existing object
+      [name]: value, // Update only the specific field
+    };
+
+    // Use updateResumeInfoField for consistency
+    dispatch(
+      updateResumeInfoField({
+        field: "education",
+        data: newEducation,
+      })
+    );
+  };
+
+  const addEducation = () => {
+    const newEducation = {
       degree: "",
       institution: "",
       location: "",
       start_year: "",
       end_year: "",
-    },
-  ]);
+    };
+    const updatedEducation = [...(resumeInfo.education || []), newEducation];
 
-  useEffect(() => {
-    if (resumeInfo && resumeInfo.education) {
-      setEducation(resumeInfo.education);
-    }
-  }, []);
-
-  const handleFormChange = (index, name, value) => {
-    const newEducation = education.slice();
-    newEducation[index][name] = value;
-    setEducation(newEducation);
     dispatch(
-      setResumeInfo((prevInfo) => ({
-        ...prevInfo,
-        education: newEducation,
-      }))
+      updateResumeInfoField({
+        field: "education",
+        data: updatedEducation,
+      })
     );
   };
 
-  const addEducation = () => {
-    setEducation([
-      ...education,
-      {
-        degree: "",
-        institution: "",
-        location: "",
-        start_year: "",
-        end_year: "",
-      },
-    ]);
-  };
-
+  // FIXED: Remove the setEducation call and use consistent Redux actions
   const removeEducation = (index) => {
-    const newEducation = education.filter((_, i) => i !== index);
-    setEducation(newEducation);
+    const updatedEducation = (resumeInfo.education || []).filter(
+      (_, i) => i !== index
+    );
+
     dispatch(
-      setResumeInfo((prevInfo) => ({
-        ...prevInfo,
-        education: newEducation,
-      }))
+      updateResumeInfoField({
+        field: "education",
+        data: updatedEducation,
+      })
     );
   };
 
@@ -70,7 +102,7 @@ function Education({ handleSave, loading }) {
 
       <form onSubmit={handleSave}>
         <div className="mt-3">
-          {education.map((item, index) => (
+          {resumeInfo.education?.map((item, index) => (
             <div
               key={index}
               className="grid grid-cols-2 border-2 p-3 rounded-md gap-3 mt-3"
@@ -78,7 +110,7 @@ function Education({ handleSave, loading }) {
               <div>
                 <label className="ms-2 text-sm">Degree</label>
                 <Input
-                  value={item.degree}
+                  value={item.degree || ""} // Added fallback
                   type="text"
                   required
                   onChange={(e) =>
@@ -89,7 +121,7 @@ function Education({ handleSave, loading }) {
               <div>
                 <label className="ms-2 text-sm">Institute name</label>
                 <Input
-                  value={item.institution}
+                  value={item.institution || ""} // Added fallback
                   type="text"
                   required
                   onChange={(e) =>
@@ -101,7 +133,7 @@ function Education({ handleSave, loading }) {
               <div className="col-span-2">
                 <label className="ms-2 text-sm">Institute Location</label>
                 <Input
-                  value={item.location}
+                  value={item.location || ""} // Added fallback
                   type="text"
                   required
                   onChange={(e) =>
@@ -112,8 +144,8 @@ function Education({ handleSave, loading }) {
               <div className="col-span-1">
                 <label className="ms-2 text-sm">Start Date</label>
                 <Input
-                  value={item.start_year}
-                  type="number"
+                  value={item.start_year || ""} // Added fallback
+                  type="date"
                   min="1900"
                   max={new Date().getFullYear()} // Prevents future years
                   required
@@ -125,8 +157,8 @@ function Education({ handleSave, loading }) {
               <div className="col-span-1">
                 <label className="ms-2 text-sm">End Date</label>
                 <Input
-                  value={item.end_year}
-                  type="number"
+                  value={item.end_year || ""} // Added fallback
+                  type="date"
                   min="1900"
                   max={new Date().getFullYear()} // Prevents future years
                   required
@@ -137,7 +169,7 @@ function Education({ handleSave, loading }) {
               </div>
               <Button
                 type="button"
-                onClick={(e) => removeEducation(index)}
+                onClick={() => removeEducation(index)} // Removed unnecessary (e) parameter
                 className="bg-red-500 w-[50%]"
               >
                 Remove Education

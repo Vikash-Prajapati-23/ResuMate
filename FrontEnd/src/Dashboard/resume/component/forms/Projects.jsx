@@ -44,7 +44,7 @@ function Projects({ loading }) {
   };
 
   const handleFormChange = (index, name, value) => {
-    const newProjects = [...(resumeInfo.projects || [])]; // Use consistent field name
+    const newProjects = [...(resumeInfo.projects || [])];
 
     if (name === "technologies") {
       newProjects[index] = {
