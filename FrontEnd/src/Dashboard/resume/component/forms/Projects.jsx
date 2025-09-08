@@ -4,75 +4,112 @@ import { LoaderCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import TextEditor from "../TextEditor";
 import { useDispatch, useSelector } from "react-redux";
-import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
+import {
+  setResumeInfo,
+  updateResumeInfoField,
+} from "@/store/slices/resumeInfo/resumeInfo";
+import { toast } from "sonner";
+import { useParams } from "react-router-dom";
 
-function Projects({ handleSave, loading }) {
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+function Projects({ loading }) {
   const dispatch = useDispatch();
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
+  const { resumeId } = useParams();
 
-  const [project, setProject] = useState([
-    {
-      name: "",
-      description: "",
-      technologies: [],
-      link: "",
-    },
-  ]);
-
-  useEffect(() => {
-    if (resumeInfo.projects) {
-      setProject(resumeInfo.projects);
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${baseUrl}/api/create-resume/${resumeId}`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ projects: resumeInfo.projects }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        toast.success(data.message);
+        dispatch(
+          setResumeInfo({
+            ...resumeInfo,
+            projects: data.data.projects,
+          })
+        );
+      }
+    } catch (error) {
+      toast.error("Something went wrong, please try again later.");
+      console.error("Internal error.", error);
     }
-  }, []);
+  };
 
   const handleFormChange = (index, name, value) => {
-    const newProject = project.slice();
+    const newProjects = [...(resumeInfo.projects || [])]; // Use consistent field name
+
     if (name === "technologies") {
-      newProject[index][name] = value.split(",").map((tech) => tech.trim());
+      newProjects[index] = {
+        ...newProjects[index],
+        [name]: value.split(",").map((tech) => tech.trim()),
+      };
     } else {
-      newProject[index][name] = value;
+      newProjects[index] = {
+        ...newProjects[index],
+        [name]: value,
+      };
     }
-    setProject(newProject);
+
+    // Use updateResumeInfoField for consistency
     dispatch(
-      setResumeInfo((prevInfo) => ({
-        ...prevInfo,
-        project: newProject,
-      }))
+      updateResumeInfoField({
+        field: "projects",
+        data: newProjects,
+      })
     );
   };
 
-  const handleTextFormChange = (event, name, index) => {
-    const newProject = project.slice();
-    newProject[index][name] = event.target.value;
-    setProject(newProject);
+  // Fixed TextEditor handler to work with string values
+  const handleTextFormChange = (value, name, index) => {
+    const newProjects = [...(resumeInfo.projects || [])];
+    newProjects[index] = {
+      ...newProjects[index],
+      [name]: value, // Now receives string directly from TextEditor
+    };
+
     dispatch(
-      setResumeInfo((prevInfo) => ({
-        ...prevInfo,
-        project: newProject,
-      }))
+      updateResumeInfoField({
+        field: "projects",
+        data: newProjects,
+      })
     );
   };
 
   const addProject = () => {
-    setProject([
-      ...project,
-      {
-        name: "",
-        description: "",
-        technologies: [],
-        link: "",
-      },
-    ]);
+    const newProject = {
+      name: "",
+      description: "",
+      technologies: [],
+      link: "",
+    };
+    const updatedProjects = [...(resumeInfo.projects || []), newProject];
+
+    dispatch(
+      updateResumeInfoField({
+        field: "projects",
+        data: updatedProjects,
+      })
+    );
   };
 
   const removeProject = (index) => {
-    const newProject = project.filter((_, i) => i !== index);
-    setProject(newProject);
+    const updatedProjects = (resumeInfo.projects || []).filter(
+      (_, i) => i !== index
+    );
+
     dispatch(
-      setResumeInfo((prevInfo) => ({
-        ...prevInfo,
-        project: newProject,
-      }))
+      updateResumeInfoField({
+        field: "projects",
+        data: updatedProjects,
+      })
     );
   };
 
@@ -85,7 +122,7 @@ function Projects({ handleSave, loading }) {
 
       <form onSubmit={handleSave}>
         <div>
-          {project.map((item, index) => (
+          {resumeInfo.projects?.map((item, index) => (
             <div
               className="grid grid-cols-2 gap-3 mt-3 mb-3 border-2 rounded-md p-4"
               key={index}
@@ -93,7 +130,7 @@ function Projects({ handleSave, loading }) {
               <div>
                 <label className="ms-2 ">Project name</label>
                 <Input
-                  value={item.name}
+                  value={item.name || ""}
                   type="text"
                   required
                   onChange={(e) =>
@@ -105,7 +142,11 @@ function Projects({ handleSave, loading }) {
               <div>
                 <label className="ms-2 ">Technologies</label>
                 <Input
-                  value={item.technologies.join(", ")}
+                  value={
+                    Array.isArray(item.technologies)
+                      ? item.technologies.join(", ")
+                      : ""
+                  }
                   type="text"
                   placeholder="Ex. React, Js, Node.js"
                   required
@@ -118,8 +159,9 @@ function Projects({ handleSave, loading }) {
               <div className="col-span-2">
                 <label className="ms-2 ">Description</label>
                 <TextEditor
-                  onTextEditorChange={(event) =>
-                    handleTextFormChange(event, "description", index)
+                  value={item.description || ""} // Pass current value
+                  onTextEditorChange={(value) =>
+                    handleTextFormChange(value, "description", index)
                   }
                 />
               </div>
@@ -127,8 +169,8 @@ function Projects({ handleSave, loading }) {
               <div className="col-span-2">
                 <label className="ms-2">Github link</label>
                 <Input
-                  value={item.link}
-                  type="link"
+                  value={item.link || ""}
+                  type="url"
                   required
                   onChange={(e) =>
                     handleFormChange(index, "link", e.target.value)

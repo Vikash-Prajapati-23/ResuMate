@@ -20,7 +20,7 @@ function PreviewSection() {
       <ExperiencePreview />
 
       {/* projects */}
-      {/* <ProjectsPreview /> */}
+      <ProjectsPreview />
 
       {/* education */}
       {/* <EducationalDetailPreview /> */}

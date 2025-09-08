@@ -18,18 +18,19 @@ import {
   EditorProvider,
 } from "react-simple-wysiwyg";
 
-function TextEditor({ onTextEditorChange }) {
-  const [value, setValue] = useState();
+function TextEditor({ onTextEditorChange, value: propValue }) {
+  const [value, setValue] = useState(propValue || "");
+
+  const handleChange = (e) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+    // Passing only the string value, not the entire event object
+    onTextEditorChange(newValue);
+  };
 
   return (
     <EditorProvider>
-      <Editor
-        value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
-          onTextEditorChange(e);
-        }}
-      >
+      <Editor value={value} onChange={handleChange}>
         <Toolbar>
           <BtnBold />
           <BtnItalic />

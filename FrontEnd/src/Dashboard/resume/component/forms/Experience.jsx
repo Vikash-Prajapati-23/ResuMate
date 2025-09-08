@@ -59,30 +59,12 @@ function Experience({ loading }) {
     }
   };
 
-  // Fixed TextEditor handler - ensure we only get the string value
+  // Handle TextEditor change which receives only string value.
   const handleTextFormChange = (value, name, index) => {
-    // Extract only the string value, handle different possible return types
-    let textValue = "";
-    
-    if (typeof value === "string") {
-      textValue = value;
-    } else if (value && typeof value === "object") {
-      // If TextEditor returns an object, try to extract the text
-      if (value.target && value.target.value) {
-        textValue = value.target.value;
-      } else if (value.target && value.target.innerHTML) {
-        textValue = value.target.innerHTML;
-      } else if (value.target && value.target.textContent) {
-        textValue = value.target.textContent;
-      } else if (typeof value.toString === "function") {
-        textValue = value.toString();
-      }
-    }
-
     const newExperience = [...(resumeInfo.experience || [])];
     newExperience[index] = {
       ...newExperience[index],
-      [name]: textValue, // Ensure this is always a string
+      [name]: value,
     };
 
     dispatch(
@@ -94,13 +76,14 @@ function Experience({ loading }) {
   };
 
   const addExperience = () => {
+    // Initializing as empty string.
     const newItem = {
       job_title: "",
       company: "",
       location: "",
       start_date: "",
       end_date: "",
-      responsibilities: "", // Initialize as empty string
+      responsibilities: "",
     };
     const updatedList = [...(resumeInfo.experience || []), newItem];
     dispatch(
