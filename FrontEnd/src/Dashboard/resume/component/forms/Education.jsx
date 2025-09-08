@@ -8,7 +8,7 @@ import {
   updateResumeInfoField,
 } from "@/store/slices/resumeInfo/resumeInfo";
 import { useParams } from "react-router-dom";
-import { toast } from "sonner"; // Added missing import
+import { toast } from "sonner";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -42,7 +42,7 @@ function Education({ loading }) {
     }
   };
 
-  // FIXED: Properly create deep copies of objects
+  // Properly create deep copies of objects
   const handleFormChange = (index, name, value) => {
     const newEducation = [...(resumeInfo.education || [])];
 

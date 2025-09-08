@@ -126,6 +126,9 @@ const resumeSchema = mongoose.Schema(
         name: {
           type: String,
         },
+        year: {
+          type: String,
+        }
       },
     ],
   },

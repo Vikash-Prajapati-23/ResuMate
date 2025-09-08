@@ -1,57 +1,93 @@
 import { Input } from "@/components/ui/input";
 import { LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setResumeInfo } from "@/store/slices/resumeInfo/resumeInfo";
+import {
+  setResumeInfo,
+  updateResumeInfoField,
+} from "@/store/slices/resumeInfo/resumeInfo";
+import { toast } from "sonner";
+import { useParams } from "react-router-dom";
 
-function Certificates({ handleSave, loading }) {
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
+function Certificates({ loading }) {
   const dispatch = useDispatch();
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
+  const { resumeId } = useParams();
 
-  const [certificate, setCertificate] = useState([
-    {
-      name: "",
-      year: 0,
-    },
-  ]);
-
-  useEffect(() => {
-    if (resumeInfo && resumeInfo.certifications) {
-      setCertificate(resumeInfo.certifications);
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${baseUrl}/api/create-resume/${resumeId}`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ certifications: resumeInfo.certifications }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        toast.success(data.message);
+        dispatch(
+          setResumeInfo({
+            ...resumeInfo,
+            certifications: data.data.certifications,
+          })
+        );
+      }
+    } catch (error) {
+      toast.error("Something went wrong, please try again later.");
+      console.error("Internal error.", error);
     }
-  }, []);
+  };
 
   const handleFormChange = (index, name, value) => {
-    const newCertificates = certificate.slice();
-    newCertificates[index][name] = value;
-    setCertificate(newCertificates);
+    const newCertificates = [...(resumeInfo.certifications || [])];
+
+    // Create new object to avoid mutating read-only Redux state
+    newCertificates[index] = {
+      ...newCertificates[index],
+      [name]: value,
+    };
+
     dispatch(
-      setResumeInfo((prevInfo) => ({
-        ...prevInfo,
-        certifications: newCertificates,
-      }))
+      updateResumeInfoField({
+        field: "certifications",
+        data: newCertificates,
+      })
     );
   };
 
   const addCertificates = () => {
-    setCertificate([
-      ...certificate,
-      {
-        name: "",
-        year: 0,
-      },
-    ]);
+    const newCertificate = {
+      name: "",
+      year: "",
+    };
+
+    const updatedCertificates = [
+      ...(resumeInfo.certifications || []),
+      newCertificate,
+    ];
+
+    dispatch(
+      updateResumeInfoField({
+        field: "certifications",
+        data: updatedCertificates,
+      })
+    );
   };
 
   const removeCertificates = (index) => {
-    const newCertificates = certificate.filter((_, i) => i !== index);
-    setCertificate(newCertificates);
+    // Added null check to prevent errors if certifications is undefined
+    const updatedCertificates = (resumeInfo.certifications || []).filter(
+      (_, i) => i !== index
+    );
+
     dispatch(
-      setResumeInfo((prevInfo) => ({
-        ...prevInfo,
-        certifications: newCertificates,
-      }))
+      updateResumeInfoField({
+        field: "certifications",
+        data: updatedCertificates,
+      })
     );
   };
 
@@ -66,7 +102,7 @@ function Certificates({ handleSave, loading }) {
 
       <form onSubmit={handleSave}>
         <div className="mt-3">
-          {certificate.map((item, index) => (
+          {resumeInfo.certifications?.map((item, index) => (
             <div
               className="grid grid-cols-2 gap-3 border-2 rounded-md p-3 mb-3"
               key={index}
@@ -74,7 +110,7 @@ function Certificates({ handleSave, loading }) {
               <div>
                 <label className="ms-2 text-sm">Certificate Name</label>
                 <Input
-                  value={item.name}
+                  value={item.name || ""}
                   type="text"
                   required
                   onChange={(e) =>
@@ -85,10 +121,10 @@ function Certificates({ handleSave, loading }) {
               <div>
                 <label className="ms-2 text-sm">Year</label>
                 <Input
-                  value={item.year}
+                  value={item.year || ""}
                   type="number"
                   min="1900"
-                  max={new Date().getFullYear()} // Prevents future years
+                  max={new Date().getFullYear()}
                   required
                   onChange={(e) =>
                     handleFormChange(index, "year", e.target.value)
