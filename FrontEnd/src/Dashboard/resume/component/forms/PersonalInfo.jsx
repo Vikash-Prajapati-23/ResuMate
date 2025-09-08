@@ -21,18 +21,6 @@ function PersonalInfo({ loading, setLoading }) {
   const [aiGeneratedSummary, setAiGeneratedSummary] = useState([]);
   const dispatch = useDispatch();
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
-  // const updateResumeInfoField = useSelector(
-  //   (state) => state.updateResumeInfoField.value
-  // );
-  // const [formData, setFormData] = useState({
-  //   first_name: "",
-  //   last_name: "",
-  //   job_title: "",
-  //   address: "",
-  //   phone: "",
-  //   email: "",
-  //   summary: "",
-  // });    
   const resumeId = useParams();
 
   useEffect(() => {

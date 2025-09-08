@@ -6,7 +6,7 @@ import Experience from "./forms/Experience";
 import Projects from "./forms/Projects";
 import Certificates from "./forms/Certificates";
 import Education from "./forms/Education";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import { Navigate, useParams } from "react-router-dom";
 
 function FormSection() {
@@ -14,14 +14,14 @@ function FormSection() {
   const [loading, setLoading] = useState(false);
   const { resumeViewID } = useParams();
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    toast("✅ Details Updated Successfully! 🥳🎉")
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  };
+  // const handleSave = (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   toast("✅ Details Updated Successfully! 🥳🎉")
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // };
 
   return (
     <div className="p-4 ">
@@ -51,44 +51,15 @@ function FormSection() {
       </div>
 
       {activeIndex === 1 && (
-        <PersonalInfo
-          handleSave={handleSave}
-          loading={loading}
-          setLoading={setLoading}
-        />
+        <PersonalInfo loading={loading} setLoading={setLoading} />
       )}
-      {activeIndex === 2 && (
-        <SkillSet
-          handleSave={handleSave}
-          loading={loading}
-        />
-      )}
-      {activeIndex === 3 && (
-        <Experience
-          handleSave={handleSave}
-          loading={loading}
-        />
-      )}
-      {activeIndex === 4 && (
-        <Projects
-          handleSave={handleSave}
-          loading={loading}
-        />
-      )}
-      {activeIndex === 5 && (
-        <Education
-          handleSave={handleSave}
-          loading={loading}
-        />
-      )}
-      {activeIndex === 6 && (
-        <Certificates
-          handleSave={handleSave}
-          loading={loading}
-        />
-      )}
+      {activeIndex === 2 && <SkillSet loading={loading} />}
+      {activeIndex === 3 && <Experience loading={loading} />}
+      {activeIndex === 4 && <Projects loading={loading} />}
+      {activeIndex === 5 && <Education loading={loading} />}
+      {activeIndex === 6 && <Certificates loading={loading} />}
       {activeIndex === 7 && (
-        <Navigate to={`/ViewResume/${resumeViewID}/view`} replace  />
+        <Navigate to={`/ViewResume/${resumeViewID}/view`} replace />
       )}
     </div>
   );

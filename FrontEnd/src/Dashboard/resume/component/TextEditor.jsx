@@ -23,7 +23,13 @@ function TextEditor({ onTextEditorChange }) {
 
   return (
     <EditorProvider>
-      <Editor value={value} onChange={(e) => {setValue(e.target.value); onTextEditorChange(e) }}>
+      <Editor
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onTextEditorChange(e);
+        }}
+      >
         <Toolbar>
           <BtnBold />
           <BtnItalic />

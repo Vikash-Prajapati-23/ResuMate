@@ -17,7 +17,7 @@ function PreviewSection() {
       <SkillsPreview />
 
       {/* experience */}
-      {/* <ExperiencePreview /> */}
+      <ExperiencePreview />
 
       {/* projects */}
       {/* <ProjectsPreview /> */}

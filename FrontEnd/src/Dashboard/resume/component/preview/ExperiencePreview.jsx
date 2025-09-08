@@ -6,7 +6,7 @@ function ExperiencePreview() {
 
   return (
     <div className="">
-      {resumeInfo?.experience.map((experience, index) => (
+      {resumeInfo.experience?.map((experience, index) => (
         <div key={index}>
           <div className="flex justify-between my-1">
             <div>
