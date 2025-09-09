@@ -13,13 +13,10 @@ function CertificationsPreview() {
         Certificates
       </h2>
 
-      <hr
-        style={{ borderColor: "blue" }}
-        className="border-[1.5px] mb-1 "
-      />
+      <hr style={{ borderColor: "blue" }} className="border-[1.5px] mb-1 " />
 
       <div className="">
-        {resumeInfo?.certifications.map((certificate, index) => (
+        {resumeInfo.certifications?.map((certificate, index) => (
           <div className="flex justify-between" key={index}>
             <p className="text-xs">{certificate.name}</p>
             <p className="text-xs">{certificate.year}</p>

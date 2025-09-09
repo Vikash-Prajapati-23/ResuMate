@@ -42,7 +42,7 @@ const ViewResume = () => {
   return (
     <>
       {/* Buttons that will not be printed */}
-      <div className="no-print flex justify-between my-5 lg:mx-96 md:mx-20">
+      <div className="no-print flex justify-between my-5 mt-20 lg:mx-96 md:mx-20">
         <Button onClick={handleShare} className="bg-purple-500 text-white" type="button">
           Share
         </Button>

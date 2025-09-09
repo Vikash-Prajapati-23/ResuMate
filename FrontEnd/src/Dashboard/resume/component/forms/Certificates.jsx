@@ -92,7 +92,7 @@ function Certificates({ loading }) {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 border-t-4 border-purple-500 my-5">
+    <div className="bg-white border rounded-lg md:p-4 p-3 border-t-4 border-purple-500 my-5">
       <div className="ms-2">
         <h2 className="font-bold">Certificates</h2>
         <p className="text-sm">
@@ -104,7 +104,7 @@ function Certificates({ loading }) {
         <div className="mt-3">
           {resumeInfo.certifications?.map((item, index) => (
             <div
-              className="grid grid-cols-2 gap-3 border-2 rounded-md p-3 mb-3"
+              className="grid grid-cols-2 gap-3 border rounded-md p-3 mb-3"
               key={index}
             >
               <div>

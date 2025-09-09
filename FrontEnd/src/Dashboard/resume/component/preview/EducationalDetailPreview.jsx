@@ -18,7 +18,7 @@ function EducationalDetailPreview() {
         className="border-[1.5px] mb-1 "
       />
 
-      {resumeInfo?.education.map((edu, index) => (
+      {resumeInfo.education?.map((edu, index) => (
         <div className="my-2 flex justify-between" key={index}>
           <div>
             <h2 className="font-bold text-normal">{edu.institution}</h2>

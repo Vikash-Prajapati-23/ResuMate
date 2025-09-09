@@ -20,7 +20,7 @@ function EditResume() {
   // }, []);
 
   return (
-      <div className="mx-2 my-10 grid grid-cols-1 md:grid-cols-2 gap-3 p-5 bg-secondary">
+      <div className="md:mx-3 mx-3 my-10 grid grid-cols-1 md:grid-cols-2 lg:gap-3 md:gap-1 lg:p-5 md:p-2">
         <FormSection />
         <PreviewSection />
       </div>

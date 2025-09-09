@@ -114,7 +114,7 @@ function Projects({ loading }) {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 border-t-4 border-purple-500 my-5">
+    <div className="bg-white border rounded-lg md:p-4 p-3 border-t-4 border-purple-500 my-5">
       <div className="ms-2">
         <h2 className="font-bold">Projects</h2>
         <p className="">Fill your projects if any.</p>

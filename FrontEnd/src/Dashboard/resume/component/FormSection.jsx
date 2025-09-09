@@ -14,17 +14,8 @@ function FormSection() {
   const [loading, setLoading] = useState(false);
   const { resumeViewID } = useParams();
 
-  // const handleSave = (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   toast("✅ Details Updated Successfully! 🥳🎉")
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 2000);
-  // };
-
   return (
-    <div className="p-4 ">
+    <div className="lg:p-4 md:p-2 p-1 ">
       <div className="flex justify-between">
         <h2 className="flex gap-2 bg-purple-500 text-white cursor-pointer p-3 font-bold rounded-md w-[110px]">
           <LayoutGridIcon /> Theme

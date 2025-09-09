@@ -94,7 +94,7 @@ function Education({ loading }) {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 border-t-4 border-purple-500 my-5">
+    <div className="bg-white border rounded-lg md:p-4 p-3 border-t-4 border-purple-500 my-5">
       <div className="ms-2">
         <h2 className="font-bold">Educational Details</h2>
         <p className="text-sm">Fill up some Educational details.</p>
@@ -105,7 +105,7 @@ function Education({ loading }) {
           {resumeInfo.education?.map((item, index) => (
             <div
               key={index}
-              className="grid grid-cols-2 border-2 p-3 rounded-md gap-3 mt-3"
+              className="grid grid-cols-2 border p-3 rounded-md gap-3 mt-3"
             >
               <div>
                 <label className="ms-2 text-sm">Degree</label>
