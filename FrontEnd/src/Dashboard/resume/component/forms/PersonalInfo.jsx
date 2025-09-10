@@ -19,15 +19,16 @@ const prompt =
 
 function PersonalInfo({ loading, setLoading }) {
   const [aiGeneratedSummary, setAiGeneratedSummary] = useState([]);
+  const [AiSummary, setAiSummary] = useState(false);
   const dispatch = useDispatch();
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
   const resumeId = useParams();
 
-  useEffect(() => {
-    if (resumeInfo.personalInfo?.summary) {
-      setAiGeneratedSummary([{ summary: resumeInfo.personalInfo?.summary }]);
-    }
-  }, [resumeInfo.personalInfo?.summary]);
+  // useEffect(() => {
+  //   if (resumeInfo.personalInfo?.summary) {
+  //     setAiGeneratedSummary([{ summary: resumeInfo.personalInfo?.summary }]);
+  //   }
+  // }, [resumeInfo.personalInfo?.summary]);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -69,7 +70,7 @@ function PersonalInfo({ loading, setLoading }) {
   };
 
   const generateSummaryByAI = async () => {
-    setLoading(true);
+    setAiSummary(true);
     const jobTitle = resumeInfo?.personalInfo?.job_title || "undefined";
     const PROMPT = prompt.replace("{job_title}", jobTitle);
     // console.log(PROMPT);
@@ -85,7 +86,7 @@ function PersonalInfo({ loading, setLoading }) {
     } catch (error) {
       console.error("Error generating AI summary:", error);
     }
-    setLoading(false);
+    setAiSummary(false);
   };
 
   return (
@@ -178,19 +179,19 @@ function PersonalInfo({ loading, setLoading }) {
         <div className="mt-4 space-y-2">
           <div className="flex justify-between">
             <div>
-              <h2 className="ms-2">Add Summary</h2>
-              <p className="text-sm ms-2">Add a summary for your job role.</p>
+              <h2 className=" lg:ms-2">Add Summary</h2>
+              <p className="lg:text-sm text-xs lg:ms-2">Add a summary for your job role.</p>
             </div>
             <div>
               <Button
                 variant="outline"
                 onClick={generateSummaryByAI}
-                disabled={loading}
+                disabled={AiSummary}
                 type="button"
-                className="bg-purple-500"
+                className="bg-purple-500 md:text-sm text-xs md:px-2 px-2 md:py-2 font-normal text-white "
               >
-                {loading ? (
-                  <BrainCircuitIcon className="" />
+                {AiSummary ? (
+                  <BrainCircuitIcon className="rotate-90" />
                 ) : (
                   "Generate with AI"
                 )}
