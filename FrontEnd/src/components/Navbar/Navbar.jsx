@@ -68,7 +68,7 @@ const Navbar = ({ setIsSignUp }) => {
 
   const handleMessage = () => {
     toast("This feature will be available soon.!");
-  }
+  };
 
   return (
     <nav
@@ -118,11 +118,7 @@ const Navbar = ({ setIsSignUp }) => {
                 alt="Logo"
               />
             </Link>
-            <button
-              onClick={handleGetStarted}
-            >
-              Get started
-            </button>
+            <button onClick={handleGetStarted}>Get started</button>
             <Link
               to="/"
               onClick={handleMessage}

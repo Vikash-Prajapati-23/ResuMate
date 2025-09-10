@@ -17,26 +17,26 @@ function FormSection() {
   return (
     <div className="lg:p-4 md:p-2 p-1 ">
       <div className="flex justify-between">
-        <h2 className="flex gap-2 bg-purple-500 text-white cursor-pointer p-3 font-bold rounded-md w-[110px]">
-          <LayoutGridIcon /> Theme
-        </h2>
+        <button className="flex justify-center items-center md:gap-2 gap-1 h-9 bg-purple-500 text-white cursor-pointer lg:px-3 md:px-2 px-2 py-2 font-bold rounded-md lg:text-base md:text-sm text-xs ">
+          <LayoutGridIcon className="lg:h-5 h-4 " /> Theme
+        </button>
 
         <div className="flex gap-2">
           {activeIndex > 1 && ( //This is short-circuit evaluation using the && operator.
             <button
-              className="bg-purple-500 flex gap-1 text-white p-3 font-bold rounded-md"
+              className="flex justify-center items-center md:gap-2 gap-1 h-9 bg-purple-500 text-white cursor-pointer lg:px-3 md:px-2 px-2 py-2 font-bold rounded-md lg:text-base md:text-sm text-xs "
               onClick={() => setActiveIndex(activeIndex - 1)}
             >
-              <MoveLeft />
+              <MoveLeft className="md:w-5 w-3" />
               Back
             </button>
           )}
           <button
-            className="bg-purple-500 flex gap-1 text-white p-3 font-bold rounded-md"
+            className="flex justify-center items-center md:gap-2 gap-1 h-9 bg-purple-500 text-white cursor-pointer lg:px-3 md:px-2 px-2 py-2 font-bold rounded-md lg:text-base md:text-sm text-xs "
             onClick={() => setActiveIndex(activeIndex + 1)}
           >
             Next
-            <MoveRight />
+            <MoveRight className="md:w-5 w-3" />
           </button>
         </div>
       </div>

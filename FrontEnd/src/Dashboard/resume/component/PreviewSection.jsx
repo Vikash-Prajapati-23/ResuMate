@@ -9,7 +9,7 @@ import CertificationsPreview from "./preview/CertificationsPreview";
 function PreviewSection() {
 
   return (
-    <div className='bg-white lg:p-5 border md:p-4 p-3 border-t-[25px] shadow-md border-blue-800'>
+    <div className='bg-white lg:p-5 border md:p-4 p-3 md:mt-12 mt-6 border-t-[25px] shadow-md border-blue-800'>
       {/* personal_info */}
       <PresonalDetailPreview />
 

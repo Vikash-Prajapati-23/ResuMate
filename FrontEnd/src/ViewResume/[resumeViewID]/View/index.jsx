@@ -41,8 +41,12 @@ const ViewResume = () => {
 
   return (
     <>
+    <div className=" flex justify-between mt-20 lg:mx-96 md:mx-200">
+      <p>Your resume is ready to download and you can also share your resume to anyone by clicking the share button.</p>
+    </div>
+
       {/* Buttons that will not be printed */}
-      <div className="no-print flex justify-between my-5 mt-20 lg:mx-96 md:mx-20">
+      <div className="no-print flex justify-between my-5 lg:mx-96 md:mx-20">
         <Button onClick={handleShare} className="bg-purple-500 text-white" type="button">
           Share
         </Button>

@@ -9,10 +9,7 @@ const PresonalDetailPreview = () => {
   return (
     <div>
       <div className="flex justify-center gap-2">
-        <p
-          style={{ color: "blue" }}
-          className="text-center font-bold text-2xl"
-        >
+        <p style={{ color: "blue" }} className="text-center font-bold text-2xl">
           {resumeInfo.personalInfo?.first_name}
         </p>
         <p
@@ -26,7 +23,8 @@ const PresonalDetailPreview = () => {
       <div className="flex justify-between text-xs">
         <div className="space-y-1 my-2">
           <p className="text-start flex gap-2">
-            <MapPinHouse className="w-4 h-4" /> {resumeInfo.personalInfo?.address}
+            <MapPinHouse className="w-4 h-4" />{" "}
+            {resumeInfo.personalInfo?.address}
           </p>
           <p className="text-start flex gap-2">
             <Phone size={16} /> {resumeInfo.personalInfo?.phone}
@@ -41,7 +39,8 @@ const PresonalDetailPreview = () => {
             <Github className="w-4 h-4" /> {resumeInfo.personalInfo?.github}
           </p> */}
           <p className="text-start flex gap-2">
-            <FaLinkedin size={16} className="text-blue-600" /> {resumeInfo.personalInfo?.linkedin}
+            <FaLinkedin size={16} className="text-blue-600" />{" "}
+            {resumeInfo.personalInfo?.linkedin}
           </p>
           {/* <p className="text-start flex">
             <MapPinHouse size={16} className="" /> {resumeInfo.personalInfo?.github}
@@ -56,25 +55,15 @@ const PresonalDetailPreview = () => {
         Summary
       </h2>
 
-      <hr
-        style={{ borderColor: "blue" }}
-        className="border-[1.5px] mb-1 "
-      />
+      <hr style={{ borderColor: "blue" }} className="border-[1.5px] mb-1 " />
 
       <p className="text-justify text-xs">{resumeInfo.personalInfo?.summary}</p>
 
-      
-      <h2
-        style={{ color: "blue" }}
-        className=" mt-4 text-xl font-bold mb-1"
-      >
+      <h2 style={{ color: "blue" }} className=" mt-4 text-xl font-bold mb-1">
         Skills
       </h2>
 
-      <hr
-        // style={{ borderColor: "blue" }}
-        className="border-[1.5px] mb-1 "
-      />
+      <hr style={{ borderColor: "blue" }} className="border-[1.5px] mb-1 " />
     </div>
   );
 };
