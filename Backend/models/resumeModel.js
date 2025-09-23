@@ -12,14 +12,13 @@ const resumeSchema = mongoose.Schema(
 
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "auth",
       required: true,
     },
 
     personalInfo: {
       first_name: String,
       last_name: String,
-      job_title: String,
       job_title: String,
       email: String,
       phone: String,
@@ -106,10 +105,6 @@ const resumeSchema = mongoose.Schema(
             required: true,
           },
         ],
-        start_year: {
-          type: String,
-          required: true,
-        },
         start_year: {
           type: String,
           required: true,

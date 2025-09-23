@@ -6,7 +6,6 @@ import Experience from "./forms/Experience";
 import Projects from "./forms/Projects";
 import Certificates from "./forms/Certificates";
 import Education from "./forms/Education";
-import { toast } from "sonner";
 import { Navigate, useParams } from "react-router-dom";
 
 function FormSection() {

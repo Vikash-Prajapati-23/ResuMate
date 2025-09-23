@@ -27,7 +27,10 @@ const resumeInfoSlice = createSlice({
   reducers: {
     // Replace the entire resume
     setResumeInfo: (state, action) => {
-      state.value = action.payload;
+      state.value = {
+        ...state.value, // keep existing values
+        ...action.payload, // overwrite only provided fields
+      };
     },
 
     // Update a specific section

@@ -5,13 +5,6 @@ export async function createResume(req, res) {
   const { resumeId } = req.params;
   const updates = {};
 
-  // const saveData = await resumeInfomodel.create(personalInfo);
-
-  // return res.status(200).json({
-  //     message: "Personal details saved successfully.",
-  //     personalData: saveData,
-  // });
-
   if (req.body.userId) updates["userId"] = req.body.userId;
   if (req.body.resumeTitle) updates["resumeTitle"] = req.body.resumeTitle;
   if (req.body.personalInfo) updates["personalInfo"] = req.body.personalInfo;
@@ -33,7 +26,7 @@ export async function createResume(req, res) {
       return res.status(404).json({ message: "No data here," });
     }
 
-    console.log("Resume data:",updatedResume);
+    console.log("Resume data:", updatedResume);
 
     return res.status(200).json({
       message: "Details saved successfully.!",
@@ -42,5 +35,20 @@ export async function createResume(req, res) {
   } catch (error) {
     console.log("Internal server error.");
     return res.status(500).json({ message: "Something went wrong." });
+  }
+}
+
+export async function fetchResumes(req, res) {
+  try {
+    const savedResumes = await resumeInfomodel.find({
+      userId: req.user,
+    });
+    if (!savedResumes) {
+      return res.status(401).json({ message: "No resumes saved." });
+    }
+    return res.status(200).json({ data: savedResumes });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error." });
   }
 }

@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const prompt =
-  "Generate a compelling and professional summary for a resume based on the job title: {job_title}. The response should be in JSON format with the following structure: 'experience_level' (containing 'fresher' and 'mid_level_experienced') and 'summary' (containing a concise, impactful, and achievement-driven statement). The summary should highlight key strengths, industry relevance, and career potential. Keep it within 2-3 lines, making it engaging and results-oriented.";
+  "Generate a compelling and professional summary for a resume based on the job title: {job_title}. The response should be in JSON format with the following structure: 'experience_level' (containing 'Fresher' or 'Mid level experienced' or 'Senior level experienced) and 'summary' (containing a concise, impactful, and achievement-driven statement). The summary should highlight key strengths, industry relevance, and career potential. Keep it within 2-3 lines, making it engaging and results-oriented.";
 
 function PersonalInfo({ loading, setLoading }) {
   const [aiGeneratedSummary, setAiGeneratedSummary] = useState([]);
@@ -23,12 +23,6 @@ function PersonalInfo({ loading, setLoading }) {
   const dispatch = useDispatch();
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
   const resumeId = useParams();
-
-  // useEffect(() => {
-  //   if (resumeInfo.personalInfo?.summary) {
-  //     setAiGeneratedSummary([{ summary: resumeInfo.personalInfo?.summary }]);
-  //   }
-  // }, [resumeInfo.personalInfo?.summary]);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;

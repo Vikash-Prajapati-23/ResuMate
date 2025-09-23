@@ -1,6 +1,6 @@
 import { verifyToken } from "../services/jwtTokens";
 
-export function authenticateUser(req, res) {
+export function authenticateUser(req, res, next) {
   const token = req.cookies.token;
 
   if (!token) return res.status(401).json({ message: "Unauthorised." });
@@ -12,5 +12,7 @@ export function authenticateUser(req, res) {
 
     req.body = decoded;
     next();
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
 }
