@@ -50,7 +50,7 @@ const PresonalDetailPreview = () => {
       </div>
 
       <h2
-        className="text-center font-semibold text-sm md:text-xl lg:text-xl mb-1"
+        className="text-center font-bold text-sm md:text-xl lg:text-xl mb-1"
         style={{ color: "blue" }}
       >
         Summary
@@ -64,7 +64,7 @@ const PresonalDetailPreview = () => {
 
       <h2
         style={{ color: "blue" }}
-        className="mt-4 font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl mb-1"
+        className="mt-4 font-bold text-sm md:text-xl lg:text-xl mb-1"
       >
         Skills
       </h2>

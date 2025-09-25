@@ -38,9 +38,11 @@ function Dashboard() {
 
         {/* All the saved resumes will be shown if any. */}
         {savedResumes.length > 0 &&
-          savedResumes.map((resume, index) => (
-            <SavedResume key={resume.resumeId || index} resume={resume} />
-          ))}
+          savedResumes
+            .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+            .map((resume, index) => (
+              <SavedResume key={resume.resumeId || index} resume={resume} />
+            ))}
       </div>
     </div>
   );

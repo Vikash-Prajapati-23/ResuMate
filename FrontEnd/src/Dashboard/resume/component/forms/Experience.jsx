@@ -16,7 +16,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 function Experience({ loading }) {
   const dispatch = useDispatch();
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
-  const resumeId = useParams();
+  const { resumeId } = useParams();
 
   // Handle input change for text, date, etc.
   const handleFormChange = (index, name, value) => {
@@ -116,7 +116,10 @@ function Experience({ loading }) {
       <form className="mt-4" onSubmit={handleSave}>
         <div className="mt-4 rounded-md">
           {resumeInfo.experience?.map((item, index) => (
-            <div key={index} className="grid grid-cols-2 border p-3 rounded-md gap-3 mt-3">
+            <div
+              key={index}
+              className="grid grid-cols-2 border p-3 rounded-md gap-3 mt-3"
+            >
               <div>
                 <label className="ms-2 text-xs"> Job Title </label>
                 <Input
@@ -172,7 +175,11 @@ function Experience({ loading }) {
               <div className="col-span-2">
                 <label className="ms-2 text-xs"> Your Responsibility </label>
                 <TextEditor
-                  value={item.responsibilities || ""} // Ensure fallback to empty string
+                  value={
+                    typeof item.responsibilities === "string"
+                      ? item.responsibilities
+                      : ""
+                  }
                   onTextEditorChange={(value) =>
                     handleTextFormChange(value, "responsibilities", index)
                   }

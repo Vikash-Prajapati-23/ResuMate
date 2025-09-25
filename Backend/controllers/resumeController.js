@@ -52,3 +52,19 @@ export async function fetchResumes(req, res) {
     return res.status(500).json({ message: "Internal server error." });
   }
 }
+
+export async function getResumeById(req, res) {
+  try {
+    const { resumeId } = req.params;
+    const resume = await resumeInfomodel.findOne({ resumeId });
+    if (!resume) {
+      console.log("Resume not found.");
+      return res.status(404).json({ message: "Resume not found." });
+    }
+
+    return res.status(200).json(resume);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error.", error });
+  }
+}

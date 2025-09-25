@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { LoaderCircle, BrainCircuitIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ function PersonalInfo({ loading, setLoading }) {
   const [AiSummary, setAiSummary] = useState(false);
   const dispatch = useDispatch();
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
-  const resumeId = useParams();
+  const { resumeId } = useParams();
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -76,7 +76,6 @@ function PersonalInfo({ loading, setLoading }) {
       // console.log(parsedResponse);
 
       setAiGeneratedSummary(parsedResponse);
-
     } catch (error) {
       console.error("Error generating AI summary:", error);
     }
@@ -174,7 +173,9 @@ function PersonalInfo({ loading, setLoading }) {
           <div className="flex justify-between">
             <div>
               <h2 className=" lg:ms-2">Add Summary</h2>
-              <p className="lg:text-sm text-xs lg:ms-2">Add a summary for your job role.</p>
+              <p className="lg:text-sm text-xs lg:ms-2">
+                Add a summary for your job role.
+              </p>
             </div>
             <div>
               <Button

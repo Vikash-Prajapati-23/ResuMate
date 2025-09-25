@@ -16,7 +16,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 function SkillSet({ loading }) {
   const dispatch = useDispatch();
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
-  const resumeId = useParams();
+  const { resumeId } = useParams();
 
   // const [skills, setSkills] = useState([
   //   {
