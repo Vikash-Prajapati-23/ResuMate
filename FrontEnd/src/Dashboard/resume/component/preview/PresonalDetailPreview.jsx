@@ -58,7 +58,7 @@ const PresonalDetailPreview = () => {
 
       <hr style={{ borderColor: "blue" }} className="border-[1.5px] mb-1 " />
 
-      <p className="text-justify text-xs sm:text-sm md:text-base">
+      <p className="text-justify text-xs md:text-sm">
         {resumeInfo.personalInfo?.summary}
       </p>
 

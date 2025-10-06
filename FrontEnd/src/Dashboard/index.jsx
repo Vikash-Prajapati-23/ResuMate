@@ -8,24 +8,25 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 function Dashboard() {
   const [savedResumes, setSavedResumes] = useState([]);
 
-  useEffect(() => {
-    const fetchSavedresumes = async () => {
-      try {
-        const response = await fetch(
-          `${baseUrl}/api/create-resume/saved-resumes/`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
-        const data = await response.json();
-        if (response.ok) {
-          setSavedResumes(data.data || []);
+  const fetchSavedresumes = async () => {
+    try {
+      const response = await fetch(
+        `${baseUrl}/api/create-resume/saved-resumes/`,
+        {
+          method: "GET",
+          credentials: "include",
         }
-      } catch (error) {
-        toast.error("Failed to load saved resumes, please try again.");
+      );
+      const data = await response.json();
+      if (response.ok) {
+        setSavedResumes(data.data || []);
       }
-    };
+    } catch (error) {
+      toast.error("Failed to load saved resumes, please try again.");
+    }
+  };
+
+  useEffect(() => {
     fetchSavedresumes();
   }, []);
 
@@ -41,7 +42,11 @@ function Dashboard() {
           savedResumes
             .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
             .map((resume, index) => (
-              <SavedResume key={resume.resumeId || index} resume={resume} />
+              <SavedResume
+                fetchSavedresumes={fetchSavedresumes}
+                key={resume.resumeId || index}
+                resume={resume}
+              />
             ))}
       </div>
     </div>

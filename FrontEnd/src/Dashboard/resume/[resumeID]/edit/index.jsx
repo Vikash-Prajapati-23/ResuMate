@@ -23,7 +23,6 @@ function EditResume() {
         );
         if (res.data) {
           dispatch(setResumeInfo(res.data));
-          toast.success(res.data.message);
         }
       } catch (error) {
         console.error(error);

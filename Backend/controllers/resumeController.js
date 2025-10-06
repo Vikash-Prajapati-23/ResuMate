@@ -68,3 +68,34 @@ export async function getResumeById(req, res) {
     return res.status(500).json({ message: "Internal server error.", error });
   }
 }
+
+export async function deleteResume(req, res) {
+  console.log('Delete route hit!'); // ← Add this
+  console.log('ResumeId:', req.params.resumeId); // ← Add this
+  console.log('User:', req.user); // ← Add this
+  
+  try {
+    const { resumeId } = req.params;
+    const userId = req.user;
+
+    const resume = await resumeInfomodel.findOne({ resumeId, userId });
+    console.log('Found resume:', resume); // ← Add this
+
+    if (!resume) {
+      return res.status(404).json({
+        message: "Resume not found or you don't have permission to delete it.",
+      });
+    }
+
+    await resumeInfomodel.findOneAndDelete({ resumeId });
+
+    return res.status(200).json({
+      message: "Resume deleted successfully.",
+    });
+  } catch (error) {
+    console.error('Delete error:', error);
+    return res.status(500).json({
+      message: "Internal server error.",
+    });
+  }
+}
