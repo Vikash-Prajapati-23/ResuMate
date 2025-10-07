@@ -17,7 +17,7 @@ function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
 
   useEffect(() => {
     fetchSavedresumes();
-  }, []);
+  }, [resume]);
 
   const deleteResume = async (resumeId) => {
     try {
