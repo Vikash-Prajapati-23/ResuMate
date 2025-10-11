@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const ViewResume = () => {
   const resumeInfo = useSelector((state) => state.resumeInfo.value);
-  const { resumeViewID } = useParams();
+  // const { resumeViewID } = useParams();
 
   const handleDownload = () => {
     // Add a class to body to trigger print-specific styles
@@ -41,7 +41,7 @@ const ViewResume = () => {
 
   return (
     <>
-    <div className=" flex justify-between mt-20 lg:mx-96 md:mx-200">
+    <div className="no-print flex justify-between mt-20 lg:mx-96 md:mx-200">
       <p>Your resume is ready to download and you can also share your resume to anyone by clicking the share button.</p>
     </div>
 
@@ -58,10 +58,10 @@ const ViewResume = () => {
         >
           Download
         </Button>
-      </div>
+      </div>        
 
       {/* Printable section */}
-      <div className="print-only lg:mx-96 md:mx-20 mb-20">
+      <div className="print-only lg:mx-96 md:mx-20 mb-20 mt-[-25px] ">
         <PreviewSection />
       </div>
     </>

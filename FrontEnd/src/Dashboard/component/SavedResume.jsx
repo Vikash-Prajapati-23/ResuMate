@@ -94,7 +94,6 @@ function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                // Add your download logic here
                 console.log("Download resume:", resume.resumeId);
               }}
               className="flex gap-1 hover:bg-slate-100 border-0 rounded-md p-1"
