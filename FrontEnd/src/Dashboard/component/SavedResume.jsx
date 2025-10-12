@@ -5,14 +5,29 @@ import {
   Trash,
   EyeIcon,
   DownloadCloud,
+  LoaderCircleIcon,
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
   const [show, setShow] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +35,7 @@ function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
   }, [resume]);
 
   const deleteResume = async (resumeId) => {
+    setLoading(true);
     try {
       const res = await axios.delete(
         `${baseUrl}/api/create-resume/delete-resume/${resumeId}`
@@ -27,18 +43,23 @@ function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
       if (res.status === 200) {
         toast.success(res.data.message);
         onResumeDeleted?.(resumeId);
+        setLoading(false);
       }
     } catch (error) {
       const message =
         error.response?.data?.message ||
         "Something went wrong, please try again later.";
       toast.error(message);
-      console.error(error);
+      setLoading(false);
     }
   };
 
   const handleCardClick = () => {
     navigate(`/dashboard/resume/${resume.resumeId}/edit`);
+  };
+
+  const handleResumeDownload = () => {
+    navigate(`/ViewResume/${resume.resumeId}/view`);
   };
 
   return (
@@ -84,7 +105,7 @@ function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                deleteResume(resume.resumeId);
+                setIsDelete(true);
               }}
               className="flex gap-1 hover:bg-red-50 border-0 rounded-md p-1"
             >
@@ -94,6 +115,7 @@ function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                handleResumeDownload();
                 console.log("Download resume:", resume.resumeId);
               }}
               className="flex gap-1 hover:bg-slate-100 border-0 rounded-md p-1"
@@ -103,6 +125,32 @@ function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
           </div>
         )}
       </div>
+
+      <AlertDialog open={isDelete}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete this
+              resume and remove it from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setIsDelete(false)}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              disabled={loading}
+              onClick={() => {
+                setIsDelete(false);
+                deleteResume(resume.resumeId);
+              }}
+            >
+              { loading ? <LoaderCircleIcon className="animate-spin" /> : "Delete" }
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
