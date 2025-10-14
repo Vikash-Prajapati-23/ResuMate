@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LayoutGridIcon, MoveLeft, MoveRight } from "lucide-react";
+import { MoveLeft, MoveRight } from "lucide-react";
 import PersonalInfo from "./forms/PersonalInfo";
 import SkillSet from "./forms/SkillSet";
 import Experience from "./forms/Experience";
@@ -7,6 +7,7 @@ import Projects from "./forms/Projects";
 import Certificates from "./forms/Certificates";
 import Education from "./forms/Education";
 import { Navigate, useParams } from "react-router-dom";
+import Theme from "@/Dashboard/Theme/Theme";
 
 function FormSection() {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -16,9 +17,7 @@ function FormSection() {
   return (
     <div className="lg:p-4 md:p-2 p-1 ">
       <div className="flex justify-between">
-        <button className="flex justify-center items-center md:gap-2 gap-1 h-9 bg-purple-500 text-white cursor-pointer lg:px-3 md:px-2 px-2 py-2 font-bold rounded-md lg:text-base md:text-sm text-xs ">
-          <LayoutGridIcon className="lg:h-5 h-4 " /> Theme
-        </button>
+        <Theme />
 
         <div className="flex gap-2">
           {activeIndex > 1 && ( //This is short-circuit evaluation using the && operator.

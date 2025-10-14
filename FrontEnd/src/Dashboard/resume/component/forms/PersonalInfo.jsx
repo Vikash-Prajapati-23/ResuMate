@@ -17,7 +17,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 const prompt =
   "Generate a compelling and professional summary for a resume based on the job title: {job_title}. The response should be in JSON format with the following structure: 'experience_level' (containing 'Fresher' or 'Mid level experienced' or 'Senior level experienced) and 'summary' (containing a concise, impactful, and achievement-driven statement). The summary should highlight key strengths, industry relevance, and career potential. Keep it within 2-3 lines, making it engaging and results-oriented.";
 
-function PersonalInfo({ loading, setLoading }) {
+function PersonalInfo({ loading }) {
   const [aiGeneratedSummary, setAiGeneratedSummary] = useState([]);
   const [AiSummary, setAiSummary] = useState(false);
   const dispatch = useDispatch();
