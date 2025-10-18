@@ -46,7 +46,7 @@ function AddResume() {
   return (
     <div>
       <div
-        className="my-4 p-14 h-[250px] cursor-pointer bg-secondary w-60 flex justify-center items-center border-2 border-dashed border-gray-300 rounded-lg hover:scale-110 transition-transform duration-300 ease-in-out shadow-md"
+        className="my-4 p-14 h-[250px] cursor-pointer bg-secondary w-60 flex justify-center items-center border-2 border-dashed border-gray-300 rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out shadow-md"
         onClick={() => setOpenDialog(true)}
       >
         <PlusSquare />

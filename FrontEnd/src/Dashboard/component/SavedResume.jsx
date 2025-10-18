@@ -21,6 +21,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useSelector } from "react-redux";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -29,6 +30,7 @@ function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
   const [isDelete, setIsDelete] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
 
   useEffect(() => {
     fetchSavedresumes();
@@ -63,12 +65,16 @@ function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
   };
 
   return (
-    <div>
+    <div className="shadow-md">
       <div
         onClick={handleCardClick}
-        className="mb-2 mt-4 p-14 h-[250px] cursor-pointer bg-secondary w-60 flex justify-center items-center border-2 border-double border-gray-300 rounded-lg hover:scale-110 transition-transform duration-300 ease-in-out"
+        className="mb-2 mt-4 p-14 h-[250px] cursor-pointer bg-[var(--theme-color)] w-60 flex justify-center items-center border-2 border-double border-gray-300 rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out shadow-md"
+        style={{
+          "--theme-color": resume.personalInfo?.theme_color || "#1e40af",
+          backgroundColor: resume.personalInfo?.theme_color || "#1e40af",
+        }}
       >
-        <FileUser />
+        <FileUser size={30} className="text-white font-semibold" />
       </div>
       <div className="flex justify-between gap-2 p-1 w-[85%] relative">
         <div onClick={handleCardClick} className="cursor-pointer">
@@ -146,7 +152,11 @@ function SavedResume({ resume, onResumeDeleted, fetchSavedresumes }) {
                 deleteResume(resume.resumeId);
               }}
             >
-              { loading ? <LoaderCircleIcon className="animate-spin" /> : "Delete" }
+              {loading ? (
+                <LoaderCircleIcon className="animate-spin" />
+              ) : (
+                "Delete"
+              )}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
