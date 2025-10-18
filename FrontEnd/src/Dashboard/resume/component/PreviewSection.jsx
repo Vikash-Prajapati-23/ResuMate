@@ -5,11 +5,14 @@ import ExperiencePreview from "./preview/ExperiencePreview";
 import SkillsPreview from "./preview/SkillsPreview";
 import ProjectsPreview from "./preview/ProjectsPreview";
 import CertificationsPreview from "./preview/CertificationsPreview";
+import { useSelector } from "react-redux";
 
 function PreviewSection() {
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
 
   return (
-    <div className='bg-white lg:p-5 border md:p-4 p-3 md:mt-12 mt-6 border-t-[25px] shadow-md border-blue-800'>
+    <div
+        style={{ borderBlockColor: resumeInfo.personalInfo?.theme_color || "#1e40af" }} className={`bg-white lg:p-5 border md:p-4 p-3 md:mt-12 mt-6 border-t-[25px] shadow-md border-${resumeInfo.personalInfo?.theme_color || "#1e40af"}delay-500`}>
       {/* personal_info */}
       <PresonalDetailPreview />
 

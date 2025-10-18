@@ -7,13 +7,16 @@ function CertificationsPreview() {
   return (
     <div className="">
       <h2
-        style={{ color: "blue" }}
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
         className="text-center mt-6 text-xl font-bold mb-1 "
       >
         Certificates
       </h2>
 
-      <hr style={{ borderColor: "blue" }} className="border-[1.5px] mb-1 " />
+      <hr
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
+        className="border-[1.5px] mb-1 "
+      />
 
       <div className="">
         {resumeInfo.certifications?.map((certificate, index) => (

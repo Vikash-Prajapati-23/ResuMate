@@ -7,13 +7,16 @@ function ProjectsPreview() {
   return (
     <div>
       <h2
-        style={{ color: "blue" }}
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
         className="text-center mt-6 text-xl font-bold mb-1"
       >
         Projects
       </h2>
 
-      <hr style={{ borderColor: "blue" }} className="border-[1.5px] mb-1 " />
+      <hr
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
+        className="border-[1.5px] mb-1 "
+      />
       <div className="">
         {resumeInfo.projects?.map((project, index) => (
           <div key={index}>

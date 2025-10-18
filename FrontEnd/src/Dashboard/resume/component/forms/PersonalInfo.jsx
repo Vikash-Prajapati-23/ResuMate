@@ -167,6 +167,15 @@ function PersonalInfo({ loading }) {
               value={resumeInfo.personalInfo?.linkedin || ""}
             />
           </div>
+          {/* <div>
+            <label className="ms-2 text-sm">Theme color</label>
+            <
+              name="theme_color"
+              type="color"
+              onChange={handleFormChange}
+              value={resumeInfo.personalInfo?.theme_color || "#1e40af"}
+            />
+          </div> */}
         </div>
 
         <div className="mt-4 space-y-2">

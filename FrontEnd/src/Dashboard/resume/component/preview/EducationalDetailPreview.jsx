@@ -7,14 +7,14 @@ function EducationalDetailPreview() {
   return (
     <div className="">
       <h2
-        style={{ color: "blue" }}
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
         className="text-center mt-6 text-xl font-bold mb-1"
       >
         Educational Qualification
       </h2>
 
       <hr
-        style={{ borderColor: "blue" }}
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
         className="border-[1.5px] mb-1 "
       />
 

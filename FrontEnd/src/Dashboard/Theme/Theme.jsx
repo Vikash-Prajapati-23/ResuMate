@@ -1,9 +1,19 @@
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  setResumeInfo,
+  updateResumeInfoField,
+} from "@/store/slices/resumeInfo/resumeInfo";
 import { LayoutGridIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { toast } from "sonner";
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const Theme = () => {
   const colors = [
@@ -24,6 +34,44 @@ const Theme = () => {
     "#DB2777", // Soft Pink
   ];
 
+  const dispatch = useDispatch();
+  const resumeInfo = useSelector((state) => state.resumeInfo.value);
+  const { resumeId } = useParams();
+
+  const themeColor = async (color) => {
+    try {
+      const response = await fetch(`${baseUrl}/api/create-resume/${resumeId}`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ personalInfo: resumeInfo.personalInfo }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        toast.success(data.message);
+        dispatch(
+          setResumeInfo({
+            ...resumeInfo,
+            personalInfo: data.data.resumeId,
+          })
+        );
+      }
+    } catch (error) {
+      toast.error("Something went wrong.!");
+      console.error("Internal server error.", error);
+    }
+  };
+
+  const handleColorChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(
+      updateResumeInfoField({
+        field: "personalInfo",
+        data: { ...(resumeInfo.personalInfo || {}), [name]: value },
+      })
+    );
+  };
+
   return (
     <div>
       <Popover>
@@ -32,16 +80,23 @@ const Theme = () => {
             <LayoutGridIcon className="h-5 w-5 " /> <span>Theme</span>
           </button>
         </PopoverTrigger>
-        <PopoverContent className="p-4 pe-0 pt-2" >
-          <h4 className="cursor-default mb-2 mt-0 text-slate-600 md:text-base text-xs font-semibold ">Pic a color for your resume.</h4>
+        <PopoverContent className="p-4 pe-0 pt-2">
+          <h4 className="cursor-default mb-2 mt-0 text-slate-600 md:text-base text-xs font-semibold ">
+            Pic a color for your resume.
+          </h4>
           <div className="grid grid-cols-6 gap-2 rounded-md">
             {colors.map((item, idx) => (
-            <div
-              key={idx}
-              style={{ background: item }}
-              className={`h-5 w-5 rounded-full cursor-pointer border-black hover:border-2 duration-100 ease-in-out `}
-            ></div>
-          ))}
+              <Input
+                key={idx}
+                style={{ background: item }}
+                className={`h-5 w-2 rounded-full cursor-pointer border-0 border-black hover:border duration-100 ease-in-out `}
+                onClick={() => themeColor(item)}
+                name="theme_color"
+                type="color"
+                onChange={handleColorChange}
+                value={resumeInfo.personalInfo?.theme_color || "#1e40af"}
+              ></Input>
+            ))}
           </div>
         </PopoverContent>
       </Popover>

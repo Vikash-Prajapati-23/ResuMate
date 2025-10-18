@@ -10,13 +10,13 @@ const PresonalDetailPreview = () => {
     <div>
       <div className="flex justify-center gap-2">
         <p
-          style={{ color: "blue" }}
+          style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
           className="text-center font-semibold text-lg md:text-xl lg:text-2xl"
         >
           {resumeInfo.personalInfo?.first_name}
         </p>
         <p
-          style={{ color: "blue" }}
+          style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
           className="text-center font-semibold text-lg sm:text-xl md:text-xl lg:text-2xl"
         >
           {resumeInfo.personalInfo?.last_name}
@@ -51,25 +51,31 @@ const PresonalDetailPreview = () => {
 
       <h2
         className="text-center font-bold text-sm md:text-xl lg:text-xl mb-1"
-        style={{ color: "blue" }}
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
       >
         Summary
       </h2>
 
-      <hr style={{ borderColor: "blue" }} className="border-[1.5px] mb-1 " />
+      <hr
+        style={{
+          borderColor: resumeInfo.personalInfo?.theme_color || "#1e40af",
+        }}
+        className="border-[1.5px] mb-1 "
+      />
 
       <p className="text-justify text-xs md:text-sm">
         {resumeInfo.personalInfo?.summary}
       </p>
 
       <h2
-        style={{ color: "blue" }}
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
         className="mt-4 font-bold text-sm md:text-xl lg:text-xl mb-1"
       >
         Skills
       </h2>
 
-      <hr style={{ borderColor: "blue" }} className="border-[1.5px] mb-1 " />
+      <hr 
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }} className="border-[1.5px] mb-1 " />
     </div>
   );
 };

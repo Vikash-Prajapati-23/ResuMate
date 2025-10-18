@@ -14,7 +14,8 @@ function SkillsPreview() {
               <div
                 className="h-2"
                 style={{
-                  backgroundColor: "blue",
+                  backgroundColor:
+                    resumeInfo.personalInfo?.theme_color || "#1e40af",
                   width: `${(Number(skill?.rating) || 0) * 20}%`, // Convert to number and handle edge cases.
                 }}
               ></div>
@@ -23,11 +24,17 @@ function SkillsPreview() {
         ))}
       </div>
 
-      <h2 className="font-bold text-xl my-3 mb-1" style={{ color: "blue" }}>
+      <h2
+        className="font-bold text-xl my-3 mb-1"
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
+      >
         Experience
       </h2>
 
-      <hr style={{ borderColor: "blue" }} className="border-[1.5px]" />
+      <hr
+        style={{ color: resumeInfo.personalInfo?.theme_color || "#1e40af" }}
+        className="border-[1.5px]"
+      />
     </>
   );
 }

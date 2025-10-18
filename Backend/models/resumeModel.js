@@ -26,6 +26,7 @@ const resumeSchema = mongoose.Schema(
       linkedin: String,
       github: String,
       summary: String,
+      theme_color: String,
     },
 
     skills: [
@@ -123,7 +124,7 @@ const resumeSchema = mongoose.Schema(
         },
         year: {
           type: String,
-        }
+        },
       },
     ],
   },
